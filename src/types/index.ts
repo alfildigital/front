@@ -15,23 +15,33 @@
 // NOTICIAS
 // ---------------------------------------------------------------------------
 
+// ALINEADO CON BACKEND (4.4): campos exactos que devuelve
+// GET /api/v1/novedades (app/Controllers/Api/NovedadesController::map).
+// El backend modela cada novedad con un único archivo adjunto (archivo_*).
+//
+// La UI deriva propiedades de presentación a partir de estos campos:
+//   - "fecha_publicacion"  → antes el frontend usaba "fecha"
+//   - "contenido"          → también se usa como base para un resumen truncado
+//   - "archivo_ruta"       → si es una imagen, se usa como imagen destacada
+//   - "autor"              → sustituye a la categoría inexistente en el backend
 export interface Noticia {
   id: number;
+  usuario_id: number | null;
   titulo: string;
-  resumen: string;
   contenido: string;
-  imagen: string | null;
-  fecha: string;         // ISO 8601: "2024-03-15T10:30:00Z"
-  categoria: string;
-  adjuntos: Adjunto[];
-}
-
-export interface Adjunto {
-  id: number;
-  nombre: string;
-  url: string;
-  tipo: string;          // "pdf" | "docx" | "jpg" | etc.
-  tamanio: number;       // bytes
+  publicado: boolean;
+  fecha_publicacion: string; // ISO 8601
+  archivo_nombre: string | null;
+  archivo_contenido: string | null;
+  archivo_ruta: string | null;
+  archivo_tipo: string | null;
+  archivo_tamano: number | null;
+  autor: string | null;
+  roles_nombres: string | null;
+  roles: number[] | null;
+  usuario_abm: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -51,14 +61,28 @@ export interface Tramite {
 // MATRICULADOS — [PROVISIONAL] contrato pendiente de backend
 // ---------------------------------------------------------------------------
 
+// ALINEADO CON BACKEND (4.4): campos exactos que devuelve
+// GET /api/v1/profesionales (app/Controllers/Api/ProfesionalesController::map).
+// - "nro_matricula"    → antes "matricula"
+// - "nombre"+"apellido"→ antes el frontend usaba un único "nombre"
+// - se eliminan "especialidad" (el backend no la expone en esta versión)
 export interface Matriculado {
   id: number;
+  nro_matricula: string;
+  dni: string | null;
   nombre: string;
-  matricula: string;
-  especialidad: string;
-  telefono: string | null;
+  apellido: string;
   email: string | null;
+  telefono: string | null;
+  localidad: string | null;
+  direccion: string | null;
+  estado: string;
+  fecha_matriculacion: string;
+  observaciones: string | null;
   foto: string | null;
+  usuario_abm: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -89,14 +113,18 @@ export interface Honorario {
 // cada tarjeta: nombre, contacto y enlace web. Si el backend define nuevos campos, se actualiza
 // este tipo y el servicio correspondiente, sin afectar la lógica de la pantalla.
 
+// ALINEADO CON BACKEND (4.4): campos exactos que devuelve
+// GET /api/v1/obras-sociales (app/Controllers/Api/ObrasSocialesController::map).
+// - "correo"          → antes "email"
+// - "url_sitio_web"   → antes "sitioWeb"
+// - "logo" eliminado  → el backend no expone logo; la UI usa el avatar por defecto.
 export interface ObraSocial {
   id: number;
   nombre: string;
-  logo: string | null;
   descripcion: string | null;
   telefono: string | null;
-  email: string | null;
-  sitioWeb: string | null;
+  correo: string | null;
+  url_sitio_web: string | null;
 }
 
 
@@ -123,12 +151,22 @@ export interface Alquiler {
 // BOLETÍN OFICIAL — [PROVISIONAL] contrato pendiente de backend
 // ---------------------------------------------------------------------------
 
+// ALINEADO CON BACKEND (4.4): campos exactos que devuelve
+// GET /api/v1/boletines-oficiales (app/Controllers/Api/BoletinesOficialesController::map).
+// - "resumen"  → antes "descripcion"
+// - archivo_*  → el backend modela un único adjunto por publicación
 export interface BoletinPublicacion {
   id: number;
   titulo: string;
-  descripcion: string | null;
-  fecha: string;           // ISO 8601
-  adjuntos: Adjunto[];
+  resumen: string | null;
+  archivo_nombre: string | null;
+  archivo_ruta: string | null;
+  archivo_tipo: string | null;
+  archivo_tamano: number | null;
+  archivo_contenido: string | null;
+  usuario_abm: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 // ---------------------------------------------------------------------------

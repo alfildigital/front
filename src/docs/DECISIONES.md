@@ -135,3 +135,38 @@ Si el backend envía una ruta relativa, agregar el prefijo de `config.api.url` e
 devuelve todos los ítems.  
 **Migración:** Para agregar paginación, usar `PaginatedResponse<T>` (ya definida en `src/types/api.ts`)  
 y agregar parámetros de página al hook y servicio correspondiente.
+
+---
+
+## DECISIÓN-008: Alineación con los contratos reales del backend
+
+**Contexto:** El front consumía campos provisionales que no coinciden con los DTOs que
+expone el backend real (`/var/www/html/cpee/app/Controllers/Api/*Controller.php`). La api key
+`VITE_APP_API_KEY` se envía como `Authorization: Bearer <key>` en cada request y el backend
+responde bajo `/cpee/api/v1`.
+
+**Decisión (back-end como fuente de verdad):** se alinean tipos, servicios, páginas, mocks
+y tests con los DTOs reales. No se crean recursos que el backend no tenga.
+
+Mapeos aplicados:
+
+| Módulo | Endpoint real | Cambio en campos |
+|--------|---------------|------------------|
+| Noticias | `GET /novedades` | `fecha→fecha_publicacion`, `categoria→autor`, `imagen/resumen` se derivan de `contenido` + `archivo_*`; `adjuntos[]` (varios) → archivo único `archivo_nombre/ruta/tipo/tamano` |
+| Matriculados | `GET /profesionales` | `matricula→nro_matricula`, `nombre→nombre + apellido` separados, se quita `especialidad` |
+| Boletín | `GET /boletines-oficiales` | `descripcion→resumen`, `fecha→created_at`, `adjuntos[]` → archivo único `archivo_*` |
+| Obras Sociales | `GET /obras-sociales` | `logo` eliminado (se usa avatar), `email→correo`, `sitioWeb→url_sitio_web` |
+
+**Derivaciones (la UI sigue funcionando pese a que el backend no entrega ciertos campos):**
+- Resumen de noticia/boletín → se extrae de `contenido`/`resumen` quitando HTML.
+- Imagen destacada → `archivo_ruta` solo si `archivo_tipo` es `image/*`.
+
+**Archivos tocados:** `src/types/index.ts`, `src/api/endpoints.ts`, `src/config/index.ts`,
+`src/api/client.ts`, `src/api/services/*`, `src/pages/{Noticias,Matriculados,BoletinOficial,ObrasSociales}/*`,
+`src/components/sections/NoticiasPreview.tsx`, `src/utils/matriculadosUtils.ts`,
+`src/mocks/data/*`, `src/test/matriculadosUtils.test.ts`.
+
+**Verificación:** `tsc -b` y `eslint` pasan (excepto un error preexistente en
+`src/test/formatters.test.ts` por el matcher no estándar `toEndWith`). Los tests de
+`filterMatriculados` (6) pasan.
+

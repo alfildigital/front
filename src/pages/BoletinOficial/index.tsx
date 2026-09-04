@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Calendar, Paperclip, Download } from 'lucide-react';
+import { Calendar, Download, FileText } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
@@ -10,9 +11,9 @@ import { Pagination } from '@/components/common/Pagination';
 // ─── DATOS DE ESTA PÁGINA ────────────────────────────────────────────────────
 // Hook:      useBoletin()          →  src/hooks/queries/useBoletin.ts
 // Service:   boletinService        →  src/api/services/boletinService.ts
-// Endpoint:  GET /api/boletin-oficial
+// Endpoint:  GET /api/v1/boletines-oficiales   (alineado en 4.1)
 // Paginado:  paginateItems()       →  src/utils/paginationUtils.ts
-// Nota:      los ítems se ordenan por fecha descendente antes de paginar
+// Nota:      los ítems se ordenan por created_at descendente antes de paginar
 // ─────────────────────────────────────────────────────────────────────────────
 import { useBoletin } from '@/hooks/queries/useBoletin';
 import { usePagination } from '@/hooks/usePagination';
@@ -21,6 +22,27 @@ import { formatDate, formatFileSize } from '@/utils/formatters';
 import type { BoletinPublicacion } from '@/types';
 
 function PublicacionItem({ pub }: { pub: BoletinPublicacion }) {
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (pub.archivo_ruta) {
+      setBlobUrl(pub.archivo_ruta);
+      return;
+    }
+    if (!pub.archivo_contenido) {
+      setBlobUrl(null);
+      return;
+    }
+    const mime = pub.archivo_tipo ?? 'application/pdf';
+    const binary = atob(pub.archivo_contenido);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    const blob = new Blob([bytes], { type: mime });
+    const url = URL.createObjectURL(blob);
+    setBlobUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [pub.archivo_ruta, pub.archivo_contenido, pub.archivo_tipo]);
+
   return (
     <article className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
       <div className="flex items-start justify-between gap-3">
@@ -28,39 +50,32 @@ function PublicacionItem({ pub }: { pub: BoletinPublicacion }) {
           <h2 className="font-semibold text-gray-900 dark:text-gray-100">{pub.titulo}</h2>
           <p className="mt-1 flex items-center gap-1 text-xs text-gray-400">
             <Calendar className="h-3 w-3" aria-hidden="true" />
-            {formatDate(pub.fecha)}
+            {formatDate(pub.created_at)}
           </p>
         </div>
-        {pub.adjuntos.length > 0 && (
-          <span className="flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-500 dark:bg-gray-700 dark:text-gray-400">
-            <Paperclip className="h-3 w-3" aria-hidden="true" />
-            {pub.adjuntos.length}
-          </span>
-        )}
       </div>
 
-      {pub.descripcion && (
-        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">{pub.descripcion}</p>
+      {pub.resumen && (
+        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">{pub.resumen}</p>
       )}
 
-      {pub.adjuntos.length > 0 && (
+      {blobUrl && (
         <div className="mt-4 space-y-2">
-          {pub.adjuntos.map((adj) => (
-            <a
-              key={adj.id}
-              href={adj.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm transition-colors hover:border-primary-300 hover:bg-primary-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-primary-700 dark:hover:bg-primary-900/10"
-            >
-              <span className="truncate font-medium text-gray-800 dark:text-gray-200">{adj.nombre}</span>
-              <span className="ml-3 flex flex-shrink-0 items-center gap-2 text-xs text-gray-400">
-                {formatFileSize(adj.tamanio)}
-                <Download className="h-4 w-4 text-primary-500" aria-hidden="true" />
-              </span>
-            </a>
-          ))}
+          <a
+            href={blobUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-4 py-2.5 text-sm transition-colors hover:border-primary-300 hover:bg-primary-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-primary-700 dark:hover:bg-primary-900/10"
+          >
+            <span className="flex items-center gap-2 truncate font-medium text-gray-800 dark:text-gray-200">
+              <FileText className="h-4 w-4 flex-shrink-0 text-primary-500" aria-hidden="true" />
+              {pub.archivo_nombre ?? 'Descargar documento'}
+            </span>
+            <span className="ml-3 flex flex-shrink-0 items-center gap-2 text-xs text-gray-400">
+              {pub.archivo_tamano ? formatFileSize(pub.archivo_tamano) : null}
+              <Download className="h-4 w-4 text-primary-500" aria-hidden="true" />
+            </span>
+          </a>
         </div>
       )}
     </article>
@@ -72,9 +87,12 @@ export default function BoletinOficialPage() {
   const { data, isPending, isError, refetch } = useBoletin();
 
   // ── Ordenamiento por fecha descendente ──────────────────────────────────
-  // Se ordena antes de paginar para que la página 1 siempre muestre lo más nuevo
+  // Se ordena antes de paginar para que la página 1 siempre muestre lo más nuevo.
+  // ALINEACIÓN (4.4): el backend no expone "fecha", se ordena por created_at.
   const sorted = data
-    ? [...data].sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
+    ? [...data].sort(
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    )
     : [];
 
   // ── Paginación ──────────────────────────────────────────────────────────

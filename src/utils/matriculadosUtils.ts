@@ -16,7 +16,7 @@ export function filterMatriculados(items: Matriculado[], query: string): Matricu
   if (!q) return items;
   return items.filter(
     (m) =>
-      m.nombre.toLowerCase().includes(q) ||
-      m.matricula.toLowerCase().includes(q),
+      `${m.nombre} ${m.apellido}`.toLowerCase().includes(q) ||
+      m.nro_matricula.toLowerCase().includes(q),
   );
 }

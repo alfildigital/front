@@ -10,13 +10,18 @@
 // CUÁNDO SE ACTIVA: Cuando config.mocks.enabled === false (modo producción o staging).
 //   El selector está en 'src/hooks/queries/useObrasSociales.ts'.
 //
-// ENDPOINT: GET /api/obras-sociales
+// ENDPOINT: GET /api/v1/obras-sociales
 //   Respuesta esperada del backend:
 //   {
 //     "data": ObraSocial[],   ← array de obras sociales
 //     "meta": { ... }         ← metadatos opcionales (paginación, etc.)
 //   }
 //   → Esta forma está definida en el tipo `ApiResponse<T>` de 'src/types/api.ts'.
+//
+// ALINEACIÓN (4.1 + 4.4):
+//   El endpoint (fuente real) se resuelve desde ENDPOINTS.obrasSociales.list.
+//   Los campos del tipo ObraSocial ya coinciden con los que devuelve el backend
+//   (correo, url_sitio_web), por lo que NO es necesario ningún mapeo aquí.
 //
 // FLUJO HTTP COMPLETO:
 //   obrasSocialesService.getAll()

@@ -7,13 +7,20 @@ import type { ApiError } from '@/types/api';
  *
  * Responsabilidades:
  * - baseURL y timeout centralizados
- * - headers comunes
+ * - headers comunes (incluida la autenticación Bearer)
  * - normalización de errores
  * - logging en desarrollo
  *
- * NOTA: No contiene lógica de autenticación.
- * Si en una fase futura se agrega un panel administrativo,
- * se podrá agregar un interceptor de request con JWT aquí.
+ * AUTENTICACIÓN (4.2):
+ * El backend (cpee) protege TODA su API REST bajo /api/v1 con un token Bearer.
+ * Se exige el header "Authorization: Bearer <API_API_KEY>" en cada petición,
+ * validado por ApiController::requireAuth(). La clave se lee desde el .env
+ * (VITE_APP_API_KEY) vía config.api.apiKey y se inyecta de forma global aquí,
+ * de modo que TODOS los servicios la envían sin repetir código.
+ *
+ * NOTA DE SEGURIDAD: al ser una SPA pública, la clave queda visible en el bundle.
+ * Si en el futuro se restringen recursos de lectura pública, conviene mover la
+ * autenticación a un proxy inverso / BFF en el servidor.
  */
 const apiClient = axios.create({
   baseURL: config.api.url,
@@ -21,6 +28,7 @@ const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    Authorization: `Bearer ${config.api.apiKey}`,
   },
 });
 

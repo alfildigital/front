@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
@@ -11,7 +12,7 @@ import { Pagination } from '@/components/common/Pagination';
 // ─── DATOS DE ESTA PÁGINA ────────────────────────────────────────────────────
 // Hook:      useNoticias()        →  src/hooks/queries/useNoticias.ts
 // Service:   noticiasService      →  src/api/services/noticiasService.ts
-// Endpoint:  GET /api/noticias
+// Endpoint:  GET /api/v1/novedades            (alineado en 4.1)
 // Paginado:  paginateItems()      →  src/utils/paginationUtils.ts
 // Nota:      useNoticias también se usa en src/pages/Home/index.tsx (3 noticias)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,12 +22,50 @@ import { paginateItems } from '@/utils/paginationUtils';
 import { formatDate, truncateText } from '@/utils/formatters';
 import type { Noticia } from '@/types';
 
+// ALINEACIÓN (4.4): el backend no expone "resumen" ni "imagen" separados.
+// - El resumen se deriva del contenido (quitando etiquetas HTML).
+// - La imagen destacada se obtiene de archivo_ruta solo si archivo_tipo es de imagen.
+function textoTitulo(n: Noticia): string | null {
+  if (!n.archivo_ruta) return null;
+  if (n.archivo_tipo == null) return n.archivo_ruta;
+  return n.archivo_tipo.startsWith('image/') ? n.archivo_ruta : null;
+}
+
+function noticiaResumen(n: Noticia): string {
+  return n.contenido.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+}
+
 function NoticiaRow({ noticia }: { noticia: Noticia }) {
+  // La imagen destacada solo se muestra si el backend adjuntó una imagen.
+  const imagen = textoTitulo(noticia);
+  const resumen = noticiaResumen(noticia);
+
+  const [blobUrl, setBlobUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (noticia.archivo_ruta) {
+      setBlobUrl(noticia.archivo_ruta);
+      return;
+    }
+    if (!noticia.archivo_contenido) {
+      setBlobUrl(null);
+      return;
+    }
+    const mime = noticia.archivo_tipo ?? 'application/pdf';
+    const binary = atob(noticia.archivo_contenido);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    const blob = new Blob([bytes], { type: mime });
+    const url = URL.createObjectURL(blob);
+    setBlobUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [noticia.archivo_ruta, noticia.archivo_contenido, noticia.archivo_tipo]);
+
   return (
     <article className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:flex-row dark:border-gray-700 dark:bg-gray-800/50">
-      {noticia.imagen ? (
+      {imagen ? (
         <div className="h-36 w-full flex-shrink-0 overflow-hidden rounded-lg sm:w-48">
-          <img src={noticia.imagen} alt={noticia.titulo} className="h-full w-full object-cover" loading="lazy" />
+          <img src={imagen} alt={noticia.titulo} className="h-full w-full object-cover" loading="lazy" />
         </div>
       ) : (
         <div className="flex h-36 w-full flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 sm:w-48 dark:bg-gray-700">
@@ -38,12 +77,14 @@ function NoticiaRow({ noticia }: { noticia: Noticia }) {
         <div className="mb-1.5 flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1">
             <Calendar className="h-3 w-3" aria-hidden="true" />
-            {formatDate(noticia.fecha)}
+            {formatDate(noticia.fecha_publicacion)}
           </span>
-          <span className="flex items-center gap-1 rounded-full bg-primary-100 px-2 py-0.5 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400">
-            <Tag className="h-3 w-3" aria-hidden="true" />
-            {noticia.categoria}
-          </span>
+          {noticia.autor && (
+            <span className="flex items-center gap-1 rounded-full bg-primary-100 px-2 py-0.5 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400">
+              <Tag className="h-3 w-3" aria-hidden="true" />
+              {noticia.autor}
+            </span>
+          )}
         </div>
 
         <h2 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 dark:text-gray-100">
@@ -51,7 +92,7 @@ function NoticiaRow({ noticia }: { noticia: Noticia }) {
         </h2>
 
         <p className="flex-1 text-sm text-gray-600 dark:text-gray-400">
-          {truncateText(noticia.resumen, 160)}
+          {truncateText(resumen, 160)}
         </p>
 
         <Link

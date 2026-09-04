@@ -29,11 +29,14 @@ import type { Matriculado } from '@/types';
 // ---------------------------------------------------------------------------
 
 function MatriculadoCard({ m }: { m: Matriculado }) {
+  // ALINEACIÓN (4.4): el backend usa "nro_matricula" + "nombre"/"apellido" separados,
+  // y no expone "especialidad" en esta versión.
+  const nombreCompleto = [m.nombre, m.apellido].filter(Boolean).join(' ');
   return (
     <article className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50">
       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
         {m.foto ? (
-          <img src={m.foto} alt={m.nombre} className="h-full w-full object-cover" loading="lazy" />
+          <img src={m.foto} alt={nombreCompleto} className="h-full w-full object-cover" loading="lazy" />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <User className="h-7 w-7 text-gray-400" aria-hidden="true" />
@@ -42,9 +45,8 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
       </div>
 
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">{m.nombre}</p>
-        <p className="mt-0.5 font-mono text-xs text-primary-600 dark:text-primary-400">{m.matricula}</p>
-        <p className="mt-1 truncate text-sm text-gray-600 dark:text-gray-400">{m.especialidad}</p>
+        <p className="font-semibold text-gray-900 dark:text-gray-100 truncate">{nombreCompleto}</p>
+        <p className="mt-0.5 font-mono text-xs text-primary-600 dark:text-primary-400">{m.nro_matricula}</p>
 
         <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
           {m.telefono && (

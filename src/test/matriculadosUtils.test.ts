@@ -2,24 +2,44 @@ import { describe, it, expect } from 'vitest';
 import { filterMatriculados } from '@/utils/matriculadosUtils';
 import type { Matriculado } from '@/types';
 
+// ALINEADO CON BACKEND (4.4): fixture con los campos del DTO de
+// GET /api/v1/profesionales (nro_matricula, nombre + apellido separados).
 const items: Matriculado[] = [
   {
     id: 1,
-    nombre: 'Dra. María González',
-    matricula: 'MP-1234',
-    especialidad: 'Medicina General',
-    telefono: null,
+    nro_matricula: 'MP-1234',
+    dni: '28765432',
+    nombre: 'María',
+    apellido: 'González',
     email: null,
+    telefono: null,
+    localidad: null,
+    direccion: null,
+    estado: 'Activa',
+    fecha_matriculacion: '2015-03-10',
+    observaciones: null,
     foto: null,
+    usuario_abm: 'admin',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
   },
   {
     id: 2,
-    nombre: 'Dr. Carlos Fernández',
-    matricula: 'MP-5678',
-    especialidad: 'Cardiología',
-    telefono: null,
+    nro_matricula: 'MP-5678',
+    dni: '30112233',
+    nombre: 'Carlos',
+    apellido: 'Fernández',
     email: null,
+    telefono: null,
+    localidad: null,
+    direccion: null,
+    estado: 'Activa',
+    fecha_matriculacion: '2012-07-22',
+    observaciones: null,
     foto: null,
+    usuario_abm: 'admin',
+    created_at: '2024-01-01T00:00:00Z',
+    updated_at: '2024-01-01T00:00:00Z',
   },
 ];
 

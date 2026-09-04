@@ -73,8 +73,8 @@ import { usePagination } from '@/hooks/usePagination';
 import { paginateItems } from '@/utils/paginationUtils';
 
 // ORIGEN: Definición de tipos TypeScript ('src/types/index.ts')
-// CÓMO FUNCIONA: Define la interfaz `ObraSocial` con la estructura completa del objeto:
-//   { id, nombre, logo, descripcion, telefono, email, sitioWeb }
+// CÓMO FUNCIONA: Define la interfaz `ObraSocial` con la estructura completa del objeto,
+//   alineada con el DTO del backend (4.4): { id, nombre, descripcion, telefono, correo, url_sitio_web }.
 // POR QUÉ SE HACE: Garantiza autocompletado en el IDE y validación estricta de tipos
 //   en tiempo de compilación, evitando errores en tiempo de ejecución.
 import type { ObraSocial } from '@/types';
@@ -88,14 +88,17 @@ import type { ObraSocial } from '@/types';
  * Props que recibe el componente ObraSocialCard.
  * ORIGEN DEL TIPO: Interfaz `ObraSocial` definida en 'src/types/index.ts'
  *
+ * ALINEACIÓN CON BACKEND (4.4): los campos siguen el DTO de
+ * GET /api/v1/obras-sociales. El backend no expone "logo", por lo que la
+ * tarjeta siempre usa el avatar con ícono Building2.
+ *
  * Propiedades del objeto recibido:
- *   - id:          Identificador único (número). Usado como `key` en el `.map()` del padre.
- *   - nombre:      Nombre de la obra social (string). Se muestra como título de la tarjeta.
- *   - logo:        URL de la imagen del logo (string | null). Si es null, se muestra un avatar con ícono Building2.
- *   - descripcion: Texto descriptivo de la obra social (string | null). Se muestra debajo del nombre.
- *   - telefono:    Número de contacto (string | null). Se renderiza condicionalmente con ícono Phone.
- *   - email:       Correo electrónico (string | null). Se renderiza condicionalmente con ícono Mail.
- *   - sitioWeb:    URL del sitio web oficial (string | null). Se renderiza condicionalmente como enlace externo.
+ *   - id:            Identificador único (número). Usado como `key` en el `.map()` del padre.
+ *   - nombre:        Nombre de la obra social (string). Se muestra como título de la tarjeta.
+ *   - descripcion:   Texto descriptivo de la obra social (string | null). Se muestra debajo del nombre.
+ *   - telefono:      Número de contacto (string | null). Se renderiza condicionalmente con ícono Phone.
+ *   - correo:        Correo electrónico (string | null). Se renderiza condicionalmente con ícono Mail.
+ *   - url_sitio_web: URL del sitio web oficial (string | null). Se renderiza condicionalmente como enlace externo.
  */
 interface ObraSocialCardProps {
   obraSocial: ObraSocial;
@@ -122,26 +125,14 @@ function ObraSocialCard({ obraSocial }: ObraSocialCardProps) {
     // `article` es el elemento semántico correcto de HTML5 para una entidad autocontenida.
     <article className="flex flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
 
-      {/* ── ENCABEZADO: Logo + Nombre de la obra social ── */}
+      {/* ── ENCABEZADO: Avatar + Nombre de la obra social ──
+          ALINEACIÓN (4.4): el backend no devuelve "logo", por lo que siempre
+          se muestra el avatar con el ícono Building2 como identificador visual. */}
       <div className="mb-4 flex items-center gap-4">
-
-        {/* RENDERIZADO CONDICIONAL DEL LOGO:
-            - Si `obraSocial.logo` tiene valor (string con URL), muestra la imagen real con un <img>.
-            - Si `obraSocial.logo` es null, muestra un div con el ícono Building2 como avatar de respaldo.
-            POR QUÉ SE HACE: No todas las obras sociales tendrán logo en la base de datos,
-            por lo que el fallback visual evita espacios vacíos o imágenes rotas. */}
-        {obraSocial.logo ? (
-          <img
-            src={obraSocial.logo}
-            alt={`Logo de ${obraSocial.nombre}`} // Texto alternativo para accesibilidad (lectores de pantalla)
-            className="h-14 w-14 rounded-lg object-contain border border-gray-100 dark:border-gray-700 bg-white p-1"
-          />
-        ) : (
-          // Avatar de respaldo cuando no hay logo cargado en la API
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900/30">
-            <Building2 className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
-          </div>
-        )}
+        {/* Avatar de respaldo (ícono Building2) — sin logo del backend */}
+        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900/30">
+          <Building2 className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+        </div>
 
         {/* Nombre de la obra social como título semántico */}
         <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 leading-tight">
@@ -182,33 +173,35 @@ function ObraSocialCard({ obraSocial }: ObraSocialCardProps) {
           </div>
         )}
 
-        {/* EMAIL (CONDICIONAL):
-            Solo se renderiza si `obraSocial.email` tiene valor.
-            El `href="mailto:..."` abre el cliente de correo del sistema operativo del usuario. */}
-        {obraSocial.email && (
+        {/* CORREO (CONDICIONAL):
+            Solo se renderiza si `obraSocial.correo` tiene valor.
+            El `href="mailto:..."` abre el cliente de correo del sistema operativo del usuario.
+            (antes "email" — renombrado a "correo" por alineación con el backend, 4.4) */}
+        {obraSocial.correo && (
           <div className="flex items-center gap-2">
             {/* Ícono de correo — decorativo, oculto para asistentes de accesibilidad */}
             <Mail className="h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500" aria-hidden="true" />
             <a
-              href={`mailto:${obraSocial.email}`}
+              href={`mailto:${obraSocial.correo}`}
               className="text-sm text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors truncate"
             >
-              {obraSocial.email}
+              {obraSocial.correo}
             </a>
           </div>
         )}
 
         {/* SITIO WEB (CONDICIONAL):
-            Solo se renderiza si `obraSocial.sitioWeb` tiene valor.
+            Solo se renderiza si `obraSocial.url_sitio_web` tiene valor.
             `target="_blank"` abre en nueva pestaña.
             `rel="noopener noreferrer"` es una medida de seguridad obligatoria para evitar
-            que la página destino pueda acceder al objeto `window.opener` de nuestra app. */}
-        {obraSocial.sitioWeb && (
+            que la página destino pueda acceder al objeto `window.opener` de nuestra app.
+            (antes "sitioWeb" — renombrado a "url_sitio_web" por alineación con el backend, 4.4) */}
+        {obraSocial.url_sitio_web && (
           <div className="flex items-center gap-2">
             {/* Ícono de globo terráqueo para representar el sitio web */}
             <Globe className="h-4 w-4 flex-shrink-0 text-gray-400 dark:text-gray-500" aria-hidden="true" />
             <a
-              href={obraSocial.sitioWeb}
+              href={obraSocial.url_sitio_web}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 transition-colors"

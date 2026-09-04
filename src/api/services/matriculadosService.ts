@@ -3,67 +3,70 @@ import { ENDPOINTS } from '@/api/endpoints';
 import type { ApiResponse } from '@/types/api';
 import type { Matriculado, PagoMatriculaData, Honorario } from '@/types';
 
-
-// determinamos el tipo de usuario que devuelve la API de tipo json para mapearlo a nuestro tipo Matriculado
-interface JsonPlaceholderUser{
+/**
+ * DTO del backend (GET /api/v1/profesionales).
+ * Los campos coinciden EXACTAMENTE con lo que devuelve
+ * app/Controllers/Api/ProfesionalesController::map().
+ */
+export interface ProfesionalDto {
   id: number;
-  name: string;
-  username: string;
-  email: string;
-  phone: string;
-  website: string;
+  nro_matricula: string;
+  dni: string | null;
+  nombre: string;
+  apellido: string;
+  email: string | null;
+  telefono: string | null;
+  localidad: string | null;
+  direccion: string | null;
+  estado: string;
+  fecha_matriculacion: string;
+  observaciones: string | null;
+  foto: string | null;
+  usuario_abm: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
-  //formato de la api para response en tipo json.
-
-  export const matriculadosService = {
-    getAll: async (): Promise<Matriculado[]> => {
-      const { data } = await apiClient.get<ApiResponse<JsonPlaceholderUser[]>>(ENDPOINTS.matriculados.list);
-      console.log('Datos recibidos: ', data);
-      console.log('Cantidad recibida: ', data.length);
-      // mapeamos el array de usuarios de tipo json a nuestro tipo Matriculado 
-      return data.map((user)=>({
-        params:{
-          _limit: 100,
-        },
-        id: user.id,
-        nombre: user.name,
-        email: user.email,
-        telefono: user.phone,
-        direccion: user.website,
-        matricula: user.username,
-        especialidad: 'Especialidad de ejemplo',
-        foto: `https://i.pravatar.cc/150?u=${user.id}`,
-      }));
-  },
-
-  getPagoData: async (): Promise<PagoMatriculaData> => {
-    throw new Error('Not implemented yet');
-  },
-
-  getHonorarios: async (): Promise<Honorario[]> => {
-    throw new Error('Not implemented yet');
-  },
-};
-
-
-
-
-
-/*export const matriculadosService = {
+/**
+ * ALINEACIÓN (4.1 + 4.4):
+ * El endpoint real es /api/v1/profesionales (recurso "profesionales" del backend).
+ * Antes el frontend apuntaba a /users (placeholder de JSONPlaceholder) con un
+ * formato de campos distinto (name/username/website). Ahora se consume el
+ * backend real y se mapea su DTO al tipo de dominio Matriculado.
+ */
+export const matriculadosService = {
   getAll: async (): Promise<Matriculado[]> => {
-    const { data } = await apiClient.get<ApiResponse<Matriculado[]>>(ENDPOINTS.matriculados.list);
-    return data.data;
-  }, // este formato es para cuando la API devuelve un array de matriculados. si recibimos un array de usuarios de formato json, necesitamos mapearlo a nuestro tipo Matriculado
+    const { data } = await apiClient.get<ApiResponse<ProfesionalDto[]>>(
+      ENDPOINTS.matriculados.list,
+    );
+
+    // El backend devuelve el DTO dentro del wrapper { data: [...] }.
+    // Mapeamos cada DTO al tipo de dominio Matriculado (mismos nombres de campo).
+    return data.data.map((p) => ({
+      id: p.id,
+      nro_matricula: p.nro_matricula,
+      dni: p.dni,
+      nombre: p.nombre,
+      apellido: p.apellido,
+      email: p.email,
+      telefono: p.telefono,
+      localidad: p.localidad,
+      direccion: p.direccion,
+      estado: p.estado,
+      fecha_matriculacion: p.fecha_matriculacion,
+      observaciones: p.observaciones,
+      foto: p.foto,
+      usuario_abm: p.usuario_abm,
+      created_at: p.created_at,
+      updated_at: p.updated_at,
+    }));
+  },
 
   getPagoData: async (): Promise<PagoMatriculaData> => {
-    const { data } = await apiClient.get<ApiResponse<PagoMatriculaData>>(ENDPOINTS.matriculados.pago);
-    return data.data;
+    throw new Error('Not implemented yet');
   },
 
   getHonorarios: async (): Promise<Honorario[]> => {
-    const { data } = await apiClient.get<ApiResponse<Honorario[]>>(ENDPOINTS.matriculados.honorarios);
-    return data.data;
+    throw new Error('Not implemented yet');
   },
 };
-*/

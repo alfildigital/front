@@ -4,13 +4,28 @@ import { Card } from '@/components/common/Card';
 import { formatDate, truncateText } from '@/utils/formatters';
 import type { Noticia } from '@/types';
 
+// ALINEACIÓN (4.4): el backend no expone "imagen", "categoria" ni "resumen".
+// Se derivan: imagen → archivo_ruta (si es imagen), resumen → contenido sin HTML,
+// y autor en lugar de la categoría inexistente.
+function noticiaImagen(n: Noticia): string | null {
+  if (!n.archivo_ruta) return null;
+  if (n.archivo_tipo == null) return n.archivo_ruta;
+  return n.archivo_tipo.startsWith('image/') ? n.archivo_ruta : null;
+}
+
+function noticiaResumen(n: Noticia): string {
+  return n.contenido.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+}
+
 function NoticiaCard({ noticia }: { noticia: Noticia }) {
+  const imagen = noticiaImagen(noticia);
+  const resumen = noticiaResumen(noticia);
   return (
     <Card className="flex flex-col overflow-hidden">
       <div className="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
-        {noticia.imagen ? (
+        {imagen ? (
           <img
-            src={noticia.imagen}
+            src={imagen}
             alt={noticia.titulo}
             className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
             loading="lazy"
@@ -26,12 +41,14 @@ function NoticiaCard({ noticia }: { noticia: Noticia }) {
         <div className="mb-2 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
           <span className="flex items-center gap-1">
             <Calendar className="h-3 w-3" aria-hidden="true" />
-            {formatDate(noticia.fecha)}
+            {formatDate(noticia.fecha_publicacion)}
           </span>
-          <span className="flex items-center gap-1">
-            <Tag className="h-3 w-3" aria-hidden="true" />
-            {noticia.categoria}
-          </span>
+          {noticia.autor && (
+            <span className="flex items-center gap-1">
+              <Tag className="h-3 w-3" aria-hidden="true" />
+              {noticia.autor}
+            </span>
+          )}
         </div>
 
         <h3 className="mb-2 text-base font-semibold text-gray-900 dark:text-gray-100 line-clamp-2">
@@ -39,7 +56,7 @@ function NoticiaCard({ noticia }: { noticia: Noticia }) {
         </h3>
 
         <p className="flex-1 text-sm text-gray-600 dark:text-gray-400">
-          {truncateText(noticia.resumen, 120)}
+          {truncateText(resumen, 120)}
         </p>
 
         <Link
