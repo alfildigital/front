@@ -113,7 +113,7 @@ y efecto blur.
 
 ┌─ SECCIÓN TRÁMITES DESTACADOS ──────────────────────────┐
 │ Muestra los primeros 4 trámites del array completo     │
-│ API: GET /api/tramites  →  hook: useTramites()         │
+│ Datos locales (mock) → hook: useTramites()              │
 │ [Card 1] [Card 2] [Card 3] [Card 4]                    │
 └────────────────────────────────────────────────────────┘
 
@@ -195,7 +195,7 @@ Hook: useNoticia(id)   (toma el parámetro :id de la URL)
 **¿Qué carga?**
 
 ```
-API: GET /api/tramites
+Datos locales (mock)
 Hook: useTramites()
 Paginación: client-side (10 trámites por página)
 ```

@@ -36,6 +36,11 @@ export interface Noticia {
   archivo_ruta: string | null;
   archivo_tipo: string | null;
   archivo_tamano: number | null;
+  img_nombre: string | null;
+  img_contenido: string | null;
+  img_ruta: string | null;
+  img_tipo: string | null;
+  img_tamano: number | null;
   autor: string | null;
   roles_nombres: string | null;
   roles: number[] | null;

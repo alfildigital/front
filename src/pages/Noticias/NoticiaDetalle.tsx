@@ -8,19 +8,8 @@ import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { Skeleton } from '@/components/common/Skeleton';
 import { useNoticia } from '@/hooks/queries/useNoticias';
 import { formatDate, formatFileSize } from '@/utils/formatters';
+import { noticiaImagen, base64ToBlobUrl } from '@/utils/fileUtils';
 import type { Noticia } from '@/types';
-
-// ALINEACIÓN (4.4): el backend no expone "fecha", "categoria" ni "adjuntos".
-// - Fecha  → fecha_publicacion
-// - Firma  → autor (sustituye al badge de categoría inexistente)
-// - Imagen destacada → archivo_ruta si archivo_tipo es de imagen
-// - Adjunto único → archivo_* (en lugar del array adjuntos[])
-
-function noticiaImagen(n: Noticia): string | null {
-  if (!n.archivo_ruta) return null;
-  if (n.archivo_tipo == null) return n.archivo_ruta;
-  return n.archivo_tipo.startsWith('image/') ? n.archivo_ruta : null;
-}
 
 function useAdjuntoUrl(n: Noticia | undefined): string | null {
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
@@ -38,11 +27,7 @@ function useAdjuntoUrl(n: Noticia | undefined): string | null {
       return;
     }
     const mime = tipo ?? 'application/pdf';
-    const binary = atob(contenido);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    const blob = new Blob([bytes], { type: mime });
-    const url = URL.createObjectURL(blob);
+    const url = base64ToBlobUrl(contenido, mime);
     setBlobUrl(url);
     return () => URL.revokeObjectURL(url);
   }, [ruta, contenido, tipo]);
@@ -128,7 +113,7 @@ export default function NoticiaDetallePage() {
               dangerouslySetInnerHTML={{ __html: data.contenido }}
             />
 
-            {adjuntoUrl && !noticiaImagen(data) && (
+            {adjuntoUrl && (
               <div className="mt-10 rounded-xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800/30">
                 <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold text-gray-900 dark:text-gray-100">
                   Documento adjunto

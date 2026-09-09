@@ -19,9 +19,6 @@ export const ENDPOINTS = {
     list: '/novedades',
     detail: (id: number) => `/novedades/${id}`,
   },
-  tramites: {
-    list: '/tramites',
-  },
   // Matriculados → GET /api/v1/profesionales
   matriculados: {
     list: '/profesionales',
@@ -41,7 +38,7 @@ export const ENDPOINTS = {
   boletin: {
     list: '/boletines-oficiales',
   },
-  instagram: {
-    list: '/instagram',
-  },
+  // instagram: {
+  //   list: '/instagram',
+  // },
 } as const;

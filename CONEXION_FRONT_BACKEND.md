@@ -124,7 +124,7 @@ const service = config.mocks.enabled ? mockObrasSocialesService : obrasSocialesS
 | Matriculados | `/users` | `/profesionales` | ❌ distinto |
 | Boletín oficial | `/boletin-oficial` | `/boletines-oficiales` | ❌ distinto |
 | Obras sociales | `/obras-sociales` | `/obras-sociales` | ✅ igual |
-| Trámites | `/tramites` | *(no existe)* | ❌ falta en backend |
+| Trámites | *(local, sin API)* | *(no aplica)* | ✅ datos locales |
 | Alquileres | `/alquileres` | *(no existe)* | ❌ falta en backend |
 | Instagram | `/instagram` | *(no existe)* | ❌ falta en backend |
 

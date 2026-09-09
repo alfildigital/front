@@ -142,25 +142,20 @@ cambio necesario es en `src/api/services/*.ts` — las páginas y componentes no
 
 ### 2.2 Trámites
 
-**Endpoint real:** `GET /api/tramites`  
-**Servicio:** `src/api/services/tramitesService.ts`  
-**Estado:** ❌ Sin desarrollar
+**Datos:** locales (mock), sin consumo de API externa  
+**Servicio:** `src/mocks/services/mockTramitesService.ts`  
+**Estado:** ✅ Sin dependencia de backend (datos locales)
 
-**Contrato esperado (provisional):**
+**Estructura de datos (local):**
 
 ```json
 {
-  "success": true,
-  "data": [
-    {
-      "id": 1,
-      "titulo": "string",
-      "descripcion": "string",
-      "requisitos": ["string", "string"],
-      "enlace": "URL | null",
-      "icono": "BadgeCheck | FileCheck | RefreshCw | Stamp | null"
-    }
-  ]
+  "id": 1,
+  "titulo": "string",
+  "descripcion": "string",
+  "requisitos": ["string", "string"],
+  "enlace": "URL | null",
+  "icono": "BadgeCheck | FileCheck | RefreshCw | Stamp | null"
 }
 ```
 

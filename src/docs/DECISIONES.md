@@ -65,7 +65,6 @@ Se crearon estructuras provisionales que deben ser validadas y ajustadas con el 
 | `GET /api/obras-sociales` | `ObraSocial` | `src/types/index.ts` |
 | `GET /api/alquileres` | `Alquiler` | `src/types/index.ts` |
 | `GET /api/boletin-oficial` | `BoletinPublicacion` | `src/types/index.ts` |
-| `GET /api/tramites` | `Tramite` | `src/types/index.ts` |
 | `GET /api/honorarios` | `Honorario` | `src/types/index.ts` |
 | `GET /api/matriculados` | `Matriculado` | `src/types/index.ts` |
 | `GET /api/instagram` | `InstagramPost` | `src/types/index.ts` |

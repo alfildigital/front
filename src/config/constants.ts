@@ -10,9 +10,9 @@ export const NAV_LINKS = [
   {
     label: 'Nosotros / Matriculados',
     children: [
+      { label: 'Honorarios', to: '/matriculados/honorarios' },
       { label: 'Pagar Matrícula', to: '/matriculados/pago' },
       { label: 'Información Institucional', to: '/matriculados/informacion' },
-      { label: 'Honorarios', to: '/matriculados/honorarios' },
       { label: 'Acceso a Profesionales', to: '/matriculados/listado' },
     ],
   },

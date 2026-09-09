@@ -76,7 +76,6 @@ src/pages/Home/index.tsx             ← preview (primeras 3)
 src/pages/Tramites/index.tsx         ← listado paginado
 src/pages/Home/index.tsx             ← sección destacada (primeros 4)
   └── src/hooks/queries/useTramites.ts
-        └── src/api/services/tramitesService.ts   → GET /api/tramites
         └── src/mocks/services/mockTramitesService.ts
               └── src/mocks/data/tramites.ts
 ```

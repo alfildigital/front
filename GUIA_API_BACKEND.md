@@ -200,7 +200,6 @@ Los endpoints están centralizados en `src/api/endpoints.ts`:
 ```ts
 export const ENDPOINTS = {
   obrasSociales: { list: '/obras-sociales' },
-  tramites:      { list: '/tramites' },
   noticias:      { list: '/noticias', detail: (id) => `/noticias/${id}` },
   matriculados:  { list: '/matriculados', pago: '/matriculados/pago', honorarios: '/honorarios' },
   alquileres:    { list: '/alquileres' },

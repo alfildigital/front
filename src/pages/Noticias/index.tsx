@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
@@ -20,46 +19,12 @@ import { useNoticias } from '@/hooks/queries/useNoticias';
 import { usePagination } from '@/hooks/usePagination';
 import { paginateItems } from '@/utils/paginationUtils';
 import { formatDate, truncateText } from '@/utils/formatters';
+import { noticiaImagen, noticiaResumen } from '@/utils/fileUtils';
 import type { Noticia } from '@/types';
 
-// ALINEACIÓN (4.4): el backend no expone "resumen" ni "imagen" separados.
-// - El resumen se deriva del contenido (quitando etiquetas HTML).
-// - La imagen destacada se obtiene de archivo_ruta solo si archivo_tipo es de imagen.
-function textoTitulo(n: Noticia): string | null {
-  if (!n.archivo_ruta) return null;
-  if (n.archivo_tipo == null) return n.archivo_ruta;
-  return n.archivo_tipo.startsWith('image/') ? n.archivo_ruta : null;
-}
-
-function noticiaResumen(n: Noticia): string {
-  return n.contenido.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-}
-
 function NoticiaRow({ noticia }: { noticia: Noticia }) {
-  // La imagen destacada solo se muestra si el backend adjuntó una imagen.
-  const imagen = textoTitulo(noticia);
+  const imagen = noticiaImagen(noticia);
   const resumen = noticiaResumen(noticia);
-
-  const [blobUrl, setBlobUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (noticia.archivo_ruta) {
-      setBlobUrl(noticia.archivo_ruta);
-      return;
-    }
-    if (!noticia.archivo_contenido) {
-      setBlobUrl(null);
-      return;
-    }
-    const mime = noticia.archivo_tipo ?? 'application/pdf';
-    const binary = atob(noticia.archivo_contenido);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    const blob = new Blob([bytes], { type: mime });
-    const url = URL.createObjectURL(blob);
-    setBlobUrl(url);
-    return () => URL.revokeObjectURL(url);
-  }, [noticia.archivo_ruta, noticia.archivo_contenido, noticia.archivo_tipo]);
 
   return (
     <article className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:flex-row dark:border-gray-700 dark:bg-gray-800/50">

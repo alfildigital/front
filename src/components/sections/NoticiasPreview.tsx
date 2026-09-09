@@ -2,20 +2,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
 import { Card } from '@/components/common/Card';
 import { formatDate, truncateText } from '@/utils/formatters';
+import { noticiaImagen, noticiaResumen } from '@/utils/fileUtils';
 import type { Noticia } from '@/types';
-
-// ALINEACIÓN (4.4): el backend no expone "imagen", "categoria" ni "resumen".
-// Se derivan: imagen → archivo_ruta (si es imagen), resumen → contenido sin HTML,
-// y autor en lugar de la categoría inexistente.
-function noticiaImagen(n: Noticia): string | null {
-  if (!n.archivo_ruta) return null;
-  if (n.archivo_tipo == null) return n.archivo_ruta;
-  return n.archivo_tipo.startsWith('image/') ? n.archivo_ruta : null;
-}
-
-function noticiaResumen(n: Noticia): string {
-  return n.contenido.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-}
 
 function NoticiaCard({ noticia }: { noticia: Noticia }) {
   const imagen = noticiaImagen(noticia);
