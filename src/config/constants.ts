@@ -38,5 +38,5 @@ export const QUERY_KEYS = {
   obrasSociales: 'obras-sociales',
   alquileres: 'alquileres',
   boletin: 'boletin-oficial',
-  instagram: 'instagram',
+  // instagram: 'instagram',
 } as const;

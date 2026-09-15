@@ -182,10 +182,10 @@ export interface BoletinPublicacion {
  * Solo incluye las propiedades que la UI realmente consume.
  * El contrato real del backend puede incluir más campos.
  */
-export interface InstagramPost {
-  id: string;
-  imageUrl: string;
-  caption: string | null;
-  permalink: string;
-  timestamp: string; // ISO 8601
-}
+// export interface InstagramPost {
+//   id: string;
+//   imageUrl: string;
+//   caption: string | null;
+//   permalink: string;
+//   timestamp: string; // ISO 8601
+// }
