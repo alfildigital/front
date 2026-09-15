@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, MapPin } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
-import { InstagramCarousel } from '@/components/sections/InstagramCarousel';
+// import { InstagramCarousel } from '@/components/sections/InstagramCarousel';
 import { NoticiasPreview } from '@/components/sections/NoticiasPreview';
 import { TramitesDestacados } from '@/components/sections/TramitesDestacados';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useNoticias } from '@/hooks/queries/useNoticias';
 import { useTramites } from '@/hooks/queries/useTramites';
-import { useInstagram } from '@/hooks/queries/useInstagram';
+// import { useInstagram } from '@/hooks/queries/useInstagram';
 
 // ---------------------------------------------------------------------------
 // Hero
