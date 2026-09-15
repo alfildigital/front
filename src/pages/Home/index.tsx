@@ -77,7 +77,7 @@ function Hero() {
 export default function HomePage() {
   const noticias = useNoticias();
   const tramites = useTramites();
-  const instagram = useInstagram();
+  // const instagram = useInstagram();
 
   return (
     <Layout>
@@ -130,9 +130,9 @@ export default function HomePage() {
       )}
 
       {/* Instagram — se oculta si no hay posts, sin EmptyState */}
-      {instagram.data && instagram.data.length > 0 && (
+      {/* {instagram.data && instagram.data.length > 0 && (
         <InstagramCarousel posts={instagram.data} />
-      )}
+      )} */}
     </Layout>
   );
 }
