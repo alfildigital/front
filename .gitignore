@@ -10,6 +10,9 @@ coverage/
 .env.*
 !.env.example
 
+# Informes locales de conexión y diagnóstico
+INFORME_CONEXION_FRONT_BACKEND.local.md
+
 # Logs
 *.log
 npm-debug.log*
@@ -26,3 +29,4 @@ pnpm-debug.log*
 .idea/
 .DS_Store
 Thumbs.db
+
