@@ -117,7 +117,7 @@ function InstitutionalSections() {
                 <h2 id="nosotros-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                   Nosotros
                 </h2>
-                <p className="mt-4 text-sm leading-8 text-gray-600 dark:text-gray-300">
+                <p className="mt-4 text-sm text-justify leading-8 text-gray-600 dark:text-gray-300">
                   El Colegio de Pros en Educación Especial es la institución rectora que agrupa y representa a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad. Somos una comunidad comprometida con la ética profesional, la actualización constante y la defensa de los derechos humanos.
 
                   Nuestra labor trasciende el aula: trabajamos para garantizar que la educación especial sea un pilar fundamental en la construcción de una sociedad más justa e inclusiva. Agrupamos a expertos en diversas áreas, fomentando el intercambio de experiencias y el desarrollo técnico-científico para brindar respuestas innovadoras a los desafíos educativos actuales.
@@ -164,14 +164,14 @@ function InstitutionalSections() {
             <article className="border-l-4 border-primary-500 bg-white p-6 shadow-sm dark:bg-gray-900">
               <Target className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Misión</h3>
-              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm">
+              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm text-justify">
                 Regular, promover y jerarquizar el ejercicio profesional de la Educación Especial, velando por la idoneidad, ética y formación continua de nuestros matriculados. Buscamos garantizar una educación de calidad que potencie las capacidades de cada estudiante, promoviendo su autonomía e inclusión plena en el ámbito social, educativo y labor
               </p>
             </article>
             <article className="border-l-4 border-secondary-500 bg-white p-6 shadow-sm dark:bg-gray-900">
               <Eye className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Visión</h3>
-              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm">
+              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm text-justify">
                 Ser la institución referente a nivel nacional en materia de Educación Especial, reconocida por su excelencia técnica y su capacidad de incidencia en las políticas públicas. Aspiramos a construir una sociedad donde la diversidad sea valorada y donde cada persona con discapacidad tenga garantizado su derecho a aprender y desarrollarse plenamente, de la mano de profesionales altamente calificados.
               </p>
             </article>
