@@ -175,6 +175,66 @@ export interface BoletinPublicacion {
 }
 
 // ---------------------------------------------------------------------------
+// CONSENTIMIENTOS LEGALES
+// ---------------------------------------------------------------------------
+//
+// Estructura de datos para el registro de consentimientos de usuarios.
+// Ver CONSENTIMIENTOS_BACKEND.md para el contrato completo con el backend.
+//
+// DECISIÓN:
+//   - El frontend envía los consentimientos como parte del payload del formulario.
+//   - El backend debe validar que los obligatorios estén en true.
+//   - El backend genera el timestamp oficial y captura la IP desde la conexión HTTP.
+//   - El frontend nunca genera ni envía timestamp ni IP.
+
+export interface ConsentimientosPayload {
+  /** Aceptación de Términos y Condiciones. Obligatorio para enviar el formulario. */
+  terminosYCondiciones: boolean;
+  /** Aceptación de Política de Privacidad. Obligatorio para enviar el formulario. */
+  politicaDePrivacidad: boolean;
+  /** Consentimiento para recibir novedades y comunicaciones. Opcional. */
+  marketing: boolean;
+  /** Versión de los Términos y Condiciones aceptados (ej: "1.0"). */
+  versionTerminos: string;
+  /** Versión de la Política de Privacidad aceptada (ej: "1.0"). */
+  versionPolitica: string;
+}
+
+// ---------------------------------------------------------------------------
+// FORMULARIO CONSULTA ALQUILER — [PROVISIONAL] contrato pendiente de backend
+// ---------------------------------------------------------------------------
+//
+// Payload enviado al endpoint POST /alquileres/consulta.
+// El backend debe:
+//   1. Validar que terminosYCondiciones y politicaDePrivacidad sean true.
+//   2. Registrar el consentimiento con timestamp del servidor e IP de la conexión.
+//   3. Ver CONSENTIMIENTOS_BACKEND.md para la especificación completa.
+
+export interface ConsultaAlquilerPayload {
+  nombre: string;
+  email: string;
+  telefono: string;
+  mensaje: string;
+  espacioId: number | null;
+  consentimientos: ConsentimientosPayload;
+}
+
+// ---------------------------------------------------------------------------
+// FORMULARIO SOLICITUD OBRA SOCIAL — [PROVISIONAL] contrato pendiente de backend
+// ---------------------------------------------------------------------------
+//
+// Payload enviado al endpoint POST /obras-sociales/solicitud.
+// Mismas consideraciones de backend que ConsultaAlquilerPayload.
+
+export interface SolicitudObraSocialPayload {
+  nombre: string;
+  email: string;
+  especialidad: string;
+  mensaje: string;
+  consentimientos: ConsentimientosPayload;
+}
+
+// ---------------------------------------------------------------------------
 // INSTAGRAM — [PROVISIONAL] contrato pendiente de backend
 // ---------------------------------------------------------------------------
 
