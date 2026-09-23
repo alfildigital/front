@@ -1,12 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Eye, MapPin, Phone, Target, Building2 } from 'lucide-react';
+import { ArrowRight, Eye, MapPin, Phone, Target, Building2, Instagram, MailIcon } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 // import { InstagramCarousel } from '@/components/sections/InstagramCarousel';
 import { NoticiasPreview } from '@/components/sections/NoticiasPreview';
 //import { TramitesDestacados } from '@/components/sections/TramitesDestacados';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
+import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useNoticias } from '@/hooks/queries/useNoticias';
 // import { useTramites } from '@/hooks/queries/useTramites';
@@ -32,7 +33,6 @@ function Hero() {
       <div className="w-full lg:w-[70%]">
         <div className="max-w-2xl animate-fade-in-up">
           <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
-            Bienvenidos al
             <br />
             <span className="text-secondary-200">{SITE_NAME}</span>
           </h1>
@@ -59,23 +59,40 @@ function Hero() {
 
         {/* Quick info */}
         <div className="mt-12 flex flex-wrap gap-4 text-sm">
-          <div className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm">
+          <a
+            href="mailto:colegioedeespeciales@gmail.com"
+            className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/15"
+          >
+            <MailIcon className="h-4 w-4 text-secondary-300" aria-hidden="true" />
+            <span>Escribinos</span>
+          </a>
+          <a
+            href="https://wa.me/543764154343?text=Hola%2C%20quiero%20consultar%20sobre%20las%20actividades%20del%20colegio."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/15"
+          >
             <Phone className="h-4 w-4 text-secondary-300" aria-hidden="true" />
-            <span>Consultas: (0351) 000-0000</span>
-          </div>
-          <div className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm">
+            <span>Consultas: (376) 415-4343</span>
+          </a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Av.+mitre+1234,+Posadas,+Misiones,+Argentina"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/15"
+          >
             <MapPin className="h-4 w-4 text-secondary-300" aria-hidden="true" />
-            <span>Sede Central — Av. Ejemplo 1234</span>
-          </div>
+            <span>Sede Central — Av. Mitre 1234</span>
+          </a>
         </div>
       </div>
 
       {/* Columna derecha: 30% — solo la imagen del logo */}
       <div className="flex w-full justify-center lg:w-[30%] lg:justify-end">
         <img
-          src="/upscalemedia-transformed.svg"
+          src="/logo.jpg"
           alt={`Logo de ${SITE_NAME}`}
-          className="className= h-auto w-40 max-w-full rounded-full object-contain opacity-80 shadow-lg sm:w-48 lg:w-full"
+          className="h-auto w-40 max-w-full rounded-full object-contain opacity-80 shadow-lg sm:w-48 lg:w-full"
         />
       </div>
     </div>
@@ -92,27 +109,38 @@ function InstitutionalSections() {
           <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-8">
             {/* Columna izquierda: 80% */}
             <div className="w-full lg:w-[80%]">
-              <div className="max-w-3xl">
-                <div className="mb-5 flex items-center gap-3 text-primary-600 dark:text-primary-400">
+              <div className="max-w-3xl text-center lg:text-left">
+                <div className="mb-5 flex items-center justify-center gap-3 text-primary-600 dark:text-primary-400 lg:justify-start">
                   <Building2 className="h-6 w-6" aria-hidden="true" />
                   <span className="text-sm font-semibold uppercase tracking-wider">Institución</span>
                 </div>
                 <h2 id="nosotros-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                   Nosotros
                 </h2>
-                <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                  El Colegio de Pro en Educación Especial es la institución rectora que agrupa y representa a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad. Somos una comunidad comprometida con la ética profesional, la actualización constante y la defensa de los derechos humanos.
+                <p className="mt-4 text-sm leading-8 text-gray-600 dark:text-gray-300">
+                  El Colegio de Pros en Educación Especial es la institución rectora que agrupa y representa a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad. Somos una comunidad comprometida con la ética profesional, la actualización constante y la defensa de los derechos humanos.
 
                   Nuestra labor trasciende el aula: trabajamos para garantizar que la educación especial sea un pilar fundamental en la construcción de una sociedad más justa e inclusiva. Agrupamos a expertos en diversas áreas, fomentando el intercambio de experiencias y el desarrollo técnico-científico para brindar respuestas innovadoras a los desafíos educativos actuales.
                 </p>
+                <div className="mt-8 flex justify-center lg:justify-start">
+                  <a
+                    href="https://www.instagram.com/colegioedespecial.msn?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-primary-600 transition-colors hover:border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-400 dark:hover:bg-primary-900/30 dark:hover:text-primary-300"
+                  >
+                    <Instagram className="h-5 w-5" aria-hidden="true" />
+                    <span className="text-sm font-medium">Seguinos en Instagram</span>
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Columna derecha: 20% — imagen */}
             <div className="flex w-full items-center justify-center lg:w-[20%] lg:justify-end">
-              <div className="flex aspect-square w-full max-w-[12rem] items-center justify-center overflow-hidden rounded-full bg-primary-50 p-4 shadow-lg dark:bg-gray-800">
+              <div className="flex aspect-square bg-primary-50 p-4 shadow-lg dark:bg-gray-800">
                 <img
-                  src="/colegio_autoridades.png"
+                  src="/logo.jpg"
                   alt="Imagen institucional"
                   className="h-full w-full object-contain"
                 />
@@ -136,14 +164,14 @@ function InstitutionalSections() {
             <article className="border-l-4 border-primary-500 bg-white p-6 shadow-sm dark:bg-gray-900">
               <Target className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Misión</h3>
-              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300">
+              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm">
                 Regular, promover y jerarquizar el ejercicio profesional de la Educación Especial, velando por la idoneidad, ética y formación continua de nuestros matriculados. Buscamos garantizar una educación de calidad que potencie las capacidades de cada estudiante, promoviendo su autonomía e inclusión plena en el ámbito social, educativo y labor
               </p>
             </article>
             <article className="border-l-4 border-secondary-500 bg-white p-6 shadow-sm dark:bg-gray-900">
               <Eye className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Visión</h3>
-              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300">
+              <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm">
                 Ser la institución referente a nivel nacional en materia de Educación Especial, reconocida por su excelencia técnica y su capacidad de incidencia en las políticas públicas. Aspiramos a construir una sociedad donde la diversidad sea valorada y donde cada persona con discapacidad tenga garantizado su derecho a aprender y desarrollarse plenamente, de la mano de profesionales altamente calificados.
               </p>
             </article>
@@ -209,6 +237,16 @@ export default function HomePage() {
             <ErrorBanner message="No se pudieron cargar las noticias." onRetry={() => void noticias.refetch()} />
           </div>
         </div>
+      )}
+      {noticias.data && noticias.data.length === 0 && (
+        <section aria-label="Noticias" className="py-16 bg-gray-50 dark:bg-gray-800/30">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <EmptyState
+              title="No hay noticias para mostrar"
+              description="Todavía no se publicaron novedades para esta sección."
+            />
+          </div>
+        </section>
       )}
       {noticias.data && noticias.data.length > 0 && (
         <NoticiasPreview noticias={noticias.data.slice(0, 3)} />
