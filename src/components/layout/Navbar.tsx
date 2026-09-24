@@ -23,9 +23,16 @@ interface NavItem {
 // ---------------------------------------------------------------------------
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Inicio', to: '/' },
+  { label: 'Colegio', to: '/' },
   { label: 'Noticias', to: '/noticias' },
-  { label: 'Trámites', to: '/tramites' },
+  { 
+    label: 'Trámites', 
+    children: [
+      { label: 'Trámites', to: '/tramites/index' },
+      { label: 'Formularios', to: '/tramites/formularios' },
+      { label: 'Documentos', to: '/tramites/documentos' },
+    ]
+  },
   {
     label: 'Matriculados',
     children: [

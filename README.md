@@ -150,3 +150,4 @@ src/
 2. Configurar `VITE_API_URL` con la URL del backend
 3. Revisar `src/docs/DECISIONES.md` para validar los contratos JSON con el backend
 4. Ajustar las interfaces en `src/types/index.ts` si es necesario
+
