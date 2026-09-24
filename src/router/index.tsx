@@ -10,6 +10,8 @@ const HomePage         = lazy(() => import('@/pages/Home'));
 const NoticiasPage     = lazy(() => import('@/pages/Noticias'));
 const NoticiaDetalle   = lazy(() => import('@/pages/Noticias/NoticiaDetalle'));
 const TramitesPage     = lazy(() => import('@/pages/Tramites'));
+const FormulariosPage  = lazy(() => import('@/pages/Tramites/Formularios'));
+const DocumentosPage   = lazy(() => import('@/pages/Tramites/Documentos'));
 const PagoPage         = lazy(() => import('@/pages/Matriculados/Pago'));
 const ListadoPage      = lazy(() => import('@/pages/Matriculados/Listado'));
 const HonorariosPage   = lazy(() => import('@/pages/Matriculados/Honorarios'));
@@ -62,6 +64,18 @@ export const router = createBrowserRouter([
   },
   {
     path: '/tramites',
+    element: withSuspense(TramitesPage),
+  },
+  {
+    path: '/tramites/formularios',
+    element: withSuspense(FormulariosPage),
+  },
+  {
+    path: '/tramites/documentos',
+    element: withSuspense(DocumentosPage),
+  },
+  {
+    path: '/tramites/index',
     element: withSuspense(TramitesPage),
   },
   {

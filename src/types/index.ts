@@ -62,6 +62,18 @@ export interface Tramite {
   icono: string | null;  // nombre de ícono Lucide o URL
 }
 
+export interface RecursoPdf {
+  id: number;
+  titulo: string;
+  descripcion: string | null;
+  archivo_nombre: string | null;
+  archivo_ruta: string | null;
+  archivo_tipo: string | null;
+  archivo_tamano: number | null;
+  archivo_contenido: string | null;
+  fecha: string | null;
+}
+
 // ---------------------------------------------------------------------------
 // MATRICULADOS — [PROVISIONAL] contrato pendiente de backend
 // ---------------------------------------------------------------------------
