@@ -11,7 +11,7 @@ import type { Honorario } from '@/types';
 
 function HonorarioItem({ h }: { h: Honorario }) {
   return (
-    <article className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="rounded-xl border border-gray-300 bg-gray-50 overflow-hidden shadow-md dark:border-gray-700 dark:bg-gray-800/50">
       {h.tipo === 'imagen' ? (
         <>
           <div className="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -37,8 +37,8 @@ function HonorarioItem({ h }: { h: Honorario }) {
         </>
       ) : (
         <div className="flex items-center gap-4 p-5">
-          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-red-100 dark:bg-red-900/20">
-            <FileText className="h-6 w-6 text-red-500" aria-hidden="true" />
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
+            <FileText className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
           <div className="flex-1 min-w-0">
             <h2 className="font-semibold text-gray-900 dark:text-gray-100 truncate">{h.titulo}</h2>

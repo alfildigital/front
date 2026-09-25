@@ -31,7 +31,7 @@ export default function TerminosYCondicionesPage() {
         {/* Header */}
         <header className="mb-10">
           <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
-            <FileText className="h-6 w-6 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+            <FileText className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{doc.titulo}</h1>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">

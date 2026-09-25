@@ -27,7 +27,7 @@ export default function PagoPage() {
       <div className="mx-auto max-w-lg px-4 py-16 sm:px-6">
         <header className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-100 dark:bg-primary-900/30">
-            <CreditCard className="h-7 w-7 text-primary-600 dark:text-green-400" aria-hidden="true" />
+            <CreditCard className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Pagar Matrícula</h1>
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -35,7 +35,7 @@ export default function PagoPage() {
           </p>
         </header>
 
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
+        <div className="rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
           <div className="mb-6 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/10">
             <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-500" aria-hidden="true" />
             <div className="text-sm text-blue-800 dark:text-blue-300">
