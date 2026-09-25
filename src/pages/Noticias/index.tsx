@@ -27,7 +27,7 @@ function NoticiaRow({ noticia }: { noticia: Noticia }) {
   const resumen = noticiaResumen(noticia);
 
   return (
-    <article className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:flex-row dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="flex flex-col gap-4 rounded-xl border border-gray-300 bg-gray-50 p-5 shadow-md transition-shadow hover:shadow-lg sm:flex-row dark:border-gray-700 dark:bg-gray-800/50">
       {imagen ? (
         <div className="h-36 w-full flex-shrink-0 overflow-hidden rounded-lg sm:w-48">
           <img src={imagen} alt={noticia.titulo} className="h-full w-full object-cover" loading="lazy" />

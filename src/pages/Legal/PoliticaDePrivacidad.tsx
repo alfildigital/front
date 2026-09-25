@@ -30,7 +30,7 @@ export default function PoliticaDePrivacidadPage() {
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mb-10">
-          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary-100 dark:bg-secondary-900/30">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
             <ShieldCheck className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{doc.titulo}</h1>

@@ -33,7 +33,7 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
   // y no expone "especialidad" en esta versión.
   const nombreCompleto = [m.nombre, m.apellido].filter(Boolean).join(' ');
   return (
-    <article className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="flex items-start gap-4 rounded-xl border border-gray-300 bg-gray-50 p-4 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/50">
       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
         {m.foto ? (
           <img src={m.foto} alt={nombreCompleto} className="h-full w-full object-cover" loading="lazy" />
