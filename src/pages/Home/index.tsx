@@ -238,7 +238,7 @@ export default function HomePage() {
           </div>
         </div>
       )}
-      {noticias.data && noticias.data.length === 0 && (
+      {!noticias.isPending && !noticias.isError && noticias.data?.length === 0 && (
         <section aria-label="Noticias" className="py-16 bg-gray-50 dark:bg-gray-800/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <EmptyState
