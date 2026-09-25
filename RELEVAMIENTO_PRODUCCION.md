@@ -434,7 +434,7 @@ para ello, **al refrescar cualquier ruta que no sea `/` dará 404**.
 |---|---|
 | **Nginx** | `try_files $uri $uri/ /index.html;` |
 | **Apache / cPanel** | Archivo `.htaccess` con rewrite rules |
-| **Vercel** | Automático (detecta Vite/React) |
+| **Vercel** | `vercel.json` con rewrite de todas las rutas SPA hacia `/index.html` |
 | **Netlify** | Archivo `public/_redirects` con `/* /index.html 200` |
 
 ### Variables de entorno en el pipeline de build
