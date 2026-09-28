@@ -44,7 +44,7 @@ function PublicacionItem({ pub }: { pub: BoletinPublicacion }) {
   }, [pub.archivo_ruta, pub.archivo_contenido, pub.archivo_tipo]);
 
   return (
-    <article className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="rounded-xl border border-gray-300 bg-gray-50 p-5 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1">
           <h2 className="font-semibold text-gray-900 dark:text-gray-100">{pub.titulo}</h2>

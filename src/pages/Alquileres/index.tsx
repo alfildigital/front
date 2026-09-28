@@ -39,7 +39,7 @@ import type { Alquiler, ConsultaAlquilerPayload } from '@/types';
 
 function AlquilerCard({ a }: { a: Alquiler }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="flex flex-col overflow-hidden rounded-xl border border-gray-300 bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/50">
       <div className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
         {a.imagen ? (
           <img src={a.imagen} alt={a.titulo} className="h-full w-full object-cover" loading="lazy" />
@@ -261,7 +261,7 @@ function ConsultaAlquilerForm({ espacioSeleccionado }: { espacioSeleccionado: nu
   return (
     <section
       aria-labelledby="form-consulta-title"
-      className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50"
+      className="rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50"
     >
       <div className="mb-5 flex items-center gap-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900/30">

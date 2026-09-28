@@ -106,10 +106,10 @@ function TramiteCard({ tramite }: TramiteCardProps) {
   const Icon = getIcon(tramite.icono);
 
   return (
-    <article className="flex flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="flex flex-col rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
       {/* Contenedor e icono instanciado como componente de React */}
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
-        <Icon className="h-6 w-6 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+        <Icon className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
       </div>
 
       <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">{tramite.titulo}</h2>

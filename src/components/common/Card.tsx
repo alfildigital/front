@@ -38,7 +38,7 @@ export function Card({
   // 2. Construcción dinámica del conjunto de clases CSS de Tailwind.
   const baseClasses = [
     // Estilos base de estructura, bordes, fondo y sombra (soporta modo oscuro)
-    'rounded-xl border border-gray-200 bg-white shadow-sm',
+    'rounded-xl border border-gray-300 bg-gray-50 shadow-md',
     'dark:border-gray-700 dark:bg-gray-800/50',
 
     // Micro-interacciones visuales si la tarjeta es interactiva

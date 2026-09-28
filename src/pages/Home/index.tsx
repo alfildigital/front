@@ -5,6 +5,7 @@ import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 // import { InstagramCarousel } from '@/components/sections/InstagramCarousel';
 import { NoticiasPreview } from '@/components/sections/NoticiasPreview';
+import { ParadigmasEducacionEspecial } from '@/components/sections/ParadigmasEducacionEspecial';
 //import { TramitesDestacados } from '@/components/sections/TramitesDestacados';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -111,7 +112,7 @@ function InstitutionalSections() {
             <div className="w-full lg:w-[80%]">
               <div className="max-w-3xl text-center lg:text-left">
                 <div className="mb-5 flex items-center justify-center gap-3 text-primary-600 dark:text-primary-400 lg:justify-start">
-                  <Building2 className="h-6 w-6" aria-hidden="true" />
+                  <Building2 className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
                   <span className="text-sm font-semibold uppercase tracking-wider">Institución</span>
                 </div>
                 <h2 id="nosotros-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
@@ -161,14 +162,14 @@ function InstitutionalSections() {
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
-            <article className="border-l-4 border-primary-500 bg-white p-6 shadow-sm dark:bg-gray-900">
-              <Target className="h-7 w-7 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+            <article className="border border-gray-300 border-l-4 border-l-primary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-primary-500 dark:bg-gray-900">
+              <Target className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Misión</h3>
               <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm text-justify">
                 Regular, promover y jerarquizar el ejercicio profesional de la Educación Especial, velando por la idoneidad, ética y formación continua de nuestros matriculados. Buscamos garantizar una educación de calidad que potencie las capacidades de cada estudiante, promoviendo su autonomía e inclusión plena en el ámbito social, educativo y labor
               </p>
             </article>
-            <article className="border-l-4 border-secondary-500 bg-white p-6 shadow-sm dark:bg-gray-900">
+            <article className="border border-gray-300 border-l-4 border-l-secondary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-secondary-500 dark:bg-gray-900">
               <Eye className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Visión</h3>
               <p className="mt-3 leading-7 text-gray-600 dark:text-gray-300 text-sm text-justify">
@@ -202,7 +203,8 @@ export default function HomePage() {
       </Helmet>
 
       <Hero />
-  <InstitutionalSections />
+        <InstitutionalSections />
+        <ParadigmasEducacionEspecial />
 
       {/* Trámites */}
       {/* {tramites.isPending && (

@@ -17,7 +17,7 @@ export function EmptyState({
   return (
     <div className={`flex flex-col items-center gap-4 py-16 text-center ${className}`}>
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/20">
-        {icon ?? <Inbox className="h-8 w-8 text-primary-500" aria-hidden="true" />}
+        {icon ?? <Inbox className="h-8 w-8 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />}
       </div>
       <div className="space-y-1">
         <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">{title}</h3>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { SITE_NAME } from '@/config/constants';
-import { Leaf } from 'lucide-react';
+import { Code2 } from 'lucide-react';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -28,10 +28,15 @@ export function Footer() {
               Política de Privacidad
             </Link>
           </nav>
-          <p className="text-xs flex items-center gap-1">
-            <Leaf className="h-3 w-3 text-secondary-400" aria-hidden="true" />
-            <span>Modo sustentable disponible</span>
-          </p>
+          <a
+            href="about:blank"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-xs transition-colors hover:text-primary-600 dark:hover:text-primary-400"
+          >
+            <Code2 className="h-3 w-3 text-secondary-400" aria-hidden="true" />
+            <span>Powered by Alfil Digital</span>
+          </a>
         </div>
       </div>
     </footer>

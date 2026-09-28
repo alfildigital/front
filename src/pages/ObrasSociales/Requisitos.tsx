@@ -199,11 +199,11 @@ export default function RequisitosOsPage() {
         ) : (
           <section
             aria-labelledby="form-solicitud-title"
-            className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50"
+            className="rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50"
           >
             <div className="mb-5 flex items-center gap-3">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900/30">
-                <ClipboardList className="h-5 w-5 text-primary-600 dark:text-primary-400" aria-hidden="true" />
+                <ClipboardList className="h-5 w-5 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
               </div>
               <h2 id="form-solicitud-title" className="text-base font-semibold text-gray-900 dark:text-gray-100">
                 Solicitud de incorporación

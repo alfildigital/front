@@ -12,10 +12,10 @@ export function PdfCard({ resource }: { resource: RecursoPdf }) {
   const href = getPdfHref(resource);
 
   return (
-    <article className="flex flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="flex flex-col rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
       <div className="mb-4 flex items-center gap-4">
-        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-900/20">
-          <FileText className="h-7 w-7 text-red-500" aria-hidden="true" />
+        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-primary-100 dark:bg-primary-900/30">
+          <FileText className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
         </div>
         <h2 className="text-lg font-semibold leading-tight text-gray-900 dark:text-gray-100">{resource.titulo}</h2>
       </div>
