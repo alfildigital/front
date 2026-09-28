@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X, Leaf, Sun } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
+import { InclusiveLanguageBackdrop } from './InclusiveLanguageBackdrop';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -167,8 +167,9 @@ export function Navbar() {
   const isDark = theme === 'dark';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-700 dark:bg-surface-dark/90">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 isolate border-b border-secondary-500 bg-gray-100/50 backdrop-blur-md dark:border-primary-700 dark:bg-surface-dark/50">
+      <InclusiveLanguageBackdrop />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
@@ -180,7 +181,12 @@ export function Navbar() {
                 <img className='h-full w-full object-cover' src="/public/logo.jpg" alt="LOGO" />
               </span>
             </div>
-            <span className="hidden sm:block">{SITE_NAME}</span>
+            <span className="hidden sm:block font-semibold text-primary-700 dark:text-primary-300">
+              <h2 className="text-justify">Colegio de Profesionales</h2>
+              <span className="hidden sm:block text-secondary-500 dark:text-secondary-400">
+                <h2 className="text-justify">en Educación Especial</h2>
+              </span>
+            </span>
           </Link>
 
           {/* Desktop nav */}
@@ -244,7 +250,7 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
-          className="border-t border-gray-200 bg-white py-2 dark:border-gray-700 dark:bg-gray-900 lg:hidden"
+          className="relative z-10 border-t border-gray-200 bg-white py-2 dark:border-gray-700 dark:bg-gray-900 lg:hidden"
           role="navigation"
           aria-label="Menú móvil"
         >
