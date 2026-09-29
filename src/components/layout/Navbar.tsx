@@ -23,7 +23,13 @@ interface NavItem {
 // ---------------------------------------------------------------------------
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Colegio', to: '/' },
+  {
+    label: 'Colegio',
+    children: [
+      { label: 'Inicio', to: '/' },
+      { label: 'Nosotros', to: '/nosotros' },
+    ],
+  },
   { label: 'Noticias', to: '/noticias' },
   { 
     label: 'Trámites', 
@@ -80,7 +86,9 @@ function Dropdown({ item }: DropdownProps) {
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  const isActiveParent = item.children.some((c) => location.pathname.startsWith(c.to));
+  const isActiveParent = item.children.some(
+    (child) => location.pathname === child.to || (child.to !== '/' && location.pathname.startsWith(child.to)),
+  );
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
