@@ -157,14 +157,14 @@ function CommitteeSection({ groups, title, sectionIndex }: { groups: Member[][];
     : 'bg-secondary-500/[0.025] dark:bg-secondary-400/[0.04]';
 
   return (
-    <section className="border-t border-gray-200 bg-white py-14 dark:border-gray-700 dark:bg-gray-900" aria-label={title}>
+    <section className="border-t border-secondary-600 bg-gray-100 py-14 dark:border-secondary-700 dark:bg-gray-900" aria-label={title}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`space-y-8 rounded-lg px-4 py-8 sm:px-8 ${sectionTint}`}>
           <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
           {groups.map((members, index) => (
             <div
               key={`${title}-${index}`}
-              className={`rounded-md p-4 sm:p-6 ${index > 0 ? 'border-t border-gray-200 pt-8 dark:border-gray-700' : ''} ${
+              className={`rounded-md p-4 sm:p-6 ${index > 0 ? 'border-t border-secondary-600 pt-8 dark:border-green-500' : ''} ${
                 (sectionIndex + index) % 2 === 0
                   ? 'bg-primary-500/[0.06] dark:bg-primary-400/[0.08]'
                   : 'bg-secondary-500/[0.07] dark:bg-secondary-400/[0.08]'

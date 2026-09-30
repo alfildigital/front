@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Phone, MailIcon } from 'lucide-react';
+import { ArrowRight, Eye, MapPin, Phone, Target, Building2, Instagram, MailIcon } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 // import { InstagramCarousel } from '@/components/sections/InstagramCarousel';
@@ -24,14 +24,18 @@ function Hero() {
   className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-20 text-white"
   aria-label="Presentación institucional"
 >
+      <img
+        src="/inclusionsiluet.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute bg-black/20 fade-in-up inset-0 h-full w-full object-cover opacity-50"
+      />
   {/* Decorative circles */}
   <div className="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-white/5" aria-hidden="true" />
   <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-white/5" aria-hidden="true" />
 
   <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-8">
-      {/* Columna izquierda: 70% */}
-      <div className="w-full lg:w-[70%]">
+    <div className="w-full">
         <div className="max-w-2xl animate-fade-in-up">
           <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
             <br />
@@ -86,16 +90,6 @@ function Hero() {
             <span>Sede Central — Av. Mitre 1234</span>
           </a>
         </div>
-      </div>
-
-      {/* Columna derecha: 30% — solo la imagen del logo */}
-      <div className="flex w-full justify-center lg:w-[30%] lg:justify-end">
-        <img
-          src="/logo.jpg"
-          alt={`Logo de ${SITE_NAME}`}
-          className="h-auto w-40 max-w-full rounded-full object-contain opacity-80 shadow-lg sm:w-48 lg:w-full"
-        />
-      </div>
     </div>
   </div>
 </section>
@@ -120,9 +114,8 @@ export default function HomePage() {
           content="Sitio oficial del colegio profesional. Información institucional, trámites, noticias y más."
         />
       </Helmet>
-
       <Hero />
-        <ParadigmasEducacionEspecial />
+      <ParadigmasEducacionEspecial />
 
       {/* Trámites */}
       {/* {tramites.isPending && (
