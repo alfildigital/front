@@ -73,11 +73,9 @@ src/pages/Home/index.tsx             ← preview (primeras 3)
 ### 3.2 Trámites
 
 ```
-src/pages/Tramites/index.tsx         ← listado paginado
-src/pages/Home/index.tsx             ← sección destacada (primeros 4)
-  └── src/hooks/queries/useTramites.ts
-        └── src/mocks/services/mockTramitesService.ts
-              └── src/mocks/data/tramites.ts
+src/pages/Tramites/index.tsx         ← listado paginado y datos locales
+src/pages/Tramites/Documentos.tsx    ← documentos y datos locales
+src/pages/Tramites/Formularios.tsx   ← formularios y datos locales
 ```
 
 ### 3.3 Matriculados

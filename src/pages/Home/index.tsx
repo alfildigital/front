@@ -1,17 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Eye, MapPin, Phone, Target, Building2, Instagram, MailIcon } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, MailIcon } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 // import { InstagramCarousel } from '@/components/sections/InstagramCarousel';
 import { NoticiasPreview } from '@/components/sections/NoticiasPreview';
 import { ParadigmasEducacionEspecial } from '@/components/sections/ParadigmasEducacionEspecial';
-//import { TramitesDestacados } from '@/components/sections/TramitesDestacados';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
+import { Reveal } from '@/components/common/Reveal';
 import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useNoticias } from '@/hooks/queries/useNoticias';
-// import { useTramites } from '@/hooks/queries/useTramites';
 // import { useInstagram } from '@/hooks/queries/useInstagram';
 
 // ---------------------------------------------------------------------------
@@ -28,7 +27,7 @@ function Hero() {
         src="/inclusionsiluet.png"
         alt=""
         aria-hidden="true"
-        className="absolute bg-black/20 fade-in-up inset-0 h-full w-full object-cover opacity-50"
+        className="absolute bg-black/20 inset-0 h-full w-full object-cover opacity-50"
       />
   {/* Decorative circles */}
   <div className="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-white/5" aria-hidden="true" />
@@ -36,7 +35,7 @@ function Hero() {
 
   <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="w-full">
-        <div className="max-w-2xl animate-fade-in-up">
+        <Reveal className="max-w-2xl">
           <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
             <br />
             <span className="text-secondary-200">{SITE_NAME}</span>
@@ -60,7 +59,7 @@ function Hero() {
               Últimas Noticias
             </Link>
           </div>
-        </div>
+        </Reveal>
 
         {/* Quick info */}
         <div className="mt-12 flex flex-wrap gap-4 text-sm">
@@ -102,7 +101,6 @@ function Hero() {
 
 export default function HomePage() {
   const noticias = useNoticias();
-  // const tramites = useTramites();
   // const instagram = useInstagram();
 
   return (
@@ -116,25 +114,6 @@ export default function HomePage() {
       </Helmet>
       <Hero />
       <ParadigmasEducacionEspecial />
-
-      {/* Trámites */}
-      {/* {tramites.isPending && (
-        <div className="py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <CardSkeletonGrid count={4} />
-          </div>
-        </div>
-      )}
-      {tramites.isError && (
-        <div className="py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <ErrorBanner message="No se pudieron cargar los trámites." onRetry={() => void tramites.refetch()} />
-          </div>
-        </div>
-      )}
-      {/* {tramites.data && tramites.data.length > 0 && (
-        <TramitesDestacados tramites={tramites.data} />
-      )} */}
 
       {/* Noticias */}
       {noticias.isPending && (

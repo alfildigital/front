@@ -78,6 +78,7 @@ import { paginateItems } from '@/utils/paginationUtils';
 // POR QUÉ SE HACE: Garantiza autocompletado en el IDE y validación estricta de tipos
 //   en tiempo de compilación, evitando errores en tiempo de ejecución.
 import type { ObraSocial } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 
 // ===========================================================================
@@ -324,14 +325,14 @@ export default function ObrasSocialesPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* ── ENCABEZADO DE PÁGINA ── */}
-        <header className="mb-8">
+        <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Obras Sociales Adheridas
           </h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Obras sociales con convenio vigente con el colegio. Consultá su información de contacto y sitio web.
           </p>
-        </header>
+        </Reveal>
 
         {/* ── ESTADO A: CARGANDO (isPending === true) ──
             CÓMO FUNCIONA: Mientras la promesa de useObrasSociales() no resolvió, `isPending` es true.

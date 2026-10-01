@@ -7,6 +7,7 @@ import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { Spinner } from '@/components/common/Spinner';
 import { usePagoMatricula } from '@/hooks/queries/useMatriculados';
 import { buildWhatsAppUrl } from '@/utils/formatters';
+import { Reveal } from '@/components/common/Reveal';
 
 export default function PagoPage() {
   const { data, isPending, isError, refetch } = usePagoMatricula();
@@ -25,7 +26,7 @@ export default function PagoPage() {
       
       {/*hero*/}
       <div className="mx-auto max-w-lg px-4 py-16 sm:px-6">
-        <header className="mb-8 text-center">
+        <Reveal as="header" className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-100 dark:bg-primary-900/30">
             <CreditCard className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
@@ -33,7 +34,7 @@ export default function PagoPage() {
           <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
             Realizá el pago en línea a través de Mercado Pago de forma segura.
           </p>
-        </header>
+        </Reveal>
 
         <div className="rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
           <div className="mb-6 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/10">

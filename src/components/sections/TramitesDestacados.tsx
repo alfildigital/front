@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, BadgeCheck, RefreshCw, FileCheck, Stamp, HelpCircle } from 'lucide-react';
 import type { Tramite } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 const ICON_MAP: Record<string, React.ElementType> = {
   BadgeCheck,
@@ -63,7 +64,9 @@ export function TramitesDestacados({ tramites }: TramitesDestacadosProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Trámites</h2>
+            <Reveal>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Trámites</h2>
+            </Reveal>
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Gestiones más frecuentes</p>
           </div>
           <Link

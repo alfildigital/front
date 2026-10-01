@@ -8,6 +8,7 @@ import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { Skeleton } from '@/components/common/Skeleton';
 import { useNoticia } from '@/hooks/queries/useNoticias';
 import { formatDate, formatFileSize } from '@/utils/formatters';
+import { Reveal } from '@/components/common/Reveal';
 import { noticiaImagen, base64ToBlobUrl } from '@/utils/fileUtils';
 import type { Noticia } from '@/types';
 
@@ -94,16 +95,18 @@ export default function NoticiaDetallePage() {
               )}
             </div>
 
-            <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
-              {data.titulo}
-            </h1>
+            <Reveal>
+              <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100 sm:text-3xl">
+                {data.titulo}
+              </h1>
+            </Reveal>
 
             {imagen && (
               <div className="mb-8 overflow-hidden rounded-xl">
                 <img
                   src={imagen}
                   alt={data.titulo}
-                  className="h-64 w-full object-cover sm:h-80"
+                  className="h-64 w-full object-cover transition-transform duration-300 hover:scale-105 sm:h-80"
                 />
               </div>
             )}

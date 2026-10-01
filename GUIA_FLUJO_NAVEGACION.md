@@ -111,10 +111,9 @@ y efecto blur.
 │ 📞 (0351) 000-0000    📍 Sede Central — Av. Ejemplo   │
 └────────────────────────────────────────────────────────┘
 
-┌─ SECCIÓN TRÁMITES DESTACADOS ──────────────────────────┐
-│ Muestra los primeros 4 trámites del array completo     │
-│ Datos locales (mock) → hook: useTramites()              │
-│ [Card 1] [Card 2] [Card 3] [Card 4]                    │
+┌─ ACCESO A TRÁMITES ────────────────────────────────────┐
+│ El botón del Hero lleva a /tramites                    │
+│ Datos definidos en src/pages/Tramites/index.tsx         │
 └────────────────────────────────────────────────────────┘
 
 ┌─ SECCIÓN NOTICIAS (últimas 3) ─────────────────────────┐
@@ -195,8 +194,7 @@ Hook: useNoticia(id)   (toma el parámetro :id de la URL)
 **¿Qué carga?**
 
 ```
-Datos locales (mock)
-Hook: useTramites()
+Datos locales definidos en src/pages/Tramites/index.tsx
 Paginación: client-side (10 trámites por página)
 ```
 

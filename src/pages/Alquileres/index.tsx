@@ -34,6 +34,7 @@ import { formatMoney } from '@/utils/formatters';
 import { terminosYCondiciones } from '@/legal/terminos';
 import { politicaDePrivacidad } from '@/legal/privacidad';
 import type { Alquiler, ConsultaAlquilerPayload } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 // ─── AlquilerCard ─────────────────────────────────────────────────────────────
 
@@ -42,7 +43,7 @@ function AlquilerCard({ a }: { a: Alquiler }) {
     <article className="flex flex-col overflow-hidden rounded-xl border border-gray-300 bg-gray-50 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/50">
       <div className="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
         {a.imagen ? (
-          <img src={a.imagen} alt={a.titulo} className="h-full w-full object-cover" loading="lazy" />
+          <img src={a.imagen} alt={a.titulo} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
         ) : (
           <div className="flex h-full items-center justify-center"><span className="text-4xl">🏢</span></div>
         )}
@@ -488,10 +489,10 @@ export default function AlquileresPage() {
       </Helmet>
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mb-8">
+        <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Alquileres</h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">Espacios y consultorios disponibles</p>
-        </header>
+        </Reveal>
 
         {isPending && <CardSkeletonGrid count={4} />}
         {isError && <ErrorBanner message="No se pudieron cargar los alquileres." onRetry={refetch} />}

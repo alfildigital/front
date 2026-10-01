@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Building2, Eye, Instagram, Target, Users } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
+import { Reveal } from '@/components/common/Reveal';
 
 interface Member {
   role: string;
@@ -60,9 +61,11 @@ function InstitutionSections() {
                   <Building2 className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
                   <span className="text-sm font-semibold uppercase tracking-wider">Institución</span>
                 </div>
-                <h1 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                  Nosotros
-                </h1>
+                <Reveal>
+                  <h1 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                    Nosotros
+                  </h1>
+                </Reveal>
                 <p className="mt-4 text-justify text-sm leading-8 text-gray-600 dark:text-gray-300">
                   El Colegio de Profesionales en Educación Especial es la institución rectora que agrupa y representa a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad. Somos una comunidad comprometida con la ética profesional, la actualización constante y la defensa de los derechos humanos.
                   <br /><br />
@@ -93,9 +96,11 @@ function InstitutionSections() {
       <section aria-labelledby="vision-mission-title" className="bg-gray-50 py-16 dark:bg-gray-800/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mb-10 max-w-3xl text-center">
-            <h2 id="vision-mission-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-              Visión y misión
-            </h2>
+            <Reveal>
+              <h2 id="vision-mission-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Visión y misión
+              </h2>
+            </Reveal>
             <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
               Construimos una institución moderna, transparente y al servicio de sus profesionales.
             </p>
@@ -135,7 +140,7 @@ function MemberGroup({ members }: { members: Member[] }) {
               src={`/comision_directiva/${member.image}`}
               alt={member.role}
               loading="lazy"
-              className="aspect-square w-full object-cover object-top"
+              className="aspect-square w-full object-cover object-top transition-transform duration-300 hover:scale-105"
             />
           ) : (
             <div className="flex aspect-square items-center justify-center bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500">
@@ -160,7 +165,9 @@ function CommitteeSection({ groups, title, sectionIndex }: { groups: Member[][];
     <section className="border-t border-secondary-600 bg-gray-100 py-14 dark:border-secondary-700 dark:bg-gray-900" aria-label={title}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`space-y-8 rounded-lg px-4 py-8 sm:px-8 ${sectionTint}`}>
-          <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
+          <Reveal>
+            <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
+          </Reveal>
           {groups.map((members, index) => (
             <div
               key={`${title}-${index}`}
