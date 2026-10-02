@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet-async';
 // ORIGEN: Librería externa de iconos 'lucide-react'
 // CÓMO FUNCIONA: Importa componentes SVG optimizados individualmente.
 // POR QUÉ SE HACE: BadgeCheck, RefreshCw, FileCheck y Stamp son iconos específicos asociados a los tipos de trámites. HelpCircle sirve como ícono por defecto y ExternalLink para indicar enlaces externos.
-import { BadgeCheck, RefreshCw, FileCheck, Stamp, HelpCircle, ExternalLink } from 'lucide-react';
+import { BadgeCheck, RefreshCw, FileCheck, Stamp, HelpCircle, ExternalLink, Building2} from 'lucide-react';
 
 // ORIGEN: Archivo interno de configuración centralizada ('src/config/constants.ts')
 // CÓMO FUNCIONA: Exporta constantes globales de la aplicación (ej: "Gobierno Ciudad").
@@ -60,7 +60,8 @@ const ICON_MAP: Record<string, React.ElementType> = {
   BadgeCheck, 
   RefreshCw, 
   FileCheck, 
-  Stamp 
+  Stamp,
+  Building2
 };
 
 /**
@@ -78,13 +79,17 @@ const tramites: Tramite[] = [
     titulo: 'Inscripción de Matrícula',
     descripcion: 'Procedimiento para la inscripción inicial de la matrícula profesional.',
     requisitos: [
-      'DNI (original y copia)',
-      'Título habilitante legalizado',
-      'Foto tipo carnet (4x4)',
+      'Solicitud por escrito',
+      'DNI (original y copia certificada)',
+      'Título habilitante legalizado por escribanía',
+      '2 Fotos tipo carnet (4x4)',
       'Constancia de domicilio',
+      'Declaración jurada de domicilio',
+      'Declaración jurada de ética profesional',
+      'Certificado de antecedentes penales',
       'Pago de arancel de inscripción',
     ],
-    enlace: null,
+    enlace: '/tramites/formularios',
     icono: 'BadgeCheck',
   },
   {
@@ -96,32 +101,52 @@ const tramites: Tramite[] = [
       'Formulario de renovación completo',
       'Actualización de datos de contacto',
     ],
-    enlace: null,
+    enlace: '/tramites/formularios',
     icono: 'RefreshCw',
   },
   {
     id: 3,
-    titulo: 'Certificado de Habilitación',
+    titulo: 'Certificado de Antecedentes Disciplinarios',
     descripcion: 'Solicitud de certificado para presentación ante organismos públicos o privados.',
     requisitos: [
       'Matrícula vigente',
       'Cuota al día',
-      'Completar formulario de solicitud',
+      'Se solicita por pedido del interesado',
+      'Indicar lugar donde será presentado.',
+      'Lleva fecha de expedición',
+      'Requiere firma de una autoridad del Consejo Directivo y del presidente del Tribunal de Ética.',
     ],
     enlace: null,
     icono: 'FileCheck',
   },
   {
     id: 4,
-    titulo: 'Legalización de Documentos',
-    descripcion: 'Servicio de legalización de documentos profesionales ante el Colegio.',
+    titulo: 'Certificado de Libre de Deuda',
+    descripcion: 'Acredita que el matriculado no registra deuda de cuota social al momento de expedirse.',
     requisitos: [
-      'Documento original a legalizar',
-      'Matrícula vigente',
-      'Pago de arancel correspondiente',
+      'Se realiza por pedido del interesado.',
+      'Indicar lugar donde será presentado.',
+      'Lleva fecha de expedición.',
+      'Requiere firma de una autoridad del Consejo Directivo y Tersorería del Colegio.',
+      'Matrícula vigente.',
+      'Pago de arancel correspondiente.',
     ],
     enlace: null,
     icono: 'Stamp',
+  },
+  {
+    id: 5,
+    titulo: 'Habilitación Consultorio (2026)',
+    descripcion: 'Acredita que el matriculado no registra deuda de cuota social al momento de expedirse.',
+    requisitos: [
+      'Se realiza por pedido del interesado.',
+      'Plano gráfico del consultorio.',
+      'Accesibilidad siguiendo criterios de accesibilidad exigidos por el municipio correspondiente',
+      'Matrícula vigente.',
+      'Pago de arancel correspondiente.',
+    ],
+    enlace: '/tramites/formularios',
+    icono: 'Building2',
   },
 ];
 
@@ -143,7 +168,7 @@ function TramiteCard({ tramite }: TramiteCardProps) {
   const Icon = getIcon(tramite.icono);
 
   return (
-    <article className="flex flex-col rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="flex-col rounded-xl border border-secondary-300 bg-primary-100/20 p-6 shadow-md hover:shadow-primary-500/20 dark:border-primary-700 dark:bg-gray-800/50 dark:hover:shadow-secondary-500/20" >
       {/* Contenedor e icono instanciado como componente de React */}
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
         <Icon className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
