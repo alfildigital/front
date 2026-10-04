@@ -19,17 +19,44 @@ interface NavItem {
 }
 
 // ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+interface NavChild {
+  label: string;
+  to: string;
+}
+
+interface NavItem {
+  label: string;
+  to?: string;
+  children?: NavChild[];
+}
+
+// ---------------------------------------------------------------------------
+// Navigation helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Devuelve true si alguno de los hijos del item coincide con la ruta actual.
+ * Se usa para pintar el botón padre del dropdown como "activo"
+ * cuando el usuario está navegando dentro de esa sección.
+ */
+function isChildActive(children: NavChild[], pathname: string): boolean {
+  return children.some(
+    (child) =>
+      pathname === child.to ||
+      (child.to !== '/' && pathname.startsWith(child.to)),
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Nav items
 // ---------------------------------------------------------------------------
 
 const NAV_ITEMS: NavItem[] = [
-  {
-    label: 'Colegio',
-    children: [
-      { label: 'Inicio', to: '/' },
-      { label: 'Nosotros', to: '/nosotros' },
-    ],
-  },
+  
+  { label: 'Colegio', to: '/' },
   { label: 'Noticias', to: '/noticias' },
   { 
     label: 'Trámites', 
@@ -49,6 +76,8 @@ const NAV_ITEMS: NavItem[] = [
   },
   { label: 'Obras Sociales', to: '/obras-sociales' },
   { label: 'Boletín Oficial', to: '/boletin-oficial' },
+  { label: 'Nosotros', to: '/nosotros' },
+  
 ];
 
 // ---------------------------------------------------------------------------
@@ -86,9 +115,9 @@ function Dropdown({ item }: DropdownProps) {
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  const isActiveParent = item.children.some(
-    (child) => location.pathname === child.to || (child.to !== '/' && location.pathname.startsWith(child.to)),
-  );
+  // 👇 ANTES: item.children.some(...)
+  // 👇 AHORA: usamos el helper compartido
+  const isActiveParent = isChildActive(item.children, location.pathname);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -151,7 +180,6 @@ function Dropdown({ item }: DropdownProps) {
     </div>
   );
 }
-
 // ---------------------------------------------------------------------------
 // Main Navbar
 // ---------------------------------------------------------------------------
