@@ -12,6 +12,7 @@ import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useNoticias } from '@/hooks/queries/useNoticias';
 // import { useInstagram } from '@/hooks/queries/useInstagram';
+import { Building2, Eye, Instagram, Target } from 'lucide-react'; // Eliminado Users si ya no se usa aquí
 
 // ---------------------------------------------------------------------------
 // Hero
@@ -130,6 +131,79 @@ export default function HomePage() {
           </div>
         </div>
       )}
+
+      <section aria-labelledby="institution-title" className="bg-white py-16 dark:bg-gray-900">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-8">
+            <div className="w-full lg:w-[80%]">
+              <div className="max-w-3xl text-center lg:text-left">
+                <div className="mb-5 flex items-center justify-center gap-3 text-primary-600 dark:text-primary-400 lg:justify-start">
+                  <Building2 className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+                  <span className="text-sm font-semibold uppercase tracking-wider">Institución</span>
+                </div>
+                <Reveal>
+                  <h1 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                    El Colegio
+                  </h1>
+                </Reveal>
+                <p className="mt-4 text-justify text-sm leading-8 text-gray-600 dark:text-gray-300">
+                  El Colegio de Profesionales en Educación Especial es la institución rectora que agrupa y representa a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad. Somos una comunidad comprometida con la ética profesional, la actualización constante y la defensa de los derechos humanos.
+                  <br /><br />
+                  Nuestra labor trasciende el aula: trabajamos para garantizar que la educación especial sea un pilar fundamental en la construcción de una sociedad más justa e inclusiva. Agrupamos a expertos en diversas áreas, fomentando el intercambio de experiencias y el desarrollo técnico-científico para brindar respuestas innovadoras a los desafíos educativos actuales.
+                </p>
+                <div className="mt-8 flex justify-center lg:justify-start">
+                  <a
+                    href="https://www.instagram.com/colegioedespecial.msn?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-primary-600 transition-colors hover:border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-400 dark:hover:bg-primary-900/30 dark:hover:text-primary-300"
+                  >
+                    <Instagram className="h-5 w-5" aria-hidden="true" />
+                    <span className="text-sm font-medium">Seguinos en Instagram</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="flex w-full items-center justify-center lg:w-[20%] lg:justify-end">
+              <div className="flex aspect-square bg-primary-50 p-4 shadow-lg dark:bg-gray-800">
+                <img src="/logo.jpg" alt={`Logo de ${SITE_NAME}`} className="h-full w-full object-contain" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="vision-mission-title" className="bg-gray-50 py-16 dark:bg-gray-800/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <Reveal>
+              <h2 id="vision-mission-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                Visión y misión
+              </h2>
+            </Reveal>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+              Construimos una institución moderna, transparente y al servicio de sus profesionales.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <article className="border border-gray-300 border-l-4 border-l-primary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-primary-500 dark:bg-gray-900">
+              <Target className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+              <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Misión</h3>
+              <p className="mt-3 text-justify text-sm leading-7 text-gray-600 dark:text-gray-300">
+                Regular, promover y jerarquizar el ejercicio profesional de la Educación Especial, velando por la idoneidad, ética y formación continua de nuestros matriculados. Buscamos garantizar una educación de calidad que potencie las capacidades de cada estudiante, promoviendo su autonomía e inclusión plena en el ámbito social, educativo y laboral.
+              </p>
+            </article>
+            <article className="border border-gray-300 border-l-4 border-l-secondary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-secondary-500 dark:bg-gray-900">
+              <Eye className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+              <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Visión</h3>
+              <p className="mt-3 text-justify text-sm leading-7 text-gray-600 dark:text-gray-300">
+                Ser la institución referente a nivel nacional en materia de Educación Especial, reconocida por su excelencia técnica y su capacidad de incidencia en las políticas públicas. Aspiramos a construir una sociedad donde la diversidad sea valorada y donde cada persona con discapacidad tenga garantizado su derecho a aprender y desarrollarse plenamente, de la mano de profesionales altamente calificados.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       {!noticias.isPending && !noticias.isError && noticias.data?.length === 0 && (
         <section aria-label="Noticias" className="py-16 bg-gray-50 dark:bg-gray-800/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
