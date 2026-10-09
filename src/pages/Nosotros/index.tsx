@@ -224,7 +224,7 @@ interface Member {
 
 const boardGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Presidenta', image: 'presidenta_suplente.jpeg', bgcolor: 'primary' },
+    { name: 'María González', role: 'Presidenta', image: 'presidenta.jpeg', bgcolor: 'primary' },
     { name: 'Ana Martínez', role: 'Vicepresidenta', image: 'vicepresidenta.jpeg', bgcolor: 'secondary' },
   ],
   [
@@ -235,7 +235,7 @@ const boardGroups: Member[][] = [
   [
     { name: 'Marta Hernández', role: 'Segunda consejera', image: 'segunda_consejera.jpeg', bgcolor: 'secondary' },
     { name: 'Javier Díaz', role: 'Integrante suplente', image: 'consejo_directivo_suplente.jpeg', bgcolor: 'primary' },
-    { name: 'Elena García', role: 'Integrante', bgcolor: 'secondary' },
+    { name: 'Elena García', role: 'Integrante', image: 'presidenta_suplente.jpeg', bgcolor: 'secondary' },
   ],
 ];
 
