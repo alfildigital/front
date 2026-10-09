@@ -21,7 +21,7 @@ export function ComisionCard({ name, role, image, bgcolor, subtitle }: ComisionC
     : 'bg-primary-400';
 
   return (
-    <article className={`relative flex w-full max-w-[360px] flex-col items-center overflow-hidden rounded-2xl p-6 text-center shadow-lg transition-transform duration-300 hover:-translate-y-2 ${bgColorClass}`}>
+    <article className={`relative flex w-full max-w-[300px] flex-col items-center overflow-hidden rounded-3xl p-5 text-center shadow-lg transition-transform duration-300 hover:-translate-y-2 ${bgColorClass}`}>
       
         //Detalles decorativos (simulando los trazos verdes de la imagen)
 
@@ -77,20 +77,15 @@ import { Users } from 'lucide-react';
 interface ComisionCardProps {
   role: string;
   image?: string;
-  bgcolor: 'primary' | 'secondary';
   subtitle?: string;
 }
 
-export function ComisionCard({ role, image, bgcolor, subtitle }: ComisionCardProps) {
-  const bgColorClass = bgcolor === 'primary' 
-    ? 'bg-primary-500' 
-    : 'bg-secondary-500';
-  
+export function ComisionCard({ role, image, subtitle }: ComisionCardProps) {
   return (
-    <article className={`relative flex w-full max-w-[360px] flex-col items-center overflow-hidden rounded-2xl p-6 text-center shadow-lg transition-transform duration-300 hover:-translate-y-2 ${bgColorClass}`}>
+    <article className="relative flex w-full min-w-0 flex-col items-center p-3 text-center">
       
       {/* Contenedor de la Imagen*/}
-      <div className="relative mb-4 mt-2 h-60 w-60 overflow-hidden rounded-xl bg-white shadow-md">
+      <div className="relative mb-3 mt-1 h-44 w-44 overflow-hidden rounded-full border-4 border-white bg-white shadow-md">
         {image ? (
           <img
             src={`/comision_directiva/${image}`}
@@ -108,13 +103,13 @@ export function ComisionCard({ role, image, bgcolor, subtitle }: ComisionCardPro
       </div>
 
       {/* Texto - Solo Rol y Subtítulo */}
-      <div className="z-10 mt-2 flex flex-col gap-1">
-        <h3 className="text-xl font-bold leading-tight text-white drop-shadow-md">
+      <div className="z-10 mt-1 flex flex-col gap-1">
+        <h3 className="text-lg font-bold leading-tight text-gray-900 dark:text-gray-100">
           {role}
         </h3>
         
         {subtitle && (
-          <span className="text-sm font-medium text-white/90 bg-black/20 px-2 py-0.5 rounded-full inline-block mx-auto">
+          <span className="mx-auto inline-block rounded-full bg-gray-200 px-2 py-0.5 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-200">
             {subtitle}
           </span>
         )}

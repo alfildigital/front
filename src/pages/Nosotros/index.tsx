@@ -221,61 +221,54 @@ interface Member {
   role: string;
   image?: string;
   subtitle?: string; // Para "Suplente", "Titular", etc.
-  bgcolor?: 'primary' | 'secondary'; // Para alternar colores
 }
 
 const boardGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Presidenta', image: 'presidenta.jpeg', bgcolor: 'primary' },
-    { name: 'Ana Martínez', role: 'Vicepresidenta', image: 'vicepresidenta.jpeg', bgcolor: 'secondary' },
+    { name: 'María González', role: 'Presidenta', image: 'presidenta.jpeg' },
+    { name: 'Ana Martínez', role: 'Vicepresidenta', image: 'vicepresidenta.jpeg' },
+    { name: 'Laura Rodríguez', role: 'Secretaria', image: 'secretaria.jpeg' },
+    { name: 'Sofía López', role: 'Tesorera', image: 'tesorera.jpeg' },
   ],
   [
-    { name: 'Laura Rodríguez', role: 'Secretaria', image: 'secretaria.jpeg', bgcolor: 'primary' },
-    { name: 'Sofía López', role: 'Tesorera', image: 'tesorera.jpeg', bgcolor: 'secondary' },
-    { name: 'Carlos Ruiz', role: 'Primera consejera', image: 'primer_consejera.jpeg', bgcolor: 'primary' },
-  ],
-  [
-    { name: 'Marta Hernández', role: 'Segunda consejera', image: 'segunda_consejera.jpeg', bgcolor: 'secondary' },
-    { name: 'Javier Díaz', role: 'Integrante suplente', image: 'consejo_directivo_suplente.jpeg', bgcolor: 'primary' },
-    { name: 'Elena García', role: 'Integrante', image: 'presidenta_suplente.jpeg', bgcolor: 'secondary' },
+    { name: 'Carlos Ruiz', role: 'Primera consejera', image: 'primer_consejera.jpeg' },
+    { name: 'Marta Hernández', role: 'Segunda consejera', image: 'segunda_consejera.jpeg' },
+    { name: 'Javier Díaz', role: 'Integrante suplente', image: 'consejo_directivo_suplente.jpeg' },
+    { name: 'Elena García', role: 'Integrante', image: 'presidenta_suplente.jpeg' },
   ],
 ];
 
 const auditGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Revisora de Cuentas', subtitle: 'Titular', image: 'revision_cuenta_titular.jpeg', bgcolor: 'primary' },
-    { name: 'Ana Martínez', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular', image: 'revision_cuenta_segundo_titular.jpeg', bgcolor: 'secondary' },
-  ],
-  [
-    { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: 'revision_cuenta_suplente.jpeg', bgcolor: 'primary' },
-    { name: 'Sofía López', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: 'revision_cuenta_suplente_2.jpeg', bgcolor: 'secondary' },
+    { name: 'María González', role: 'Revisora de Cuentas', subtitle: 'Titular', image: 'revision_cuenta_titular.jpeg' },
+    { name: 'Ana Martínez', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular', image: 'revision_cuenta_segundo_titular.jpeg' },
+    { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: 'revision_cuenta_suplente.jpeg' },
+    { name: 'Sofía López', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: 'revision_cuenta_suplente_2.jpeg' },
   ],
 ];
 
 const ethicsGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Presidente', image: 'etica_disciplina_presidente.jpeg', bgcolor: 'primary' },
-    { name: 'Ana Martínez', role: 'Vicepresidente', image: 'etica_disciplina_vice_presidente.jpeg', bgcolor: 'secondary' },
-    { name: 'Laura Rodríguez', role: 'Secretaria', image: 'etica_disciplina_secretaria.jpeg', bgcolor: 'primary' },
+    { name: 'María González', role: 'Presidente', image: 'etica_disciplina_presidente.jpeg' },
+    { name: 'Ana Martínez', role: 'Vicepresidente', image: 'etica_disciplina_vice_presidente.jpeg' },
+    { name: 'Laura Rodríguez', role: 'Secretaria', image: 'etica_disciplina_secretaria.jpeg' },
+    { name: 'Marta Hernández', role: 'Titular', image: 'etica_disciplina_titular.jpeg' },
   ],
   [
-    { name: 'Marta Hernández', role: 'Titular', image: 'etica_disciplina_titular.jpeg', bgcolor: 'secondary' },
-    { name: 'Javier Díaz', role: 'Titular', image: 'etica_disciplina_titular_2.jpeg', bgcolor: 'primary' },
+    { name: 'Javier Díaz', role: 'Titular', image: 'etica_disciplina_titular_2.jpeg' },
   ],
 ];
 
 // Modificamos MemberGroup para usar ComisionCard
 function MemberGroup({ members }: { members: Member[] }) {
   return (
-    <div className="flex flex-wrap justify-center gap-8">
-      {members.map((member, index) => (
+    <div className="grid grid-cols-2 items-start gap-4 md:grid-cols-3 xl:grid-cols-4">
+      {members.map((member) => (
         <ComisionCard
-          key={`${member.role}-${member.image ?? index}`}
-          name={member.name}
+          key={`${member.role}-${member.image}`}
           role={member.role}
           image={member.image}
           subtitle={member.subtitle}
-          bgcolor={member.bgcolor || (index % 2 === 0 ? 'primary' : 'secondary')} // Fallback por si no se define
         />
       ))}
     </div>
