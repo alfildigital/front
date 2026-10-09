@@ -12,7 +12,8 @@ import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useNoticias } from '@/hooks/queries/useNoticias';
 // import { useInstagram } from '@/hooks/queries/useInstagram';
-import { Building2, Eye, Instagram, Target } from 'lucide-react'; // Eliminado Users si ya no se usa aquí
+import { Building2, Eye, FileText, Instagram, Target } from 'lucide-react'; // Eliminado Users si ya no se usa aquí
+import { DocumentLink } from '@/components/common/DocumentLink';
 
 // ---------------------------------------------------------------------------
 // Hero
@@ -21,9 +22,9 @@ import { Building2, Eye, Instagram, Target } from 'lucide-react'; // Eliminado U
 function Hero() {
   return (
    <section
-  className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-20 text-white"
-  aria-label="Presentación institucional"
->
+      className="relative overflow-hidden bg-gradient-to-br   from-primary-600 via-primary-500 to-secondary-500 py-20 text-white"
+      aria-label="Presentación institucional"
+    >
       <img
         src="/inclusionsiluet.png"
         alt=""
@@ -45,7 +46,8 @@ function Hero() {
             Servicio y representación para los profesionales. Trámites, información
             institucional y más, en un solo lugar.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-6">
+
             <Link
               to="/tramites"
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-primary-700 shadow-sm transition-all hover:bg-primary-50 hover:shadow-md"
@@ -60,6 +62,9 @@ function Hero() {
               Últimas Noticias
             </Link>
           </div>
+            <DocumentLink href="https://digestomisiones.gob.ar/archivospdf/1702476679_Ley%20I%20-%20N%C2%B0%20177.pdf" icon={FileText}>
+                Ley de creación del Colegio (Ley I - N.º 177)
+            </DocumentLink>
         </Reveal>
 
         {/* Quick info */}

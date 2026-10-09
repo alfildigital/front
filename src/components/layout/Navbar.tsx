@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X, Leaf, Sun } from 'lucide-react';
+import { ChevronDown, Menu, X, Leaf, Sun, LogIn } from 'lucide-react';
 import { InclusiveLanguageBackdrop } from './InclusiveLanguageBackdrop';
-
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -190,6 +189,20 @@ export function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
 
+{/*Login */}
+
+  function LoginIcon() {
+  const handleClick = () => {
+    window.open('about:blank', '_blank');
+  };
+
+  return (
+    <button onClick={handleClick} title='Login' className="login-icon flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700">
+      <LogIn />
+    </button>
+  );
+}
+
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
@@ -217,14 +230,14 @@ export function Navbar() {
                 <img className='h-full w-full object-cover' src="/public/logo.jpg" alt="LOGO" />
               </span>
             </div>
-            <span className="hidden sm:block font-semibold text-primary-700 dark:text-primary-300">
+            <span className="hidden sm:block text-sm font-semibold text-primary-700 dark:text-primary-300">
               <h2 className="text-justify">Colegio de Profesionales</h2>
               <span className="hidden sm:block text-secondary-500 dark:text-secondary-400">
                 <h2 className="text-justify">en Educación Especial</h2>
               </span>
             </span>
           </Link>
-
+            
           {/* Desktop nav */}
           <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item) =>
@@ -265,6 +278,7 @@ export function Navbar() {
                 <Leaf className="h-5 w-5" aria-hidden="true" />
               )}
             </button>
+            <LoginIcon />
 
             {/* Mobile toggle */}
             <button

@@ -211,7 +211,9 @@ import { Helmet } from 'react-helmet-async';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
+import { FileText } from 'lucide-react'; 
 import { ComisionCard } from '@/components/common/ComisionCard'; // <--- Importamos el nuevo componente
+import { DocumentLink } from '@/components/common/DocumentLink';
 
 // Actualizamos la interfaz para incluir los nuevos campos
 interface Member {
@@ -286,9 +288,11 @@ function CommitteeSection({ groups, title, sectionIndex }: { groups: Member[][];
     : 'bg-secondary-500/[0.025] dark:bg-secondary-400/[0.04]';
 
   return (
+    
     <section className="border-t border-secondary-600 bg-gray-100 py-14 dark:border-secondary-700 dark:bg-gray-900" aria-label={title}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="border border-gray-900/20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`space-y-8 rounded-lg px-4 py-8 sm:px-8 ${sectionTint}`}>
+          
           <Reveal>
             <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
           </Reveal>
@@ -317,6 +321,9 @@ export default function NosotrosPage() {
         <title>Nosotros | {SITE_NAME}</title>
         <meta name="description" content="Conocé la institución, su misión, visión y órganos directivos." />
       </Helmet>
+      <DocumentLink href="https://digestomisiones.gob.ar/archivospdf/1702476679_Ley%20I%20-%20N%C2%B0%20177.pdf" icon={FileText}>
+            Ley de creación del Colegio (Ley I - N.º 177)
+      </DocumentLink>
       <CommitteeSection groups={boardGroups} title="Consejo Directivo" sectionIndex={0} />
       <CommitteeSection groups={auditGroups} title="Comisión Revisora de Cuentas" sectionIndex={1} />
       <CommitteeSection groups={ethicsGroups} title="Tribunal de Ética y Disciplina" sectionIndex={2} />
