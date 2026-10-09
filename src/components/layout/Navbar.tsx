@@ -1,7 +1,21 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X, Leaf, Sun } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
+import { ChevronDown, Menu, X, Leaf, Sun, LogIn } from 'lucide-react';
+import { InclusiveLanguageBackdrop } from './InclusiveLanguageBackdrop';
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+interface NavChild {
+  label: string;
+  to: string;
+}
+
+interface NavItem {
+  label: string;
+  to?: string;
+  children?: NavChild[];
+}
 
 // ---------------------------------------------------------------------------
 // Types
@@ -19,10 +33,28 @@ interface NavItem {
 }
 
 // ---------------------------------------------------------------------------
+// Navigation helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * Devuelve true si alguno de los hijos del item coincide con la ruta actual.
+ * Se usa para pintar el botón padre del dropdown como "activo"
+ * cuando el usuario está navegando dentro de esa sección.
+ */
+function isChildActive(children: NavChild[], pathname: string): boolean {
+  return children.some(
+    (child) =>
+      pathname === child.to ||
+      (child.to !== '/' && pathname.startsWith(child.to)),
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Nav items
 // ---------------------------------------------------------------------------
 
 const NAV_ITEMS: NavItem[] = [
+  
   { label: 'Colegio', to: '/' },
   { label: 'Noticias', to: '/noticias' },
   { 
@@ -43,6 +75,8 @@ const NAV_ITEMS: NavItem[] = [
   },
   { label: 'Obras Sociales', to: '/obras-sociales' },
   { label: 'Boletín Oficial', to: '/boletin-oficial' },
+  { label: 'Nosotros', to: '/nosotros' },
+  
 ];
 
 // ---------------------------------------------------------------------------
@@ -80,7 +114,9 @@ function Dropdown({ item }: DropdownProps) {
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  const isActiveParent = item.children.some((c) => location.pathname.startsWith(c.to));
+  // 👇 ANTES: item.children.some(...)
+  // 👇 AHORA: usamos el helper compartido
+  const isActiveParent = isChildActive(item.children, location.pathname);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -143,7 +179,6 @@ function Dropdown({ item }: DropdownProps) {
     </div>
   );
 }
-
 // ---------------------------------------------------------------------------
 // Main Navbar
 // ---------------------------------------------------------------------------
@@ -153,6 +188,20 @@ export function Navbar() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const location = useLocation();
+
+{/*Login */}
+
+  function LoginIcon() {
+  const handleClick = () => {
+    window.open('about:blank', '_blank');
+  };
+
+  return (
+    <button onClick={handleClick} title='Login' className="login-icon flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700">
+      <LogIn />
+    </button>
+  );
+}
 
   useEffect(() => {
     applyTheme(theme);
@@ -167,8 +216,9 @@ export function Navbar() {
   const isDark = theme === 'dark';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-700 dark:bg-surface-dark/90">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 isolate border-b border-secondary-500 bg-gray-100/50 backdrop-blur-md dark:border-primary-700 dark:bg-surface-dark/50">
+      <InclusiveLanguageBackdrop />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
@@ -180,9 +230,14 @@ export function Navbar() {
                 <img className='h-full w-full object-cover' src="/public/logo.jpg" alt="LOGO" />
               </span>
             </div>
-            <span className="hidden sm:block">{SITE_NAME}</span>
+            <span className="hidden sm:block text-sm font-semibold text-primary-700 dark:text-primary-300">
+              <h2 className="text-justify">Colegio de Profesionales</h2>
+              <span className="hidden sm:block text-secondary-500 dark:text-secondary-400">
+                <h2 className="text-justify">en Educación Especial</h2>
+              </span>
+            </span>
           </Link>
-
+            
           {/* Desktop nav */}
           <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-1">
             {NAV_ITEMS.map((item) =>
@@ -223,6 +278,7 @@ export function Navbar() {
                 <Leaf className="h-5 w-5" aria-hidden="true" />
               )}
             </button>
+            <LoginIcon />
 
             {/* Mobile toggle */}
             <button
@@ -244,7 +300,7 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
-          className="border-t border-gray-200 bg-white py-2 dark:border-gray-700 dark:bg-gray-900 lg:hidden"
+          className="relative z-10 border-t border-gray-200 bg-white py-2 dark:border-gray-700 dark:bg-gray-900 lg:hidden"
           role="navigation"
           aria-label="Menú móvil"
         >

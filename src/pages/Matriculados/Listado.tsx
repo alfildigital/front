@@ -21,6 +21,7 @@ import { usePagination } from '@/hooks/usePagination';
 import { filterMatriculados } from '@/utils/matriculadosUtils';
 import { paginateItems } from '@/utils/paginationUtils';
 import type { Matriculado } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 // ---------------------------------------------------------------------------
 // Componente de tarjeta individual
@@ -36,7 +37,7 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
     <article className="flex items-start gap-4 rounded-xl border border-gray-300 bg-gray-50 p-4 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/50">
       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
         {m.foto ? (
-          <img src={m.foto} alt={nombreCompleto} className="h-full w-full object-cover" loading="lazy" />
+          <img src={m.foto} alt={nombreCompleto} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <User className="h-7 w-7 text-gray-400" aria-hidden="true" />
@@ -112,14 +113,14 @@ export default function ListadoPage() {
       </Helmet>
 
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mb-6">
+        <Reveal as="header" className="mb-6">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Profesionales Matriculados
           </h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Buscá por nombre o número de matrícula
           </p>
-        </header>
+        </Reveal>
 
         {/* ── Buscador ── */}
         <div className="relative mb-8">

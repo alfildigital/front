@@ -142,9 +142,8 @@ cambio necesario es en `src/api/services/*.ts` — las páginas y componentes no
 
 ### 2.2 Trámites
 
-**Datos:** locales (mock), sin consumo de API externa  
-**Servicio:** `src/mocks/services/mockTramitesService.ts`  
-**Estado:** ✅ Sin dependencia de backend (datos locales)
+**Datos:** locales, definidos en `src/pages/Tramites/index.tsx`  
+**Estado:** sin consumo de API externa
 
 **Estructura de datos (local):**
 

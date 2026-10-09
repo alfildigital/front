@@ -20,6 +20,7 @@ import { usePagination } from '@/hooks/usePagination';
 import { paginateItems } from '@/utils/paginationUtils';
 import { formatDate, formatFileSize } from '@/utils/formatters';
 import type { BoletinPublicacion } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 function PublicacionItem({ pub }: { pub: BoletinPublicacion }) {
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
@@ -109,12 +110,12 @@ export default function BoletinOficialPage() {
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mb-8">
+        <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Boletín Oficial</h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Publicaciones, resoluciones y comunicados oficiales
           </p>
-        </header>
+        </Reveal>
 
         {isPending && (
           <div className="space-y-4">{[1, 2, 3].map((i) => <CardSkeleton key={i} />)}</div>

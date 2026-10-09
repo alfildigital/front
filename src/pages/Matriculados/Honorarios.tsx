@@ -8,6 +8,7 @@ import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useHonorarios } from '@/hooks/queries/useMatriculados';
 import { formatDate } from '@/utils/formatters';
 import type { Honorario } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 function HonorarioItem({ h }: { h: Honorario }) {
   return (
@@ -18,7 +19,7 @@ function HonorarioItem({ h }: { h: Honorario }) {
             <img
               src={h.url}
               alt={h.titulo}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
               loading="lazy"
             />
           </div>
@@ -80,12 +81,12 @@ export default function HonorariosPage() {
       </Helmet>
 
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mb-8">
+        <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Honorarios</h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Tablas de honorarios mínimos vigentes
           </p>
-        </header>
+        </Reveal>
 
         {isPending && <CardSkeletonGrid count={3} />}
         {isError && <ErrorBanner message="No se pudieron cargar los honorarios." onRetry={refetch} />}

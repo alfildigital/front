@@ -3,6 +3,7 @@ import { Info } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { EmptyState } from '@/components/common/EmptyState';
+import { Reveal } from '@/components/common/Reveal';
 
 /**
  * Página de Información Institucional.
@@ -18,11 +19,11 @@ export default function InformacionPage() {
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mb-8">
+        <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Información Institucional
           </h1>
-        </header>
+        </Reveal>
         <EmptyState
           title="Contenido en construcción"
           description="Esta sección estará disponible pronto. El contrato con el backend está pendiente de definición."

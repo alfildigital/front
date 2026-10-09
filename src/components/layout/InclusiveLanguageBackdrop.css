@@ -1,0 +1,60 @@
+.inclusive-language-backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.inclusive-language-particle {
+  position: absolute;
+  display: block;
+  color: rgb(63 112 83 / 24%);
+  opacity: 0;
+  animation: inclusive-spore-drift 13s ease-in-out infinite both;
+  will-change: transform, opacity;
+}
+
+.dark .inclusive-language-particle {
+  color: rgb(190 220 199 / 30%);
+}
+
+.inclusive-language-particle.is-gesture {
+  font-size: 21px;
+  filter: grayscale(0.6);
+}
+
+.inclusive-language-particle.is-braille {
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.inclusive-language-particle:nth-child(3n) {
+  animation-duration: 16s;
+}
+
+.inclusive-language-particle:nth-child(3n + 1) {
+  animation-duration: 19s;
+}
+
+@keyframes inclusive-spore-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) rotate(-8deg) scale(0.85);
+  }
+  20%, 76% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--particle-drift), -24px, 0) rotate(8deg) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inclusive-language-particle {
+    animation: none;
+    opacity: 0.35;
+    transform: none;
+  }
+}

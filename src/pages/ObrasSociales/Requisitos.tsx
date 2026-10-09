@@ -11,6 +11,7 @@ import { useConsentimientos } from '@/hooks/useConsentimientos';
 import { terminosYCondiciones } from '@/legal/terminos';
 import { politicaDePrivacidad } from '@/legal/privacidad';
 import type { SolicitudObraSocialPayload } from '@/types';
+import { Reveal } from '@/components/common/Reveal';
 
 // ─── DATOS DE ESTA PÁGINA ────────────────────────────────────────────────────
 // Formulario: solicitud de incorporación al convenio de obras sociales
@@ -153,14 +154,14 @@ export default function RequisitosOsPage() {
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <header className="mb-8">
+        <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
             Requisitos para Incorporación
           </h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Requisitos para que una obra social se incorpore al convenio
           </p>
-        </header>
+        </Reveal>
 
         {/* Información general */}
         <div className="mb-8 rounded-xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-800 dark:bg-blue-900/10">

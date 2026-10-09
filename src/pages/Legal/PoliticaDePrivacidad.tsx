@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { politicaDePrivacidad } from '@/legal/privacidad';
+import { Reveal } from '@/components/common/Reveal';
 
 /**
  * PoliticaDePrivacidadPage
@@ -29,7 +30,7 @@ export default function PoliticaDePrivacidadPage() {
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
-        <header className="mb-10">
+        <Reveal as="header" className="mb-10">
           <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
             <ShieldCheck className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
@@ -47,7 +48,7 @@ export default function PoliticaDePrivacidadPage() {
               {doc.subtitulo}
             </p>
           )}
-        </header>
+        </Reveal>
 
         {/* Índice */}
         <nav

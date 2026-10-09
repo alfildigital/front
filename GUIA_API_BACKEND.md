@@ -278,7 +278,6 @@ navegador**. Los datos provienen de archivos locales en `src/mocks/`.
 src/mocks/
 ├── data/                        ← Arrays TypeScript con datos estáticos
 │   ├── obrasSociales.ts         ← 12 obras sociales de ejemplo
-│   ├── tramites.ts              ← 4 trámites de ejemplo
 │   ├── noticias.ts
 │   ├── matriculados.ts
 │   ├── alquileres.ts
@@ -286,7 +285,6 @@ src/mocks/
 │   └── instagram.ts
 └── services/                    ← Implementaciones mock con delay simulado
     ├── mockObrasSocialesService.ts
-    ├── mockTramitesService.ts
     └── ...
 ```
 

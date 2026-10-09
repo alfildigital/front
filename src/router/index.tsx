@@ -7,6 +7,7 @@ import { Spinner } from '@/components/common/Spinner';
 // ---------------------------------------------------------------------------
 
 const HomePage         = lazy(() => import('@/pages/Home'));
+const NosotrosPage     = lazy(() => import('@/pages/Nosotros'));
 const NoticiasPage     = lazy(() => import('@/pages/Noticias'));
 const NoticiaDetalle   = lazy(() => import('@/pages/Noticias/NoticiaDetalle'));
 const TramitesPage     = lazy(() => import('@/pages/Tramites'));
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: withSuspense(HomePage),
+  },
+  {
+    path: '/nosotros',
+    element: withSuspense(NosotrosPage),
   },
   {
     path: '/noticias',

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Home, ArrowLeft } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
+import { Reveal } from '@/components/common/Reveal';
 
 export default function NotFoundPage() {
   return (
@@ -13,9 +14,11 @@ export default function NotFoundPage() {
 
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
         <p className="text-8xl font-black text-primary-200 dark:text-primary-900 select-none">404</p>
-        <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
-          Página no encontrada
-        </h1>
+        <Reveal>
+          <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
+            Página no encontrada
+          </h1>
+        </Reveal>
         <p className="mt-2 text-gray-500 dark:text-gray-400">
           La dirección que buscás no existe o fue movida.
         </p>
