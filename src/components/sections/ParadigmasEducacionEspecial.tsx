@@ -305,7 +305,7 @@ export function ParadigmasEducacionEspecial() {
               {[
                 {
                   Icon: ShieldCheck,
-                  titulo: "Sujetos de derechos",
+                  titulo: "Personas en situación de discapacidad",
                   texto: "Reconoce a las personas con discapacidad como sujetos de derechos.",
                 },
                 {
