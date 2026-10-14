@@ -321,9 +321,6 @@ export default function NosotrosPage() {
         <title>Nosotros | {SITE_NAME}</title>
         <meta name="description" content="Conocé la institución, su misión, visión y órganos directivos." />
       </Helmet>
-      <DocumentLink href="https://digestomisiones.gob.ar/archivospdf/1702476679_Ley%20I%20-%20N%C2%B0%20177.pdf" icon={FileText}>
-            Ley de creación del Colegio (Ley I - N.º 177)
-      </DocumentLink>
       <CommitteeSection groups={boardGroups} title="Consejo Directivo" sectionIndex={0} />
       <CommitteeSection groups={auditGroups} title="Comisión Revisora de Cuentas" sectionIndex={1} />
       <CommitteeSection groups={ethicsGroups} title="Tribunal de Ética y Disciplina" sectionIndex={2} />

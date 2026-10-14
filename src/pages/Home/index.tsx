@@ -12,8 +12,9 @@ import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useNoticias } from '@/hooks/queries/useNoticias';
 // import { useInstagram } from '@/hooks/queries/useInstagram';
-import { Building2, Eye, FileText, Instagram, Target } from 'lucide-react'; // Eliminado Users si ya no se usa aquí
+import { Building2, Eye, FileText, Target } from 'lucide-react'; // Eliminado Users si ya no se usa aquí
 import { DocumentLink } from '@/components/common/DocumentLink';
+import {InstagramBtn}  from '@/components/common/InstagramBtn'; // Importa el componente InstagramBtn
 
 // ---------------------------------------------------------------------------
 // Hero
@@ -156,17 +157,11 @@ export default function HomePage() {
                   <br /><br />
                   Nuestra labor trasciende el aula: trabajamos para garantizar que la educación especial sea un pilar fundamental en la construcción de una sociedad más justa e inclusiva. Agrupamos a expertos en diversas áreas, fomentando el intercambio de experiencias y el desarrollo técnico-científico para brindar respuestas innovadoras a los desafíos educativos actuales.
                 </p>
-                <div className="mt-8 flex justify-center lg:justify-start">
-                  <a
-                    href="https://www.instagram.com/colegioedespecial.msn?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-2 text-primary-600 transition-colors hover:border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-400 dark:hover:bg-primary-900/30 dark:hover:text-primary-300"
-                  >
-                    <Instagram className="h-5 w-5" aria-hidden="true" />
-                    <span className="text-sm font-medium">Seguinos en Instagram</span>
-                  </a>
-                </div>
+
+
+                {/*-------------------------- componente IG ------------------------------*/}        
+                  <InstagramBtn />
+
               </div>
             </div>
             <div className="flex w-full items-center justify-center lg:w-[20%] lg:justify-end">
@@ -177,6 +172,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ----------------------------- Visión y misión -----------------------------------*/}
 
       <section aria-labelledby="vision-mission-title" className="bg-gray-50 py-16 dark:bg-gray-800/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -192,17 +189,17 @@ export default function HomePage() {
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             <article className="border border-gray-300 border-l-4 border-l-primary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-primary-500 dark:bg-gray-900">
-              <Target className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+              <Target className="h-7 w-7 text-primary-500 dark:text-primary-500" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Misión</h3>
-              <p className="mt-3 text-justify text-sm leading-7 text-gray-600 dark:text-gray-300">
-                Regular, promover y jerarquizar el ejercicio profesional de la Educación Especial, velando por la idoneidad, ética y formación continua de nuestros matriculados. Buscamos garantizar una educación de calidad que potencie las capacidades de cada estudiante, promoviendo su autonomía e inclusión plena en el ámbito social, educativo y laboral.
+              <p className="mt-3 text-justify text-base leading-7 text-gray-600 dark:text-gray-300">
+               Defender los derechos de los profesionales en el ámbito de la Educación Especial,promoviendo su desarrollo y formación continua; como asi también, velar por el cumplimiento de las obligaciones profesionales y establecer estánderes éticos elevados para garantizar un servicio de calidad.
               </p>
             </article>
             <article className="border border-gray-300 border-l-4 border-l-secondary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-secondary-500 dark:bg-gray-900">
               <Eye className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Visión</h3>
-              <p className="mt-3 text-justify text-sm leading-7 text-gray-600 dark:text-gray-300">
-                Ser la institución referente a nivel nacional en materia de Educación Especial, reconocida por su excelencia técnica y su capacidad de incidencia en las políticas públicas. Aspiramos a construir una sociedad donde la diversidad sea valorada y donde cada persona con discapacidad tenga garantizado su derecho a aprender y desarrollarse plenamente, de la mano de profesionales altamente calificados.
+              <p className="mt-3 text-justify text-base leading-7 text-gray-600 dark:text-gray-300">
+                El CPEE aspira a ser una entidad de referencia en el ámbito de la educacion inclusiva, que contribuya significativamente al desarrollo de una sociedad mas humana y respetuosa de la diversidad.
               </p>
             </article>
           </div>
