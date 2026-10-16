@@ -192,7 +192,7 @@ export default function HomePage() {
               <Target className="h-7 w-7 text-primary-500 dark:text-primary-500" aria-hidden="true" />
               <h3 className="mt-4 text-xl font-semibold text-gray-900 dark:text-gray-100">Misión</h3>
               <p className="mt-3 text-justify text-base leading-7 text-gray-600 dark:text-gray-300">
-               Defender los derechos de los profesionales en el ámbito de la Educación Especial,promoviendo su desarrollo y formación continua; como asi también, velar por el cumplimiento de las obligaciones profesionales y establecer estánderes éticos elevados para garantizar un servicio de calidad.
+               Defender los derechos de los profesionales en el ámbito de la Educación Especial, promoviendo su desarrollo y formación continua; como asi también, velar por el cumplimiento de las obligaciones profesionales y establecer estánderes éticos elevados para garantizar un servicio de calidad.
               </p>
             </article>
             <article className="border border-gray-300 border-l-4 border-l-secondary-500 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:border-l-secondary-500 dark:bg-gray-900">
