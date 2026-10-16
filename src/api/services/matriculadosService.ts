@@ -18,7 +18,7 @@ export interface ProfesionalDto {
   telefono: string | null;
   localidad: string | null;
   direccion: string | null;
-  estado: string;
+  estado_matricula: string;
   fecha_matriculacion: string;
   observaciones: string | null;
   foto: string | null;
@@ -52,7 +52,7 @@ export const matriculadosService = {
       telefono: p.telefono,
       localidad: p.localidad,
       direccion: p.direccion,
-      estado: p.estado,
+      estado: p.estado_matricula,
       fecha_matriculacion: p.fecha_matriculacion,
       observaciones: p.observaciones,
       foto: p.foto,
