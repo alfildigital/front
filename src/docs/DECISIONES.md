@@ -66,7 +66,7 @@ Se crearon estructuras provisionales que deben ser validadas y ajustadas con el 
 | `GET /api/alquileres` | `Alquiler` | `src/types/index.ts` |
 | `GET /api/boletin-oficial` | `BoletinPublicacion` | `src/types/index.ts` |
 | `GET /api/honorarios` | `Honorario` | `src/types/index.ts` |
-| `GET /api/matriculados` | `Matriculado` | `src/types/index.ts` |
+| `GET {VITE_API_URL}/profesionales` | `Matriculado` | `src/api/services/matriculadosService.ts` |
 | `GET /api/instagram` | `InstagramPost` | `src/types/index.ts` |
 
 ### Contrato definitivo confirmado

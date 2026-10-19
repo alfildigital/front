@@ -75,6 +75,6 @@ Tailwind usa `darkMode: 'class'`.
 
 ## Mocks
 
-Controlados por `VITE_USE_MOCKS=true` (activo por defecto en desarrollo).  
-Los hooks eligen el servicio real o el mock en el momento de importación.  
-Para desactivarlos: cambiar a `VITE_USE_MOCKS=false` en `.env.development`.
+Controlados por `VITE_USE_MOCKS=true`; cada hook que soporte mocks elige el servicio al importar.  
+Matriculados siempre consulta la API real y no tiene datos mock.  
+Para los demás módulos, establecer `VITE_USE_MOCKS=false` en `.env.development` desactiva los mocks.

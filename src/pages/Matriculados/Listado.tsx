@@ -11,7 +11,7 @@ import { Pagination } from '@/components/common/Pagination';
 // ─── DATOS DE ESTA PÁGINA ────────────────────────────────────────────────────
 // Hook:      useMatriculados()       →  src/hooks/queries/useMatriculados.ts
 // Service:   matriculadosService     →  src/api/services/matriculadosService.ts
-// Endpoint:  GET /api/matriculados
+// Endpoint:  GET {VITE_API_URL}/profesionales (API real, sin mocks)
 // Filtrado:  filterMatriculados()    →  src/utils/matriculadosUtils.ts
 // Paginado:  paginateItems()         →  src/utils/paginationUtils.ts
 // ─────────────────────────────────────────────────────────────────────────────
@@ -30,18 +30,25 @@ import { Reveal } from '@/components/common/Reveal';
 // ---------------------------------------------------------------------------
 
 function MatriculadoCard({ m }: { m: Matriculado }) {
+  const [fotoError, setFotoError] = useState(false);
   // ALINEACIÓN (4.4): el backend usa "nro_matricula" + "nombre"/"apellido" separados,
   // y no expone "especialidad" en esta versión.
   const nombreCompleto = [m.nombre, m.apellido].filter(Boolean).join(' ');
   return (
     <article className="flex items-start gap-4 rounded-xl border border-gray-300 bg-gray-50 p-4 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/50">
       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
-        {m.foto ? (
-          <img src={m.foto} alt={nombreCompleto} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
-        ) : (
+        {!m.foto || fotoError ? (
           <div className="flex h-full w-full items-center justify-center">
             <User className="h-7 w-7 text-gray-400" aria-hidden="true" />
           </div>
+        ) : (
+          <img
+            src={m.foto}
+            alt={nombreCompleto}
+            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+            onError={() => setFotoError(true)}
+          />
         )}
       </div>
 
@@ -86,7 +93,7 @@ export default function ListadoPage() {
   const debouncedQuery = useDebounce(query, 350);
 
   // ── Obtención de datos ────────────────────────────────────────────────────
-  // useMatriculados trae TODOS los matriculados desde la API (o mock).
+  // useMatriculados trae todos los matriculados desde la API.
   // La paginación se aplica en el cliente sobre el array resultante.
   const { data, isPending, isError, refetch } = useMatriculados();
 
