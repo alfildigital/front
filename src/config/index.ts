@@ -5,18 +5,18 @@
  */
 export const config = {
   api: {
-    url: import.meta.env.VITE_API_URL as string,
+    url: import.meta.env.API_URL as string,
     // API Key del backend (header "Authorization: Bearer <clave>").
     // El backend (cpee) exige este token en TODAS  las peticiones a /api/v1.
     // Se inyecta como header global en 'src/api/client.ts'.
-    apiKey: import.meta.env.VITE_APP_API_KEY as string,
-    timeout: Number(import.meta.env.VITE_API_TIMEOUT ?? 30000),
+    apiKey: import.meta.env.APP_API_KEY as string,
+    timeout: Number(import.meta.env.API_TIMEOUT ?? 30000),
   },
   whatsapp: {
-    number: import.meta.env.VITE_WHATSAPP_NUMBER as string,
+    number: import.meta.env.WHATSAPP_NUMBER as string,
   },
   logs: {
-    enabled: import.meta.env.VITE_ENABLE_LOGS === 'true',
+    enabled: import.meta.env.ENABLE_LOGS === 'true',
   },
   // Si VITE_USE_MOCKS=true, los hooks usan datos locales simulados en lugar de
   // llamar al backend real. Sirve para desarrollo y pruebas sin depender del servidor API.
@@ -25,6 +25,6 @@ export const config = {
   //   VITE_USE_MOCKS=true desactivara los mocks e intentara conectar con la API real.
   //   Ahora 'true' activa los mocks y 'false' usa la API real.
   mocks: {
-    enabled: import.meta.env.VITE_USE_MOCKS === 'true',
+    enabled: import.meta.env.USE_MOCKS === 'false',
   },
 } as const;

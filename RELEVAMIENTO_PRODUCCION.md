@@ -168,32 +168,13 @@ cambio necesario es en `src/api/services/*.ts` — las páginas y componentes no
 
 ### 2.3 Matriculados
 
-**Endpoint real:** `GET /api/matriculados`  
+**Endpoint consumido:** `GET {VITE_API_URL}/profesionales` (en el entorno local, `VITE_API_URL` termina en `/api/v1`).  
 **Servicio:** `src/api/services/matriculadosService.ts`  
-**Estado:** ❌ Sin desarrollar
+**Selección:** siempre API real; `VITE_USE_MOCKS` no aplica a Matriculados.
 
-**Contrato esperado (provisional):**
+El servicio lee el arreglo `data` de la respuesta y mapea el DTO del backend a `Matriculado`: `id`, `nro_matricula`, `dni`, `nombre`, `apellido`, `email`, `telefono`, `localidad`, `direccion`, `estado`, `fecha_matriculacion`, `observaciones`, `foto`, `usuario_abm`, `created_at` y `updated_at`.
 
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": 1,
-      "nombre": "Apellido, Nombre",
-      "matricula": "MP-1234",
-      "especialidad": "string",
-      "telefono": "string | null",
-      "email": "string | null",
-      "foto": "URL absoluta | null"
-    }
-  ]
-}
-```
-
-> **Nota sobre `foto`:** Se espera una URL absoluta lista para usar en `<img src>`.
-> Si el backend devuelve una ruta relativa, hay que agregar el prefijo `config.api.url`
-> en `src/api/services/matriculadosService.ts`.
+La página muestra nombre, matrícula, foto, teléfono y email. El buscador filtra por nombre/apellido o número de matrícula y la paginación ocurre en el frontend. Si no hay foto o no carga, se muestra el icono `User` de Lucide.
 
 ---
 

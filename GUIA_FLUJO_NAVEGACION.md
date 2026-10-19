@@ -236,7 +236,7 @@ Hook: usePagoMatricula()
 **¿Qué carga?**
 
 ```
-API: GET /api/matriculados
+API: GET {VITE_API_URL}/profesionales (API real; no usa mocks)
 Hook: useMatriculados()
 Funcionalidad extra: buscador con debounce (useDebounce)
 Paginación: client-side

@@ -83,9 +83,9 @@ src/pages/Tramites/Formularios.tsx   ← formularios y datos locales
 ```
 src/pages/Matriculados/Listado.tsx   ← búsqueda + paginación
   └── src/hooks/queries/useMatriculados.ts  (useMatriculados)
-        └── src/api/services/matriculadosService.ts  → GET /api/matriculados
-        └── src/mocks/services/mockMatriculadosService.ts
-              └── src/mocks/data/matriculados.ts
+        └── src/api/services/matriculadosService.ts
+              └── GET {VITE_API_URL}/profesionales
+                  DTO API → Matriculado; filtra nombre/matrícula y pagina en frontend
   └── src/utils/matriculadosUtils.ts        (filterMatriculados)
   └── src/utils/paginationUtils.ts          (paginateItems)
   └── src/hooks/usePagination.ts            (estado de página)
