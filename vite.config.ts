@@ -2,10 +2,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import Sitemap from 'vite-plugin-sitemap';
 
 export default defineConfig({
-  plugins: [react()],
+  // 👇 Aquí van los plugins
+  plugins: [
+    react(),
+    Sitemap({ hostname: 'https://www.colegioedespecial.org.ar' })
+  ],
   resolve: {
+    // 👇 Aquí solo van los alias
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
