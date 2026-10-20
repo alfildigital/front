@@ -223,12 +223,10 @@ export function Navbar() {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-lg font-bold text-primary-600 dark:text-primary-400"
+            className="flex items-center text-lg font-bold text-primary-600 dark:text-primary-400"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-500">
-              <span className="text-xs font-black text-white">
-                <img className='h-full w-full object-cover' src="/public/logo.jpg" alt="LOGO" />
-              </span>
+            <div className="flex h-12 w-12 items-center bg-white justify-center rounded-2xl mx-2">
+              <img className="h-full w-full rounded-full object-contain" src="/logo(1).svg" alt="LOGO" />
             </div>
             <span className="hidden sm:block text-sm font-semibold text-primary-700 dark:text-primary-300">
               <h2 className="text-justify">Colegio de Profesionales</h2>

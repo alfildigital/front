@@ -21,7 +21,6 @@ export interface ProfesionalDto {
   estado: string;
   fecha_matriculacion: string;
   observaciones: string | null;
-  foto: string | null;
   usuario_abm: string | null;
   created_at: string;
   updated_at: string;
@@ -55,7 +54,6 @@ export const matriculadosService = {
       estado: p.estado,
       fecha_matriculacion: p.fecha_matriculacion,
       observaciones: p.observaciones,
-      foto: p.foto,
       usuario_abm: p.usuario_abm,
       created_at: p.created_at,
       updated_at: p.updated_at,
