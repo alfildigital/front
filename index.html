@@ -2,19 +2,67 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo(1).svg" />
+    <link rel="icon" type="image/svg+xml" href="/imagenes/new_logo.webp" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Título y descripción REALES (no genéricos) -->
+    <title>Nombre Institución | Colegio Profesional de [Asociación]</title>
+    <meta name="description" content="Sitio oficial del [Nombre]. Trámites, matriculación, documentación institucional, estatuto, código de ética y novedades para profesionales de [rubro]." />
+
+    <!-- Canonical (evita duplicados) -->
+    <link rel="canonical" href="https://colegioedespecial.org.ar/" />
+
+    <!-- Open Graph (redes sociales) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nombre Institución" />
+    <meta property="og:title" content="Nombre Institución | Colegio Profesional de [Asociación]" />
+    <meta property="og:description" content="Trámites, documentación institucional y novedades." />
+    <meta property="og:url" content="https://colegioedespecial.org.ar/" />
+    <meta property="og:image" content="https://colegioedespecial.org.ar/imagenes/og-image.jpg" />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nombre Institución" />
+    <meta name="twitter:description" content="Trámites y documentación institucional." />
+    <meta name="twitter:image" content="https://colegioedespecial.org.ar/imagenes/og-image.jpg" />
+
     <meta name="theme-color" content="#49bcdb" />
+
+    <!-- Preconnect fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <title>Institución Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Datos estructurados: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Nombre Institución",
+      "url": "https://colegioedespecial.org.ar/",
+      "logo": "https://colegioedespecial.org.ar/imagenes/new_logo.webp",
+      "description": "Colegio profesional de [rubro].",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle 123",
+        "addressLocality": "Ciudad",
+        "addressRegion": "Provincia",
+        "postalCode": "0000",
+        "addressCountry": "AR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+54-000-000-0000",
+        "contactType": "customer service"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Necesitás habilitar JavaScript para ver este sitio.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

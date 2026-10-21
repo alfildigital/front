@@ -26,7 +26,7 @@ function Hero() {
       aria-label="Presentación institucional"
     >
       <img
-        src="/inclusionsiluet.png"
+        src="imagenes/inclusionsiluet.webp"
         alt=""
         aria-hidden="true"
         className="absolute bg-black/20 inset-0 h-full w-full object-cover opacity-50"
