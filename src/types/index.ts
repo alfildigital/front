@@ -93,7 +93,7 @@ export interface Matriculado {
   telefono: string | null;
   localidad: string | null;
   direccion: string | null;
-  estado: string;
+  estado_matricula: string;
   fecha_matriculacion: string;
   observaciones: string | null;
   usuario_abm: string | null;

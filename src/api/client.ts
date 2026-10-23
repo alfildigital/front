@@ -23,12 +23,12 @@ import type { ApiError } from '@/types/api';
  * autenticación a un proxy inverso / BFF en el servidor.
  */
 const apiClient = axios.create({
-  baseURL: config.api.url,
+  baseURL: 'https://gestion.colegioedespecial.org.ar/cpee/api/v1',
   timeout: config.api.timeout,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
-    Authorization: `Bearer ${config.api.apiKey}`,
+    Authorization: `Bearer ${import.meta.env.VITE_APP_API_KEY}`,
   },
 });
 

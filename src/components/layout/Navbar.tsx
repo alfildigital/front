@@ -198,7 +198,7 @@ export function Navbar() {
 
   function LoginIcon() {
   const handleClick = () => {
-    window.open('about:blank', '_blank');
+    window.open('http://gestion.colegioedespecial.org.ar/', '_blank');
   };
 
   return (

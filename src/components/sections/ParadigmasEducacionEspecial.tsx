@@ -281,7 +281,7 @@ export function ParadigmasEducacionEspecial() {
           </div>
         </div>
 
-        <div className="mt-20 rounded-2xl border border-primary-200 bg-primary-50 p-6 sm:p-8 dark:border-primary-800 dark:bg-primary-950/40">
+        <div className="mt-20 rounded-2xl border border-secondary-500 bg-primary-50 p-6 sm:p-8 dark:border-primary-800 dark:bg-primary-950/40">
           <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
               <div className="mb-4 flex items-center gap-3 text-primary-700 dark:text-primary-300">
@@ -305,7 +305,7 @@ export function ParadigmasEducacionEspecial() {
               {[
                 {
                   Icon: ShieldCheck,
-                  titulo: "Sujetos de derechos",
+                  titulo: "Personas en situación de discapacidad",
                   texto: "Reconoce a las personas con discapacidad como sujetos de derechos.",
                 },
                 {
@@ -323,7 +323,7 @@ export function ParadigmasEducacionEspecial() {
               ].map(({ Icon, titulo, texto }) => (
                 <article
                   key={titulo}
-                  className="rounded-xl border border-primary-200 bg-gray-50 p-5 shadow-sm dark:border-primary-900 dark:bg-gray-900/70"
+                  className="rounded-xl border border-secondary-500 bg-primary-200/10 p-5 shadow-sm dark:border-primary-900 dark:bg-gray-900/70"
                 >
                   <Icon
                     className="h-6 w-6 text-primary-600 dark:text-primary-400"
