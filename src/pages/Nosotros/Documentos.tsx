@@ -5,7 +5,7 @@ import { PdfCard } from '@/components/common/PdfCard';
 import { Reveal } from '@/components/common/Reveal';
 import type { RecursoPdf } from '@/types';
 
-const sinArchivo: Omit<RecursoPdf, 'id' | 'titulo' | 'descripcion'> = {
+const archivos: Omit<RecursoPdf, 'id' | 'titulo' | 'descripcion'> = {
   archivo_nombre: null,
   archivo_ruta: null,
   archivo_tipo: 'application/pdf',
@@ -15,10 +15,37 @@ const sinArchivo: Omit<RecursoPdf, 'id' | 'titulo' | 'descripcion'> = {
 };
 
 const documentos: RecursoPdf[] = [
-  { ...sinArchivo, id: 1, titulo: 'Reglamento de matrícula profesional', descripcion: 'Normativa vigente aplicable a profesionales matriculados.', archivo_nombre: 'reglamento-matricula-profesional.pdf', archivo_ruta: '/pdfs/documentos/reglamento-matricula-profesional.pdf' },
-  { ...sinArchivo, id: 2, titulo: 'Código de ética profesional', descripcion: 'Documento de referencia para el ejercicio profesional.', archivo_nombre: 'codigo-etica-profesional.pdf', archivo_ruta: '/pdfs/documentos/codigo-etica-profesional.pdf' },
-  { ...sinArchivo, id: 3, titulo: 'Requisitos para trámites profesionales', descripcion: 'Detalle de la documentación necesaria para realizar trámites.', archivo_nombre: 'requisitos-tramites-profesionales.pdf', archivo_ruta: '/pdfs/documentos/requisitos-tramites-profesionales.pdf' },
-  { ...sinArchivo, id: 4, titulo: 'Aranceles institucionales vigentes', descripcion: 'Tabla de aranceles aplicables a los trámites institucionales.', archivo_nombre: 'aranceles-institucionales-vigentes.pdf', archivo_ruta: '/pdfs/documentos/aranceles-institucionales-vigentes.pdf' },
+  { ...archivos,
+     
+    id: 1, 
+    titulo: 'Código de ética profesional',
+    descripcion: 'Documento de referencia para el ejercicio profesional.', 
+    archivo_nombre: 'CODIGO_ETICA.pdf',
+    archivo_ruta: '/pdfs/documentos/CODIGO_ETICA.pdf' 
+
+  },
+
+  { ...archivos, 
+    
+    id: 2, 
+    titulo: 'Estatuto institucional', 
+    descripcion: 'Aprobado por Asamblea General Ordinaria de fecha 9 de Septiembre 2024.', 
+    archivo_nombre: 'estatuto-institucional.pdf', 
+    archivo_ruta: '/pdfs/documentos/estatuto-institucional.pdf' 
+  
+  },
+  /*
+  { ...archivos, 
+    
+    id: 3, 
+    titulo: 'Requisitos para trámites profesionales', 
+    descripcion: 'Detalle de la documentación necesaria para realizar trámites.', 
+    archivo_nombre: 'requisitos-tramites-profesionales.pdf', 
+    archivo_ruta: '/pdfs/documentos/requisitos-tramites-profesionales.pdf' 
+
+  },
+  */
+  { ...archivos, id: 4, titulo: 'Aranceles institucionales vigentes', descripcion: 'Tabla de aranceles aplicables a los trámites institucionales.', archivo_nombre: 'aranceles-institucionales-vigentes.pdf', archivo_ruta: '/pdfs/documentos/aranceles-institucionales-vigentes.pdf' },
 ];
 
 export default function DocumentosPage() {

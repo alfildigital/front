@@ -14,8 +14,7 @@ import { useNoticias } from '@/hooks/queries/useNoticias';
 // import { useInstagram } from '@/hooks/queries/useInstagram';
 import { Building2, Eye, FileText, Target } from 'lucide-react'; // Eliminado Users si ya no se usa aquí
 import { DocumentLink } from '@/components/common/DocumentLink';
-import {InstagramBtn}  from '@/components/common/InstagramBtn'; // Importa el componente InstagramBtn
-
+import { InstagramBtn } from '@/components/common/InstagramBtn';
 // ---------------------------------------------------------------------------
 // Hero
 // ---------------------------------------------------------------------------
@@ -23,14 +22,14 @@ import {InstagramBtn}  from '@/components/common/InstagramBtn'; // Importa el co
 function Hero() {
   return (
    <section
-      className="relative overflow-hidden bg-gradient-to-br   from-primary-600 via-primary-500 to-secondary-500 py-20 text-white"
+      className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 py-20 text-white"
       aria-label="Presentación institucional"
     >
       <img
-        src="/inclusionsiluet.png"
-        alt=""
+        src="imagenes/logo2.webp"
+        alt="Logo de fondo del sitio web del Colegio de Profesionales en Educación Especial"
         aria-hidden="true"
-        className="absolute bg-black/20 inset-0 h-full w-full object-cover opacity-50"
+        className="absolute inset-0 h-full w-full object-cover opacity-10"
       />
   {/* Decorative circles */}
   <div className="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-white/5" aria-hidden="true" />
@@ -39,10 +38,12 @@ function Hero() {
   <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="w-full">
         <Reveal className="max-w-2xl">
-          <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl">
-            <br />
-            <span className="text-secondary-200">{SITE_NAME}</span>
-          </h1>
+            <h1 className="flex flex-wrap items-center gap-4 text-4xl font-extrabold leading-tight sm:text-5xl">
+              <span className="text-secondary-200">{SITE_NAME}</span>
+                <span className="inline-flex items-center rounded-xl border border-white/40 px-3 py-1.5 text-sm font-semibold text-white">
+                N° PPJJ A-5458
+              </span>
+            </h1>
           <p className="mt-4 text-lg text-white/85">
             Servicio y representación para los profesionales. Trámites, información
             institucional y más, en un solo lugar.
@@ -165,8 +166,8 @@ export default function HomePage() {
               </div>
             </div>
             <div className="flex w-full items-center justify-center lg:w-[20%] lg:justify-end">
-              <div className="flex aspect-square bg-primary-50 p-4 shadow-lg dark:bg-gray-800">
-                <img src="/logo.jpg" alt={`Logo de ${SITE_NAME}`} className="h-full w-full object-contain" />
+              <div className="flex aspect-video bg-primary-50 p-2  shadow-lg dark:bg-gray-800">
+                <img src="/imagenes/new_logo.webp" alt={`Logo de ${SITE_NAME}`} className="h-full w-full object-contain" />
               </div>
             </div>
           </div>

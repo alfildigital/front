@@ -96,7 +96,6 @@ export interface Matriculado {
   estado_matricula: string;
   fecha_matriculacion: string;
   observaciones: string | null;
-  foto: string | null;
   usuario_abm: string | null;
   created_at: string;
   updated_at: string;

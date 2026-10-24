@@ -12,7 +12,7 @@ const NoticiasPage     = lazy(() => import('@/pages/Noticias'));
 const NoticiaDetalle   = lazy(() => import('@/pages/Noticias/NoticiaDetalle'));
 const TramitesPage     = lazy(() => import('@/pages/Tramites'));
 const FormulariosPage  = lazy(() => import('@/pages/Tramites/Formularios'));
-const DocumentosPage   = lazy(() => import('@/pages/Tramites/Documentos'));
+const DocumentosPage   = lazy(() => import('@/pages/Nosotros/Documentos'));
 const PagoPage         = lazy(() => import('@/pages/Matriculados/Pago'));
 const ListadoPage      = lazy(() => import('@/pages/Matriculados/Listado'));
 const HonorariosPage   = lazy(() => import('@/pages/Matriculados/Honorarios'));
@@ -58,6 +58,10 @@ export const router = createBrowserRouter([
   {
     path: '/nosotros',
     element: withSuspense(NosotrosPage),
+  },
+  {
+    path: '/nosotros/documentos',
+    element: withSuspense(DocumentosPage),
   },
   {
     path: '/noticias',

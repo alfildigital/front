@@ -211,9 +211,8 @@ import { Helmet } from 'react-helmet-async';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
-import { Building2, Eye, Instagram, Target } from 'lucide-react';
+import { Building2} from 'lucide-react';
 import { ComisionCard } from '@/components/common/ComisionCard'; // <--- Importamos el nuevo componente
-import { DocumentLink } from '@/components/common/DocumentLink';
 
 // Actualizamos la interfaz para incluir los nuevos campos
 interface Member {
@@ -258,6 +257,49 @@ const ethicsGroups: Member[][] = [
     { name: 'Javier Díaz', role: 'Titular', image: 'etica_disciplina_titular_2.jpeg' },
   ],
 ];
+
+/*secciones de la institución */
+
+function InstitutionSections() {
+  return (
+    <>
+      <section aria-labelledby="institution-title" className="relative overflow-hidden bg-white py-16 dark:bg-gray-900">
+        {/* Marca de agua / Logo de fondo */}
+        <div 
+          className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.06] dark:opacity-[0.08]"
+          aria-hidden="true"
+        >
+          <img
+            src="/logo2.png"
+            alt=""
+            className="h-auto max-h-[85%] w-auto max-w-[85%] object-contain grayscale blur-[0.5px]"
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center lg:text-left">
+            <div className="mb-5 flex items-center justify-center gap-3 text-primary-600 dark:text-primary-400 lg:justify-start">
+              <Building2 className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+              <span className="text-sm font-semibold uppercase tracking-wider">Institución</span>
+            </div>
+            
+            <Reveal>
+              <h1 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100 sm:text-4xl">
+                Nosotros
+              </h1>
+            </Reveal>
+
+            <p className="mt-6 text-justify text-sm leading-8 text-gray-600 dark:text-gray-300 sm:text-base sm:leading-9">
+              El <strong className="font-semibold text-primary-700 dark:text-primary-300">Colegio de Matriculados en Educación Especial</strong> nace del pulso colectivo y la convicción profunda de quienes eligen transformar realidades desde el compromiso cotidiano. Surgimos de la necesidad imperiosa de otorgar un marco de representación sólida, respaldo institucional y voz unificada a nuestra disciplina, defendiendo la dignidad y jerarquía del ejercicio profesional frente a los desafíos actuales.
+              <br /><br />
+              Nuestro <strong className="font-semibold text-secondary-700 dark:text-secondary-400">objetivo fundamental</strong> es custodiar la ética y potenciar la formación continua, garantizando que cada intervención y trayectoria educativa sea un puente real hacia la autonomía, la igualdad de oportunidades y la inclusión plena de las personas con discapacidad en nuestra sociedad.
+            </p>
+          </div>
+        </div>
+        </section>
+    </>
+  );
+}
 
 // Modificamos MemberGroup para usar ComisionCard
 function MemberGroup({ members }: { members: Member[] }) {
