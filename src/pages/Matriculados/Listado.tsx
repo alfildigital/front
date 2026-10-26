@@ -30,26 +30,12 @@ import { Reveal } from '@/components/common/Reveal';
 // ---------------------------------------------------------------------------
 
 function MatriculadoCard({ m }: { m: Matriculado }) {
-  const [fotoError, setFotoError] = useState(false);
   // ALINEACIÓN (4.4): el backend usa "nro_matricula" + "nombre"/"apellido" separados,
   // y no expone "especialidad" en esta versión.
   const nombreCompleto = [m.nombre, m.apellido].filter(Boolean).join(' ');
   return (
     <article className="flex items-start gap-4 rounded-xl border border-gray-300 bg-gray-50 p-4 shadow-md transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/50">
       <div className="h-14 w-14 flex-shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-700">
-        {!m.foto || fotoError ? (
-          <div className="flex h-full w-full items-center justify-center">
-            <User className="h-7 w-7 text-gray-400" aria-hidden="true" />
-          </div>
-        ) : (
-          <img
-            src={m.foto}
-            alt={nombreCompleto}
-            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-            loading="lazy"
-            onError={() => setFotoError(true)}
-          />
-        )}
       </div>
 
       <div className="flex-1 min-w-0">

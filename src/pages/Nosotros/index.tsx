@@ -211,9 +211,8 @@ import { Helmet } from 'react-helmet-async';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
-import { Building2, Eye, Instagram, Target } from 'lucide-react';
+import { Building2} from 'lucide-react';
 import { ComisionCard } from '@/components/common/ComisionCard'; // <--- Importamos el nuevo componente
-import { DocumentLink } from '@/components/common/DocumentLink';
 
 // Actualizamos la interfaz para incluir los nuevos campos
 interface Member {
@@ -258,6 +257,8 @@ const ethicsGroups: Member[][] = [
     { name: 'Javier Díaz', role: 'Titular', image: 'etica_disciplina_titular_2.jpeg' },
   ],
 ];
+
+/*secciones de la institución */
 
 // Modificamos MemberGroup para usar ComisionCard
 function MemberGroup({ members }: { members: Member[] }) {

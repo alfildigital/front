@@ -62,7 +62,6 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'Trámites', to: '/tramites/index' },
       { label: 'Formularios', to: '/tramites/formularios' },
-      { label: 'Documentos', to: '/tramites/documentos' },
     ]
   },
   {
@@ -75,7 +74,13 @@ const NAV_ITEMS: NavItem[] = [
   },
   { label: 'Obras Sociales', to: '/obras-sociales' },
   { label: 'Boletín Oficial', to: '/boletin-oficial' },
-  { label: 'Nosotros', to: '/nosotros' },
+  { 
+    label: 'Nosotros',
+    children:[ 
+      { label: 'Nuestra Institución', to: '/nosotros' },
+      { label: 'Documentos', to: '/nosotros/documentos' },
+    ],
+  },
   
 ];
 
@@ -114,8 +119,7 @@ function Dropdown({ item }: DropdownProps) {
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // 👇 ANTES: item.children.some(...)
-  // 👇 AHORA: usamos el helper compartido
+ 
   const isActiveParent = isChildActive(item.children, location.pathname);
 
   useEffect(() => {
@@ -161,6 +165,7 @@ function Dropdown({ item }: DropdownProps) {
             <NavLink
               key={child.to}
               to={child.to}
+              end
               role="menuitem"
               className={({ isActive }) =>
                 [
@@ -223,12 +228,10 @@ export function Navbar() {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-lg font-bold text-primary-600 dark:text-primary-400"
+            className="flex items-center text-lg font-bold text-primary-600 dark:text-primary-400"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-500">
-              <span className="text-xs font-black text-white">
-                <img className='h-full w-full object-cover' src="/public/logo.jpg" alt="LOGO" />
-              </span>
+            <div className="flex h-12 w-12 items-center bg-white justify-center rounded-2xl mx-2">
+              <img className="h-full w-full rounded-full object-contain" src="/imagenes/new_logo.webp" alt="LOGO" />
             </div>
             <span className="hidden sm:block text-sm font-semibold text-primary-700 dark:text-primary-300">
               <h2 className="text-justify">Colegio de Profesionales</h2>
