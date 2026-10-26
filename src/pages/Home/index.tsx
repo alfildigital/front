@@ -79,22 +79,22 @@ function Hero() {
             <span>Escribinos</span>
           </a>
           <a
-            href="https://wa.me/543764154343?text=Hola%2C%20quiero%20consultar%20sobre%20las%20actividades%20del%20colegio."
+            href="https://wa.me/543764130888?text=Hola%2C%20quiero%20consultar%20sobre%20las%20actividades%20del%20colegio."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/15"
           >
             <Phone className="h-4 w-4 text-secondary-300" aria-hidden="true" />
-            <span>Consultas: (376) 415-4343</span>
+            <span>Consultas: (376) 413-0888</span>
           </a>
           <a
-            href="https://www.google.com/maps/search/?api=1&query=Av.+mitre+1234,+Posadas,+Misiones,+Argentina"
+            href="https://www.google.com/maps/search/?api=1&query=calle+63+8205+san+onofre,+Posadas,+Misiones,+Argentina"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2.5 backdrop-blur-sm transition-colors hover:bg-white/15"
           >
             <MapPin className="h-4 w-4 text-secondary-300" aria-hidden="true" />
-            <span>Sede Central — Av. Mitre 1234</span>
+            <span>Direccion Formal - Calle 63 N° 8205 B° San Onofre - Posadas, Misiones</span>
           </a>
         </div>
     </div>

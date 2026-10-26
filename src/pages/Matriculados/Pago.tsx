@@ -1,21 +1,29 @@
 import { Helmet } from 'react-helmet-async';
-import { ExternalLink, MessageCircle, CreditCard, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Check, Copy, ExternalLink, MessageCircle, CreditCard, AlertCircle } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { config } from '@/config';
 import { Layout } from '@/components/layout/Layout';
-import { ErrorBanner } from '@/components/common/ErrorBanner';
-import { Spinner } from '@/components/common/Spinner';
-import { usePagoMatricula } from '@/hooks/queries/useMatriculados';
 import { buildWhatsAppUrl } from '@/utils/formatters';
 import { Reveal } from '@/components/common/Reveal';
 
 export default function PagoPage() {
-  const { data, isPending, isError, refetch } = usePagoMatricula();
+  const [copiado, setCopiado] = useState<'alias' | 'cvu' | null>(null);
 
   const whatsappUrl = buildWhatsAppUrl(
     config.whatsapp.number,
     'Hola, quiero consultar sobre el pago de matrícula.',
   );
+
+  const copiarDato = async (dato: 'alias' | 'cvu', valor: string) => {
+    try {
+      await navigator.clipboard.writeText(valor);
+      setCopiado(dato);
+    } catch {
+      setCopiado(null);
+      console.error(`No se pudo copiar el ${dato} al portapapeles.`);
+    }
+  };
 
   return (
     <Layout>
@@ -48,35 +56,83 @@ export default function PagoPage() {
             </div>
           </div>
 
-          {isPending && (
-            <div className="flex justify-center py-6">
-              <Spinner label="Preparando pago..." />
+          <section
+            aria-labelledby="datos-transferencia"
+            className="mt-6 rounded-xl border border-secondary-300 bg-primary-100/20 p-6 shadow-md hover:shadow-primary-500/20 dark:border-primary-700 dark:bg-gray-800/50 dark:hover:shadow-secondary-500/20"
+          >
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
+                <img
+                  src="https://cdn.simpleicons.org/mercadopago/009EE3"
+                  alt="Logo de Mercado Pago"
+                  className="h-8 w-8"
+                />
+              </div>
+              <h2 id="datos-transferencia" className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                Mercado Pago
+              </h2>
             </div>
-          )}
-
-          {isError && (
-            <ErrorBanner
-              message="No se pudo obtener el enlace de pago. Reintentá o contactá por WhatsApp."
-              onRetry={refetch}
-            />
-          )}
-
-          {data && (
+            <dl className="space-y-3 text-sm">
+              <div>
+                <dt className="text-gray-500 dark:text-gray-400">Alias</dt>
+                <dd className="flex items-center justify-between gap-3 font-medium text-gray-900 dark:text-gray-100">
+                  <span>colegio.misiones.mp</span>
+                  <button
+                    type="button"
+                    onClick={() => copiarDato('alias', 'colegio.misiones.mp')}
+                    aria-label={copiado === 'alias' ? 'Alias copiado' : 'Copiar alias'}
+                    title={copiado === 'alias' ? 'Copiado' : 'Copiar'}
+                    className="rounded-md p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                  >
+                    {copiado === 'alias' ? (
+                      <Check className="h-4 w-4 text-green-600" aria-hidden="true" />
+                    ) : (
+                      <Copy className="h-4 w-4" aria-hidden="true" />
+                    )}
+                  </button>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 dark:text-gray-400">CVU</dt>
+                <dd className="flex items-center justify-between gap-3 font-mono font-medium text-gray-900 dark:text-gray-100">
+                  <span className="break-all">0000003100051012180633</span>
+                  <button
+                    type="button"
+                    onClick={() => copiarDato('cvu', '0000003100051012180633')}
+                    aria-label={copiado === 'cvu' ? 'CVU copiado' : 'Copiar CVU'}
+                    title={copiado === 'cvu' ? 'Copiado' : 'Copiar'}
+                    className="shrink-0 rounded-md p-2 font-sans text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                  >
+                    {copiado === 'cvu' ? (
+                      <Check className="h-4 w-4 text-green-600" aria-hidden="true" />
+                    ) : (
+                      <Copy className="h-4 w-4" aria-hidden="true" />
+                    )}
+                  </button>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-gray-500 dark:text-gray-400">Nombre</dt>
+                <dd className="font-medium text-gray-900 dark:text-gray-100">
+                    Asociacion Colegio De Profesionales De Ed
+                </dd>
+              </div>
+            </dl>
             <a
-              href={data.checkoutUrl}
+              href="https://mpago.la/22aV8yP"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-primary-600 hover:shadow-md active:scale-95"
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-primary-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-primary-600 hover:shadow-md active:scale-95"
             >
               <CreditCard className="h-5 w-5" aria-hidden="true" />
               Pagar con Mercado Pago
               <ExternalLink className="h-4 w-4 opacity-70" aria-hidden="true" />
             </a>
-          )}
+          </section>
 
           <div className="my-6 flex items-center gap-3">
             <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
-            <span className="text-xs text-gray-400">o</span>
+            <span className="text-xs text-gray-400">o consultá</span>
             <div className="h-px flex-1 bg-gray-200 dark:bg-gray-700" />
           </div>
 

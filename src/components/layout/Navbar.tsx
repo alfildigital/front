@@ -67,12 +67,12 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: 'Matriculados',
     children: [
-      { label: 'Pagar Matrícula', to: '/matriculados/pago' },
+      { label: 'Matrícula', to: '/matriculados/pago' },
       { label: 'Honorarios', to: '/matriculados/honorarios' },
       { label: 'Profesionales', to: '/matriculados/listado' },
     ],
   },
-  { label: 'Obras Sociales', to: '/obras-sociales' },
+  /*{ label: 'Obras Sociales', to: '/obras-sociales' },*/
   { label: 'Boletín Oficial', to: '/boletin-oficial' },
   { 
     label: 'Nosotros',
