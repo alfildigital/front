@@ -8,7 +8,10 @@ export default defineConfig({
   // 👇 Aquí van los plugins
   plugins: [
     react(),
-    Sitemap({ hostname: 'https://www.colegioedespecial.org.ar' })
+    Sitemap({ 
+      hostname: 'https://www.colegioedespecial.org.ar',
+      generateRobotsTxt: false
+    })
   ],
   resolve: {
     // 👇 Aquí solo van los alias
