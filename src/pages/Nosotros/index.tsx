@@ -213,7 +213,6 @@ import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
 import { Building2} from 'lucide-react';
 import { ComisionCard } from '@/components/common/ComisionCard'; // <--- Importamos el nuevo componente
-import { group } from 'console';
 
 // Actualizamos la interfaz para incluir los nuevos campos
 interface Member {
@@ -225,37 +224,37 @@ interface Member {
 
 const boardGroups: Member[][] = [
   [
-    { name: 'Fabiana Silva', role: 'Presidenta', image: 'fabiana_silva_presidenta.webp' },
-    { name: 'Liz Zamudio', role: 'Vicepresidenta', image: 'vicepresidenta.webp' },
-    { name: 'Amanda Alsina', role: 'Secretaria', image: 'amanda_alsina_secretaria_general.webp' },
-    { name: 'Eskinazi Florencia Natalia', role: 'Tesorera', image: 'tesorera.webp' },
+    { name: 'Fabiana Silva', role: 'Presidenta', image: '/comision_directiva/1_presidenta_consejo_dirctivo.webp' },
+    { name: 'Liz Zamudio', role: 'Vicepresidenta' },
+    { name: 'Amanda Alsina', role: 'Secretaria', image: '/comision_directiva/3_secretaria_general_consejo_directivo.webp' },
+    { name: 'Eskinazi Florencia Natalia', role: 'Tesorera' },
   ],
   [
-    { name: 'Bettiana Herrera', role: 'Primera consejera', image: 'carol_bettina_herrera_primera_consejera_titular_consejo_directivo.webp' },
-    { name: 'Raimon Evelin', role: 'Segunda consejera', image: 'segunda_consejera.webp' },
-    { name: 'Romina Martinez', role: 'Integrante suplente', image: 'romina_martinez_consejera_suplente_consejo_directivo.webp' },
-    { name: 'Marina Redes', role: 'Integrante suplente', image: 'marina_redes_consejera_suplente_consejo_directivo.webp' },
+    { name: 'Bettiana Herrera', role: 'Primera consejera', image: '/comision_directiva/5_1_consejera_titular_consejo_directivo.webp' },
+    { name: 'Raimon Evelin', role: 'Segunda consejera' },
+    { name: 'Romina Martinez', role: 'Integrante suplente', image: '/comision_directiva/7_consejera_suplente_consejo_directivo.webp' },
+    { name: 'Marina Redes', role: 'Integrante suplente', image: '/comision_directiva/8_2_consejera_suplente_consejo_directivo.webp' },
   ],
 ];
 
 const auditGroups: Member[][] = [
   [
-    { name: 'Ligia Méndez', role: 'Revisora de Cuentas', subtitle: 'Primer Titular', image: '10_1_titular_comisión_revisora_de_cuentas.webp' },
-    { name: 'Rosana Lemesi', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular', image: 'revision_cuenta_segundo_titular.webp' },
-    { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: '12_1_suplente_comisión_revisora_de_cuentas.webp' },
-    { name: 'Griselda Araujo', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: '13_2_suplente_comisión_revisora_de_cuentas.webp' },
+    { name: 'Ligia Méndez', role: 'Revisora de Cuentas', subtitle: 'Primer Titular', image: '/comision_directiva/10_1_titular_comisión_revisora_de_cuentas.webp' },
+    { name: 'Rosana Lemesi', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular' },
+    { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: '/comision_directiva/12_1_suplente_comisión_revisora_de_cuentas.webp' },
+    { name: 'Griselda Araujo', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: '/comision_directiva/13_2_suplente_comisión_revisora_de_cuentas.webp' },
   ],
 ];
 
 const ethicsGroups: Member[][] = [
   [
-    { name: 'Sergio Villalba', role: 'Presidente', image: '14_presidente_tribunal_de_Ética_y_disciplina.webp' },
-    { name: 'Mariana Novinsky', role: 'Vicepresidente', image: '15_vice_presidenta__tribunal_de_Ética_y_disciplina.webp' },
-    { name: 'Haydee Pintos', role: 'Secretaria', image: '.webp' },
+    { name: 'Sergio Villalba', role: 'Presidente', image: '/comision_directiva/14_presidente_tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Mariana Novinsky', role: 'Vicepresidente', image: '/comision_directiva/15_vice_presidenta__tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Haydee Pintos', role: 'Secretaria' },
   ],
   [
-    { name: 'Luisa Fonseca', role: 'Primer Titular', image: '17_1_titular__tribunal_de_Ética_y_disciplina.webp' },
-    { name: 'Marilina Dicker', role: 'Segundo Titular', image: '18_2_titular_tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Luisa Fonseca', role: 'Primer Titular', image: '/comision_directiva/17_1_titular__tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Marilina Dicker', role: 'Segundo Titular', image: '/comision_directiva/18_2_titular_tribunal_de_Ética_y_disciplina.webp' },
   ],
 ];
 

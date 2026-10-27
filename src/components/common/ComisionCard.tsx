@@ -90,10 +90,10 @@ export function ComisionCard({ name, role, image, subtitle, group }: ComisionCar
       <div className="relative mb-3 mt-1 h-44 w-44 overflow-hidden rounded-full border-2 border-secondary-500 bg-black/10 shadow-xl">
         {image ? (
           <img
-            src={`/comision_directiva/${image}`}
+            src={image}
             alt={name ? `${name}, ${role}` : role}
             loading="lazy"
-            className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
+            className="h-full w-full object-cover object-top"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gray-100 text-gray-400">
