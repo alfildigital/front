@@ -24,6 +24,7 @@ export const ENDPOINTS = {
     list: '/profesionales',
     pago: '/posts',
     honorarios: '/posts',
+    solicitarDetallePagos: '/profesionales/solicitar-detalle-pagos',
   },
   // Obras sociales:
   // El endpoint listado es la fuente de datos real para la página de Obras Sociales.

@@ -213,6 +213,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
 import { Building2} from 'lucide-react';
 import { ComisionCard } from '@/components/common/ComisionCard'; // <--- Importamos el nuevo componente
+import { group } from 'console';
 
 // Actualizamos la interfaz para incluir los nuevos campos
 interface Member {
@@ -224,52 +225,62 @@ interface Member {
 
 const boardGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Presidenta', image: 'presidenta.jpeg' },
-    { name: 'Ana Martínez', role: 'Vicepresidenta', image: 'vicepresidenta.jpeg' },
-    { name: 'Laura Rodríguez', role: 'Secretaria', image: 'secretaria.jpeg' },
-    { name: 'Sofía López', role: 'Tesorera', image: 'tesorera.jpeg' },
+    { name: 'Fabiana Silva', role: 'Presidenta', image: 'fabiana_silva_presidenta.webp' },
+    { name: 'Liz Zamudio', role: 'Vicepresidenta', image: 'vicepresidenta.webp' },
+    { name: 'Amanda Alsina', role: 'Secretaria', image: 'amanda_alsina_secretaria_general.webp' },
+    { name: 'Eskinazi Florencia Natalia', role: 'Tesorera', image: 'tesorera.webp' },
   ],
   [
-    { name: 'Carlos Ruiz', role: 'Primera consejera', image: 'primer_consejera.jpeg' },
-    { name: 'Marta Hernández', role: 'Segunda consejera', image: 'segunda_consejera.jpeg' },
-    { name: 'Javier Díaz', role: 'Integrante suplente', image: 'consejo_directivo_suplente.jpeg' },
-    { name: 'Elena García', role: 'Integrante', image: 'presidenta_suplente.jpeg' },
+    { name: 'Bettiana Herrera', role: 'Primera consejera', image: 'carol_bettina_herrera_primera_consejera_titular_consejo_directivo.webp' },
+    { name: 'Raimon Evelin', role: 'Segunda consejera', image: 'segunda_consejera.webp' },
+    { name: 'Romina Martinez', role: 'Integrante suplente', image: 'romina_martinez_consejera_suplente_consejo_directivo.webp' },
+    { name: 'Marina Redes', role: 'Integrante suplente', image: 'marina_redes_consejera_suplente_consejo_directivo.webp' },
   ],
 ];
 
 const auditGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Revisora de Cuentas', subtitle: 'Titular', image: 'revision_cuenta_titular.jpeg' },
-    { name: 'Ana Martínez', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular', image: 'revision_cuenta_segundo_titular.jpeg' },
-    { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: 'revision_cuenta_suplente.jpeg' },
-    { name: 'Sofía López', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: 'revision_cuenta_suplente_2.jpeg' },
+    { name: 'Ligia Méndez', role: 'Revisora de Cuentas', subtitle: 'Primer Titular', image: '10_1_titular_comisión_revisora_de_cuentas.webp' },
+    { name: 'Rosana Lemesi', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular', image: 'revision_cuenta_segundo_titular.webp' },
+    { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: '12_1_suplente_comisión_revisora_de_cuentas.webp' },
+    { name: 'Griselda Araujo', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: '13_2_suplente_comisión_revisora_de_cuentas.webp' },
   ],
 ];
 
 const ethicsGroups: Member[][] = [
   [
-    { name: 'María González', role: 'Presidente', image: 'etica_disciplina_presidente.jpeg' },
-    { name: 'Ana Martínez', role: 'Vicepresidente', image: 'etica_disciplina_vice_presidente.jpeg' },
-    { name: 'Laura Rodríguez', role: 'Secretaria', image: 'etica_disciplina_secretaria.jpeg' },
-    { name: 'Marta Hernández', role: 'Titular', image: 'etica_disciplina_titular.jpeg' },
+    { name: 'Sergio Villalba', role: 'Presidente', image: '14_presidente_tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Mariana Novinsky', role: 'Vicepresidente', image: '15_vice_presidenta__tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Haydee Pintos', role: 'Secretaria', image: '.webp' },
   ],
   [
-    { name: 'Javier Díaz', role: 'Titular', image: 'etica_disciplina_titular_2.jpeg' },
+    { name: 'Luisa Fonseca', role: 'Primer Titular', image: '17_1_titular__tribunal_de_Ética_y_disciplina.webp' },
+    { name: 'Marilina Dicker', role: 'Segundo Titular', image: '18_2_titular_tribunal_de_Ética_y_disciplina.webp' },
   ],
 ];
 
 /*secciones de la institución */
 
 // Modificamos MemberGroup para usar ComisionCard
-function MemberGroup({ members }: { members: Member[] }) {
+function MemberGroup({ members, group }: { members: Member[]; group: string }) {
+  const colsMobile = members.length >= 2 ? 'grid-cols-2' : 'grid-cols-1';
+  const colsDesktop = {
+    1: 'md:grid-cols-1',
+    2: 'md:grid-cols-2',
+    3: 'md:grid-cols-3',
+    4: 'md:grid-cols-4',
+  }[members.length] ?? 'md:grid-cols-4';
+
   return (
-    <div className="grid grid-cols-2 items-start gap-4 md:grid-cols-3 xl:grid-cols-4">
+    <div className={`grid ${colsMobile} ${colsDesktop} items-start gap-4`}>
       {members.map((member) => (
         <ComisionCard
           key={`${member.role}-${member.image}`}
+          name={member.name}
           role={member.role}
           image={member.image}
           subtitle={member.subtitle}
+          group={group}
         />
       ))}
     </div>
@@ -283,7 +294,7 @@ function CommitteeSection({ groups, title, sectionIndex }: { groups: Member[][];
 
   return (
     
-    <section className="border-t border-secondary-600 bg-gray-100 py-14 dark:border-secondary-700 dark:bg-gray-900" aria-label={title}>
+    <section className="border border-secondary-600 bg-gray-100 py-14 dark:border-secondary-700 dark:bg-gray-900" aria-label={title}>
       <div className="border border-gray-900/20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`space-y-8 rounded-lg px-4 py-8 sm:px-8 ${sectionTint}`}>
           
@@ -299,7 +310,7 @@ function CommitteeSection({ groups, title, sectionIndex }: { groups: Member[][];
                   : 'bg-secondary-500/[0.07] dark:bg-secondary-400/[0.08]'
               }`}
             >
-              <MemberGroup members={members} />
+              <MemberGroup members={members} group={title} />
             </div>
           ))}
         </div>
