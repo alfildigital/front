@@ -1,8 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import { FileText, ImageIcon, Download, Calendar } from 'lucide-react';
+import { FileText, ImageIcon, Download, Calendar, CreditCard } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
-import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
 import { useHonorarios } from '@/hooks/queries/useMatriculados';
@@ -53,17 +52,7 @@ function HonorarioItem({ h }: { h: Honorario }) {
               </p>
             )}
           </div>
-          <a
-            href={h.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            download
-            aria-label={`Descargar ${h.titulo}`}
-            className="flex items-center gap-1.5 rounded-lg bg-primary-100 px-3 py-2 text-xs font-medium text-primary-700 transition-colors hover:bg-primary-200 dark:bg-primary-900/20 dark:text-primary-400"
-          >
-            <Download className="h-4 w-4" aria-hidden="true" />
-            Descargar
-          </a>
+          
         </div>
       )}
     </article>
@@ -71,7 +60,7 @@ function HonorarioItem({ h }: { h: Honorario }) {
 }
 
 export default function HonorariosPage() {
-  const { data, isPending, isError, refetch } = useHonorarios();
+  const { data, isPending } = useHonorarios();
 
   return (
     <Layout>
@@ -88,8 +77,30 @@ export default function HonorariosPage() {
           </p>
         </Reveal>
 
+        <section className="mb-8 rounded-xl border border-secondary-300 bg-primary-100/20 p-6 shadow-md dark:border-primary-700 dark:bg-gray-800/50">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 dark:bg-primary-900/30">
+            <CreditCard className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+          </div>
+          <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+            Matrícula profesional
+          </h2>
+          <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            La inscripción inicia el trámite para obtener la matrícula profesional. Una vez matriculado/a,
+            se abona una cuota mensual para mantenerla vigente.
+          </p>
+          <dl className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-lg border-2 border-primary-200 bg-green-100/70 p-4 dark:border-green-700 dark:bg-gray-900/50">
+              <dt className="text-sm text-gray-500 dark:text-gray-400">Inscripción</dt>
+              <dd className="mt-1 text-xl font-semibold text-gray-900 dark:text-gray-100">$37.000</dd>
+            </div>
+            <div className="rounded-lg border-2 border-primary-200 bg-green-100/70 p-4 dark:border-green-700 dark:bg-gray-900/50">
+              <dt className="text-sm text-gray-500 dark:text-gray-400">Cuota mensual</dt>
+              <dd className="mt-1 text-xl font-semibold text-gray-900 dark:text-gray-100">$6.000</dd>
+            </div>
+          </dl>
+        </section>
         {isPending && <CardSkeletonGrid count={3} />}
-        {isError && <ErrorBanner message="No se pudieron cargar los honorarios." onRetry={refetch} />}
+        {isPending && <CardSkeletonGrid count={3} />}
         {data?.length === 0 && (
           <EmptyState
             title="Sin honorarios"
