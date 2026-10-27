@@ -75,25 +75,25 @@ export function ComisionCard({ name, role, image, bgcolor, subtitle }: ComisionC
 import { Users } from 'lucide-react';
 
 interface ComisionCardProps {
+  name?: string;
   role: string;
   image?: string;
   subtitle?: string;
+  group: string;
 }
 
-export function ComisionCard({ role, image, subtitle }: ComisionCardProps) {
+export function ComisionCard({ name, role, image, subtitle, group }: ComisionCardProps) {
   return (
     <article className="relative flex w-full min-w-0 flex-col items-center p-3 text-center">
       
-      {/* Contenedor de la Imagen*/}
-      <div className="relative mb-3 mt-1 h-44 w-44 overflow-hidden rounded-full border-4 border-white bg-white shadow-md">
+      {/* Contenedor de la imagen */}
+      <div className="relative mb-3 mt-1 h-44 w-44 overflow-hidden rounded-full border-2 border-secondary-500 bg-black/10 shadow-xl">
         {image ? (
           <img
             src={`/comision_directiva/${image}`}
-            alt={role}
+            alt={name ? `${name}, ${role}` : role}
             loading="lazy"
-            // Cambiamos object-top por object-center para que siempre centre la imagen
-            // y object-cover asegura que llene el 100% del contenedor sin deformarse
-            className="h-full w-full object-cover object-center"
+            className="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-105"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gray-100 text-gray-400">
@@ -102,17 +102,23 @@ export function ComisionCard({ role, image, subtitle }: ComisionCardProps) {
         )}
       </div>
 
-      {/* Texto - Solo Rol y Subtítulo */}
-      <div className="z-10 mt-1 flex flex-col gap-1">
-        <h3 className="text-lg font-bold leading-tight text-gray-900 dark:text-gray-100">
+      <div className="z-10 mt-1 flex flex-col items-center gap-1">
+        {name && (
+          <h3 className="[text-shadow:2px_0_3px_#1f9fbe] text-lg font-bold leading-tight text-gray-900 dark:text-gray-100">
+            {name}
+          </h3>
+        )}
+        <p className="text-base font-semibold leading-tight text-gray-800 dark:text-gray-200">
           {role}
-        </h3>
-        
+        </p>
         {subtitle && (
-          <span className="mx-auto inline-block rounded-full bg-gray-200 px-2 py-0.5 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-200">
+          <span className="inline-block rounded-full bg-gray-200 px-2 py-0.5 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-200">
             {subtitle}
           </span>
         )}
+        <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+          {group}
+        </p>
       </div>
     </article>
   );

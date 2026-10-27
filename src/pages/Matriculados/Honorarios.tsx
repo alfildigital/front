@@ -89,11 +89,11 @@ export default function HonorariosPage() {
             se abona una cuota mensual para mantenerla vigente.
           </p>
           <dl className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-lg border-2 border-primary-200 bg-green-100/70 p-4 dark:border-green-700 dark:bg-gray-900/50">
+            <div className="rounded-lg border-2 border-primary-200 bg-green-100/70 p-4 dark:border-secondary-400 dark:bg-gray-900/50">
               <dt className="text-sm text-gray-500 dark:text-gray-400">Inscripción</dt>
               <dd className="mt-1 text-xl font-semibold text-gray-900 dark:text-gray-100">$37.000</dd>
             </div>
-            <div className="rounded-lg border-2 border-primary-200 bg-green-100/70 p-4 dark:border-green-700 dark:bg-gray-900/50">
+            <div className="rounded-lg border-2 border-primary-200 bg-green-100/70 p-4 dark:border-secondary-400 dark:bg-gray-900/50">
               <dt className="text-sm text-gray-500 dark:text-gray-400">Cuota mensual</dt>
               <dd className="mt-1 text-xl font-semibold text-gray-900 dark:text-gray-100">$6.000</dd>
             </div>
