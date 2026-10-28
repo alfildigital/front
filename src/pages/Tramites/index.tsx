@@ -227,8 +227,12 @@ export default function TramitesPage() {
     <Layout>
       {/* INYECCIÓN SEO: Cambia dinámicamente la etiqueta <title> en el navegador */}
       <Helmet>
-        <title>Trámites — {SITE_NAME}</title>
-        <meta name="description" content="Información sobre los trámites disponibles en la institución." />
+        <title>Trámites del Colegio de Educación Especial en Posadas | Requisitos y procedimientos</title>
+        <meta
+          name="description"
+          content="Trámites institucionales del Colegio de Profesionales en Educación Especial en Posadas, Misiones. Requisitos, procedimientos, documentación y gestión para profesionales."
+        />
+        <link rel="canonical" href="https://colegioedespecial.org.ar/tramites" />
       </Helmet>
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

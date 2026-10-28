@@ -80,6 +80,7 @@ const NAV_ITEMS: NavItem[] = [
     children:[ 
       { label: 'Nuestra Institución', to: '/nosotros' },
       { label: 'Documentos', to: '/nosotros/documentos' },
+      { label: 'Contacto', to: '/contacto' },
     ],
   },
   

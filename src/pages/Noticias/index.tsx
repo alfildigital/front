@@ -86,8 +86,12 @@ export default function NoticiasPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Noticias — {SITE_NAME}</title>
-        <meta name="description" content="Últimas noticias e información de la institución." />
+        <title>Noticias del Colegio de Educación Especial en Posadas | Novedades institucionales</title>
+        <meta
+          name="description"
+          content="Novedades, comunicados y noticias del Colegio de Profesionales en Educación Especial de Posadas, Misiones. Información institucional, publicaciones y actualizaciones para profesionales."
+        />
+        <link rel="canonical" href="https://colegioedespecial.org.ar/noticias" />
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">

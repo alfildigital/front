@@ -288,7 +288,7 @@ export function ParadigmasEducacionEspecial() {
               return (
                 <article key={paradigma.numero} className="relative pl-14 lg:pl-0 lg:pt-14">
                   <div
-                    className={`absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white shadow-sm lg:left-1/2 lg:-translate-x-1/2 dark:border-gray-900 ${styles.marker}`}
+                    className={`absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border-4 border-red-100 shadow-sm lg:left-1/2 lg:-translate-x-1/2 dark:border-gray-900 ${styles.marker}`}
                   >
                     <span className="text-xs font-bold">{paradigma.numero}</span>
                   </div>

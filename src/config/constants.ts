@@ -7,6 +7,7 @@ export const NAV_LINKS = [
   { label: 'Inicio', to: '/' },
   { label: 'Noticias', to: '/noticias' },
   { label: 'Trámites', to: '/tramites' },
+  { label: 'Contacto', to: '/contacto' },
   {
     label: 'Nosotros / Matriculados',
     children: [
