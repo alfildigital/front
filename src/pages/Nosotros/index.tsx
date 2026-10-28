@@ -231,7 +231,7 @@ const boardGroups: Member[][] = [
   ],
   [
     { name: 'Bettiana Herrera', role: 'Primera consejera', image: '/comision_directiva/5_1_consejera_titular_consejo_directivo.webp' },
-    { name: 'Raimon Evelin', role: 'Segunda consejera' },
+    { name: 'Raimon Evelin', role: 'Segunda consejera', image:'/comision_directiva/5_2_consejera_titular_consejo_directivo.webp' },
     { name: 'Romina Martinez', role: 'Integrante suplente', image: '/comision_directiva/7_consejera_suplente_consejo_directivo.webp' },
     { name: 'Marina Redes', role: 'Integrante suplente', image: '/comision_directiva/8_2_consejera_suplente_consejo_directivo.webp' },
   ],
@@ -240,7 +240,7 @@ const boardGroups: Member[][] = [
 const auditGroups: Member[][] = [
   [
     { name: 'Ligia Méndez', role: 'Revisora de Cuentas', subtitle: 'Primer Titular', image: '/comision_directiva/10_1_titular_comisión_revisora_de_cuentas.webp' },
-    { name: 'Rosana Lemesi', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular' },
+    { name: 'Rosana Lemesi', role: 'Revisor de Cuentas', subtitle: 'Segundo Titular', image: '/comision_directiva/11_2_titular_comisión_revisora_de_cuentas.webp' },
     { name: 'Laura Rodríguez', role: 'Revisora de Cuentas', subtitle: 'Suplente', image: '/comision_directiva/12_1_suplente_comisión_revisora_de_cuentas.webp' },
     { name: 'Griselda Araujo', role: 'Revisor de Cuentas', subtitle: 'Suplente', image: '/comision_directiva/13_2_suplente_comisión_revisora_de_cuentas.webp' },
   ],
