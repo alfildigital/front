@@ -113,6 +113,7 @@ const paradigmas: Paradigma[] = [
 ];
 
 const colorStyles = {
+  // Colores compartidos por las tarjetas 01–04: ícono, número circular y borde superior.
   primary: {
     icon: "bg-primary-100 text-secondary-600 dark:bg-primary-900/30 dark:text-secondary-400",
     marker:
@@ -285,13 +286,16 @@ export function ParadigmasEducacionEspecial() {
               const Icon = paradigma.Icon;
               const styles = colorStyles[paradigma.color as keyof typeof colorStyles];
 
+              // Contenedor y posición de cada tarjeta (01–04).
               return (
                 <article key={paradigma.numero} className="relative pl-14 lg:pl-0 lg:pt-14">
+                  {/* Número circular sobre la tarjeta: posición, tamaño, borde y color. */}
                   <div
                     className={`absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border-4 border-white shadow-sm lg:left-1/2 lg:-translate-x-1/2 dark:border-gray-900 ${styles.marker}`}
                   >
                     <span className="text-xs font-bold">{paradigma.numero}</span>
                   </div>
+                  {/* Estilos compartidos de la tarjeta: fondo, borde, sombra, hover y modo oscuro. */}
                   <div
                     className={`h-full rounded-2xl border border-gray-300 border-t-4 bg-gray-50 p-6 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800/60 ${styles.accent}`}
                   >
@@ -301,6 +305,7 @@ export function ParadigmasEducacionEspecial() {
                       >
                         <Icon className="h-6 w-6" aria-hidden="true" />
                       </div>
+                      {/* Número grande decorativo dentro de cada tarjeta. */}
                       <span className="text-4xl font-black text-gray-100 dark:text-gray-700">
                         {paradigma.numero}
                       </span>
