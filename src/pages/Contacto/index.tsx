@@ -248,8 +248,7 @@ export default function ContactoPage() {
               El {SITE_NAME} atiende consultas vinculadas a matrícula
               profesional, trámites institucionales, documentación y
               procedimientos vigentes. Para mayores consultas, podés
-              comunicarte por teléfono, WhatsApp o acercarte a la sede
-              central en Posadas, Misiones.
+              comunicarte por teléfono, WhatsApp o enviar un mensaje al domicilio formal en Posadas, Misiones.
             </p>
 
             {/* Acciones de contacto */}
