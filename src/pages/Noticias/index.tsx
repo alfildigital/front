@@ -28,14 +28,14 @@ function NoticiaRow({ noticia }: { noticia: Noticia }) {
   const resumen = noticiaResumen(noticia);
 
   return (
-    <article className="flex flex-col gap-4 rounded-xl border border-gray-300 bg-gray-50 p-5 shadow-md transition-shadow hover:shadow-lg sm:flex-row dark:border-gray-700 dark:bg-gray-800/50">
+    <article className="group flex flex-col gap-4 overflow-hidden rounded-2xl border border-secondary-200 bg-white p-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary-400 hover:shadow-xl sm:flex-row dark:border-primary-700 dark:bg-gray-900 dark:text-gray-100 dark:hover:border-primary-500 dark:hover:bg-gray-800">
       {imagen ? (
-        <div className="h-36 w-full flex-shrink-0 overflow-hidden rounded-lg sm:w-48">
-          <img src={imagen} alt={noticia.titulo} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
+        <div className="h-36 w-full flex-shrink-0 overflow-hidden rounded-xl sm:w-48">
+          <img src={imagen} alt={noticia.titulo} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" />
         </div>
       ) : (
-        <div className="flex h-36 w-full flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 sm:w-48 dark:bg-gray-700">
-          <span className="text-3xl">📰</span>
+        <div className="flex h-36 w-full flex-shrink-0 items-center justify-center rounded-xl bg-primary-50 text-3xl shadow-inner sm:w-48 dark:bg-primary-900/20">
+          <span aria-hidden="true">📰</span>
         </div>
       )}
 
@@ -46,24 +46,24 @@ function NoticiaRow({ noticia }: { noticia: Noticia }) {
             {formatDate(noticia.fecha_publicacion)}
           </span>
           {noticia.autor && (
-            <span className="flex items-center gap-1 rounded-full bg-primary-100 px-2 py-0.5 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400">
+            <span className="flex items-center gap-1 rounded-full border border-primary-200 bg-primary-50 px-2 py-0.5 font-medium text-primary-700 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-400">
               <Tag className="h-3 w-3" aria-hidden="true" />
               {noticia.autor}
             </span>
           )}
         </div>
 
-        <h2 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 dark:text-gray-100">
+        <h2 className="mb-2 line-clamp-2 text-base font-semibold text-gray-900 transition-colors duration-200 group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
           {noticia.titulo}
         </h2>
 
-        <p className="flex-1 text-sm text-gray-600 dark:text-gray-400">
+        <p className="flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
           {truncateText(resumen, 160)}
         </p>
 
         <Link
           to={`/noticias/${noticia.id}`}
-          className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400"
+          className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary-600 transition-colors hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
         >
           Leer nota completa
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -94,7 +94,7 @@ export default function NoticiasPage() {
         <link rel="canonical" href="https://colegioedespecial.org.ar/noticias" />
       </Helmet>
 
-      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto bg-secondary-100/10 dark:bg-gray-900 max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         <Reveal as="header" className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Noticias</h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">Novedades e información institucional</p>

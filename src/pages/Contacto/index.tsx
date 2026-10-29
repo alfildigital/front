@@ -29,13 +29,15 @@ function ContactCard({
   isPrimary = false,
 }: ContactCardProps) {
   return (
-    <article className="group relative flex h-full min-w-0 flex-col items-center overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 text-center shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary-400 hover:shadow-xl dark:border-gray-700 dark:bg-gray-900">
+
+    <article className="group relative flex h-full min-w-0 flex-col items-center overflow-hidden rounded-2xl border border-secondary-200 bg-white p-5 text-center shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary-400 hover:shadow-xl dark:border-primary-700 dark:bg-gray-900 dark:text-gray-100 dark:hover:border-primary-500 dark:hover:bg-gray-800">
+
       {/* Decoración institucional */}
-      <div className="pointer-events-none absolute -right-5 -top-5 h-20 w-20 rounded-full bg-primary-100/70 transition-transform duration-500 group-hover:scale-150 dark:bg-primary-900/20" />
+      <div className="pointer-events-none absolute -right-5 -top-5 h-20 w-20 rounded-full bg-secondary-200/70 transition-transform duration-500 group-hover:scale-150 dark:bg-primary-900/20" />
 
       {/* Icono circular */}
-      <div className="relative mb-4 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-secondary-500 bg-primary-500 text-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:border-primary-500 group-hover:shadow-lg">
-        <Icon className="h-7 w-7" aria-hidden="true" />
+      <div className="relative mb-4 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-secondary-300 bg-primary-300/50 text-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:border-primary-500 group-hover:shadow-lg">
+        <Icon className="h-7 w-7 text-gray-600/70 dark:text-gray-400" aria-hidden="true" />
       </div>
 
       {/* Título y enlace */}
@@ -177,14 +179,18 @@ export default function ContactoPage() {
         />
       </Helmet>
 
-      <main className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      <main className="mx-auto bg-secondary-100/10 w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+      
         {/* Encabezado */}
         <Reveal as="header" className="mb-10 text-center">
-          <span className="mb-3 inline-block rounded-full bg-primary-100 px-4 py-1.5 text-sm font-semibold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
-            Estamos para ayudarte
-          </span>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5 shadow-sm dark:border-primary-800 dark:bg-primary-900/20">
+            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-primary-500" aria-hidden="true" />
+            <span className="text-sm font-semibold text-primary-700 dark:text-primary-300">
+              Estamos para ayudarte
+            </span>
+          </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 sm:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
             Contacto institucional
           </h1>
 
@@ -217,17 +223,21 @@ export default function ContactoPage() {
         {/* Atención institucional */}
         <Reveal
           as="section"
-          className="relative mt-10 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50 p-6 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800/40 sm:p-8"
+          className="relative mt-10 overflow-hidden rounded-2xl border border-secondary-200 bg-white p-6 text-center shadow-sm dark:border-primary-700 dark:bg-gray-900 dark:text-gray-100 sm:p-8"
         >
           {/* Decoración de fondo */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-primary-100/60 dark:bg-primary-900/10"
+            className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-secondary-200/70 transition-all duration-500 ease-out hover:scale-110 hover:bg-secondary-300/80 dark:bg-primary-900/20 dark:hover:bg-primary-800/30"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-12 -left-12 h-32 w-32 rounded-full bg-primary-100/80 transition-all duration-500 ease-out hover:scale-105 hover:bg-primary-200/90 dark:bg-primary-900/10 dark:hover:bg-primary-800/20"
           />
 
           <div className="relative">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-500 text-white shadow-md">
-              <MapPin className="h-6 w-6" aria-hidden="true" />
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-secondary-300 bg-primary-300/50 text-white shadow-md">
+              <MapPin className="h-7 w-7 text-gray-600/70 dark:text-gray-400" aria-hidden="true" />
             </div>
 
             <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">

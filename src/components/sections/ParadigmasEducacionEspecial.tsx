@@ -117,14 +117,14 @@ const colorStyles = {
   primary: {
     icon: "bg-primary-100 text-secondary-600 dark:bg-primary-900/30 dark:text-secondary-400",
     marker:
-      "border-primary-200 bg-primary-50 text-primary-700 dark:border-primary-800 dark:bg-primary-950 dark:text-primary-300",
-    accent: "border-primary-400",
+      "border-primary-700 bg-primary-50 text-primary-700 dark:border-primary-800 dark:bg-primary-950 dark:text-primary-300",
+    accent: "border-primary-700 dark:border-primary-600",
   },
   secondary: {
     icon: "bg-primary-100 text-secondary-600 dark:bg-primary-900/30 dark:text-secondary-400",
     marker:
-      "border-secondary-200 bg-secondary-50 text-secondary-700 dark:border-secondary-800 dark:bg-secondary-950 dark:text-secondary-300",
-    accent: "border-secondary-400",
+      "border-secondary-700 bg-secondary-50 text-secondary-700 dark:border-secondary-800 dark:bg-secondary-950 dark:text-secondary-300",
+    accent: "border-secondary-400 dark:border-secondary-600",
   },
 } as const;
 
@@ -306,7 +306,7 @@ export function ParadigmasEducacionEspecial() {
                         <Icon className="h-6 w-6" aria-hidden="true" />
                       </div>
                       {/* Número grande decorativo dentro de cada tarjeta. */}
-                      <span className="text-4xl font-black text-gray-100 dark:text-gray-700">
+                      <span className="text-4xl font-black text-gray-300 dark:text-gray-700">
                         {paradigma.numero}
                       </span>
                     </div>
