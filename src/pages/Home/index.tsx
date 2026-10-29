@@ -114,11 +114,18 @@ export default function HomePage() {
   return (
     <Layout>
       <Helmet>
-        <title>{SITE_NAME}</title>
+        <title>Colegio de Educación Especial en Posadas, Misiones | Matriculación</title>
         <meta
           name="description"
-          content="Sitio oficial del colegio profesional. Información institucional, trámites, noticias y más."
+          content="Colegio de Profesionales en Educación Especial de Posadas, Misiones. Información sobre matrícula profesional, requisitos, trámites, estatuto, código de ética y documentación institucional."
         />
+        <meta property="og:title" content="Colegio de Educación Especial en Posadas, Misiones | Matriculación" />
+        <meta
+          property="og:description"
+          content="Colegio de Profesionales en Educación Especial de Posadas, Misiones. Información sobre matrícula profesional, requisitos, trámites, estatuto, código de ética y documentación institucional."
+        />
+        <meta property="og:url" content="https://colegioedespecial.org.ar/" />
+        <link rel="canonical" href="https://colegioedespecial.org.ar/" />
       </Helmet>
       <Hero />
       <ParadigmasEducacionEspecial />
@@ -149,19 +156,27 @@ export default function HomePage() {
                   <span className="text-sm font-semibold uppercase tracking-wider">Institución</span>
                 </div>
                 <Reveal>
-                  <h1 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                    El Colegio
-                  </h1>
+                  <h2 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                    Colegio de Profesionales en Educación Especial de Posadas, Misiones
+                  </h2>
                 </Reveal>
                 <p className="mt-4 text-justify text-sm leading-8 text-gray-600 dark:text-gray-300">
-                  El Colegio de Profesionales en Educación Especial es la institución rectora que agrupa y representa a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad. Somos una comunidad comprometida con la ética profesional, la actualización constante y la defensa de los derechos humanos.
+                  El Colegio de Profesionales en Educación Especial es la institución rectora que agrupa, representa y orienta a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad en Posadas, Misiones. Nuestra función institucional es fortalecer el ejercicio profesional, promover la ética y la actualización continua, y acompañar a los profesionales en su práctica con un enfoque de inclusión, calidad y responsabilidad social.
                   <br /><br />
-                  Nuestra labor trasciende el aula: trabajamos para garantizar que la educación especial sea un pilar fundamental en la construcción de una sociedad más justa e inclusiva. Agrupamos a expertos en diversas áreas, fomentando el intercambio de experiencias y el desarrollo técnico-científico para brindar respuestas innovadoras a los desafíos educativos actuales.
+                  A través de la información institucional, los trámites, la documentación oficial y las novedades del colegio, brindamos acceso a herramientas útiles para quienes desean formarse, matricularse y consultar los procedimientos vigentes. La institución desarrolla su actividad en el marco de la educación especial y la atención a la diversidad, con una mirada comprometida con los derechos de las personas y la mejora continua de la práctica profesional.
                 </p>
 
+                <div className="mt-6 flex flex-wrap gap-4 text-sm text-gray-700 dark:text-gray-200">
+                  <a href="/tramites" className="rounded-full bg-primary-50 px-4 py-2 font-medium text-primary-700 transition hover:bg-primary-100 dark:bg-primary-900/20 dark:text-primary-300">
+                    Trámites y documentación
+                  </a>
+                  <a href="/matriculados/pago" className="rounded-full bg-secondary-50 px-4 py-2 font-medium text-secondary-700 transition hover:bg-secondary-100 dark:bg-secondary-900/20 dark:text-secondary-300">
+                    Matrícula profesional
+                  </a>
+                </div>
 
-                {/*-------------------------- componente IG ------------------------------*/}        
-                  <InstagramBtn />
+                {/*-------------------------- componente IG ------------------------------*/}
+                <InstagramBtn />
 
               </div>
             </div>

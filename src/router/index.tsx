@@ -22,6 +22,7 @@ const ArancelesPage    = lazy(() => import('@/pages/ObrasSociales/Aranceles'));
 const RequisitosPage   = lazy(() => import('@/pages/ObrasSociales/Requisitos'));
 const AlquileresPage         = lazy(() => import('@/pages/Alquileres'));
 const BoletinPage            = lazy(() => import('@/pages/BoletinOficial'));
+const ContactoPage           = lazy(() => import('@/pages/Contacto'));
 const TerminosPage           = lazy(() => import('@/pages/Legal/TerminosYCondiciones'));
 const PoliticaPrivacidadPage = lazy(() => import('@/pages/Legal/PoliticaDePrivacidad'));
 const NotFoundPage           = lazy(() => import('@/pages/NotFound'));
@@ -122,6 +123,10 @@ export const router = createBrowserRouter([
   {
     path: '/boletin-oficial',
     element: withSuspense(BoletinPage),
+  },
+  {
+    path: '/contacto',
+    element: withSuspense(ContactoPage),
   },
   {
     path: '/terminos-y-condiciones',

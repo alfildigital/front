@@ -77,22 +77,22 @@ const formularios: RecursoPdf[] = [
     id: 2, 
     titulo: 'Habilitación del consultorio', 
     descripcion: 'Requerimiento para la habilitación del consultorio.',
-    archivo_nombre: 'Habilitacion_consultorio_(2026).pdf', 
-    archivo_ruta: '/public/Habilitacion_consultorio_(2026).pdf' },
+    archivo_nombre: 'HABILITACION_CONSULTORIO_(2026).pdf', 
+    archivo_ruta: '/pdf/documentos/HABILITACION_CONSULTORIO_(2026).pdf' },
 
   { ...formulario_card, 
     id: 3, 
     titulo: 'Solicitud de certificado de habilitación', 
     descripcion: 'Formulario para solicitar un certificado de habilitación profesional.', 
     archivo_nombre: 'solicitud-certificado-habilitacion.pdf', 
-    archivo_ruta: '/pdfs/formularios/solicitud-certificado-habilitacion.pdf' },
+    archivo_ruta: '/pdfs/documentos/solicitud-certificado-habilitacion.pdf' },
 
   { ...formulario_card, 
     id: 4, 
     titulo: 'Declaración jurada de matrícula', 
     descripcion: 'Formulario de declaración jurada para trámites de matrícula.', 
     archivo_nombre: 'declaracion-jurada-matricula.pdf', 
-    archivo_ruta: '/pdfs/formularios/declaracion-jurada-matricula.pdf' },
+    archivo_ruta: '/pdfs/documentos/declaracion-jurada-matricula.pdf' },
 ];
 
 // ---------------------------------------------------------------

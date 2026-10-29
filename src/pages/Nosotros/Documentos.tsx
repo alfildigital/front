@@ -34,18 +34,19 @@ const documentos: RecursoPdf[] = [
     archivo_ruta: '/pdfs/documentos/estatuto-institucional.pdf' 
   
   },
-  /*
+
   { ...archivos, 
     
     id: 3, 
-    titulo: 'Requisitos para trámites profesionales', 
-    descripcion: 'Detalle de la documentación necesaria para realizar trámites.', 
-    archivo_nombre: 'requisitos-tramites-profesionales.pdf', 
-    archivo_ruta: '/pdfs/documentos/requisitos-tramites-profesionales.pdf' 
+    titulo: 'Resolucion N° 3/2026 - Honorarios minimos de las prestaciones profesionales', 
+    descripcion: 'Detalle de la resolución sobre los honorarios mínimos.', 
+    archivo_nombre: 'honorarios-minimos.pdf', 
+    archivo_ruta: '/pdfs/documentos/resolucion_3-2026.pdf' 
 
   },
-  */
+  /*
   { ...archivos, id: 4, titulo: 'Aranceles institucionales vigentes', descripcion: 'Tabla de aranceles aplicables a los trámites institucionales.', archivo_nombre: 'aranceles-institucionales-vigentes.pdf', archivo_ruta: '/pdfs/documentos/aranceles-institucionales-vigentes.pdf' },
+   */
 ];
 
 export default function DocumentosPage() {

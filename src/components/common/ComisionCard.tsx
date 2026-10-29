@@ -87,20 +87,21 @@ export function ComisionCard({ name, role, image, subtitle, group }: ComisionCar
     <article className="relative flex w-full min-w-0 flex-col items-center p-3 text-center">
       
       {/* Contenedor de la imagen */}
-      <div className="relative mb-3 mt-1 h-44 w-44 overflow-hidden rounded-full border-2 border-secondary-500 bg-black/10 shadow-xl">
+      {/* Contenedor de la imagen */}
+      <div className="group relative mb-3 mt-1 h-44 w-44 overflow-hidden rounded-full border-2 border-secondary-500 bg-black/10 shadow-xl transition-all duration-300 ease-out hover:scale-110 hover:shadow-2xl hover:border-primary-500">
         {image ? (
           <img
             src={image}
             alt={name ? `${name}, ${role}` : role}
             loading="lazy"
-            className="h-full w-full object-cover object-top"
+            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-110"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gray-100 text-gray-400">
-            <Users className="h-16 w-16" aria-hidden="true" />
+            <Users className="h-16 w-16 transition-transform duration-300 group-hover:scale-110" aria-hidden="true" />
           </div>
         )}
-      </div>
+</div>
 
       <div className="z-10 mt-1 flex flex-col items-center gap-1">
         {name && (

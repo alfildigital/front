@@ -97,8 +97,12 @@ export default function InformacionPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Información Institucional — {SITE_NAME}</title>
-        <meta name="description" content="Información institucional del colegio profesional." />
+        <title>Información institucional del Colegio de Educación Especial en Posadas | Pagos y matrícula</title>
+        <meta
+          name="description"
+          content="Información institucional del Colegio de Profesionales en Educación Especial de Posadas, Misiones: matrícula, pagos, trámites y documentación."
+        />
+        <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/informacion" />
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">

@@ -27,9 +27,13 @@ export default function PagoPage() {
 
   return (
     <Layout>
-      <Helmet>{/*todo lo que se muestra aca es la información del título y meta tags en la pestaña*/}
-        <title>Pagar Matrícula — {SITE_NAME}</title>
-        <meta name="description" content="Pagá tu matrícula de forma segura a través de Mercado Pago." />
+      <Helmet>
+        <title>Pago de matrícula del Colegio de Educación Especial en Posadas | Mercado Pago</title>
+        <meta
+          name="description"
+          content="Información para pagar la matrícula del Colegio de Profesionales en Educación Especial en Posadas, Misiones a través de Mercado Pago, alias y CVU."
+        />
+        <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/pago" />
       </Helmet>
       
       {/*hero*/}
