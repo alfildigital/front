@@ -26,6 +26,17 @@ export interface ProfesionalDto {
   updated_at: string;
 }
 
+interface ProfesionalesPageResponse extends ApiResponse<ProfesionalDto[]> {
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+
+const PAGE_SIZE = 100;
+
 /**
  * ALINEACIÓN (4.1 + 4.4):
  * El endpoint real es /api/v1/profesionales (recurso "profesionales" del backend).
@@ -35,13 +46,42 @@ export interface ProfesionalDto {
  */
 export const matriculadosService = {
   getAll: async (): Promise<Matriculado[]> => {
-    const { data } = await apiClient.get<ApiResponse<ProfesionalDto[]>>(
-      ENDPOINTS.matriculados.list,
-    );
+    const getPage = async (page: number): Promise<ProfesionalesPageResponse> => {
+      const { data } = await apiClient.get<ProfesionalesPageResponse>(
+        ENDPOINTS.matriculados.list,
+        { params: { page, limit: PAGE_SIZE } },
+      );
 
-    // El backend devuelve el DTO dentro del wrapper { data: [...] }.
-    // Mapeamos cada DTO al tipo de dominio Matriculado (mismos nombres de campo).
-    return data.data.map((p) => ({
+      if (!data.success) {
+        throw new Error(data.message ?? 'No se pudo cargar el listado de matriculados.');
+      }
+      if (!Array.isArray(data.data)) {
+        throw new Error('La API devolvió un listado de matriculados inválido.');
+      }
+      if (
+        !Number.isInteger(data.meta?.pages) ||
+        data.meta.pages < 1 ||
+        data.meta.page !== page
+      ) {
+        throw new Error('La API devolvió metadata de paginación inválida.');
+      }
+
+      return data;
+    };
+
+    const firstPage = await getPage(1);
+    const remainingPages = await Promise.all(
+      Array.from({ length: firstPage.meta.pages - 1 }, (_, index) =>
+        getPage(index + 2),
+      ),
+    );
+    const profesionales = [
+      ...firstPage.data,
+      ...remainingPages.flatMap((page) => page.data),
+    ];
+
+    // El backend ordena por apellido y nombre; concatenar las páginas conserva ese orden.
+    return profesionales.map((p) => ({
       id: p.id,
       nro_matricula: p.nro_matricula,
       dni: p.dni,
@@ -51,7 +91,7 @@ export const matriculadosService = {
       telefono: p.telefono,
       localidad: p.localidad,
       direccion: p.direccion,
-      estado: p.estado_matricula,
+      estado_matricula: p.estado_matricula,
       fecha_matriculacion: p.fecha_matriculacion,
       observaciones: p.observaciones,
       usuario_abm: p.usuario_abm,
