@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Search, Phone, Mail, MapPin, User, ArrowDownWideNarrow, ChevronDown, Check } from 'lucide-react';
+import { Search, Phone, Mail, MapPin, ArrowDownWideNarrow, ChevronDown, Check } from 'lucide-react';
 import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
@@ -37,51 +37,69 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
   // ALINEACIÓN (4.4): el backend usa "nro_matricula" + "nombre"/"apellido" separados,
   // y no expone "especialidad" en esta versión.
   const nombreCompleto = [m.nombre, m.apellido].filter(Boolean).join(' ');
+  const telefono = m.telefono?.trim();
+  const email = m.email?.trim();
+  const direccion = m.direccion?.trim();
+  const mostrarTelefono = telefono && telefono.replace(/\D/g, '').length >= 10;
+  const estado = m.estado_matricula?.trim().toLowerCase();
+  const estadoClassName = estado === 'activa'
+    ? 'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-900/30 dark:text-green-300'
+    : estado === 'suspendida'
+      ? 'border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
+      : estado === 'inactiva'
+        ? 'border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-900/30 dark:text-red-300'
+        : 'border-gray-200 bg-gray-50 text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300';
+
   return (
     <article className="group flex items-start gap-4 rounded-2xl border border-secondary-200 bg-white p-4 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary-400 hover:shadow-xl dark:border-primary-700 dark:bg-gray-900 dark:hover:border-primary-500 dark:hover:bg-gray-800">
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-3">
-          <p className="truncate text-base font-semibold text-gray-900 transition-colors duration-200 group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
-            {nombreCompleto}
-          </p>
+          <div className="min-w-0">
+            <p className="truncate text-base font-semibold text-gray-900 transition-colors duration-200 group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
+              {nombreCompleto}
+            </p>
+            {m.estado_matricula?.trim() && (
+              <span className={`mt-1 inline-flex rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${estadoClassName}`}>
+                {estado}
+              </span>
+            )}
+          </div>
           <span className="rounded-full border border-primary-200 bg-primary-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-700 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-300">
             {m.nro_matricula}
           </span>
         </div>
 
-        <div className="mt-3 space-y-2">
-          {m.telefono && (
-            <a
-              href={`tel:${m.telefono}`}
-              className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
-            >
-              <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              <span className="truncate">{m.telefono}</span>
-            </a>
-          )}
-          <div className="flex min-w-0 items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
-            <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            {m.email?.trim() ? (
+        {(mostrarTelefono || email || direccion) && (
+          <div className="mt-3 space-y-2">
+            {mostrarTelefono && (
               <a
-                href={`mailto:${m.email}`}
-                title={m.email}
-                className="truncate transition-colors hover:text-primary-600 dark:hover:text-primary-400"
+                href={`tel:${telefono}`}
+                className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
               >
-                {m.email}
+                <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                <span className="truncate">{telefono}</span>
               </a>
-            ) : (
-              <span className="text-gray-500 dark:text-gray-400">Correo no informado</span>
+            )}
+            {email && (
+              <div className="flex min-w-0 items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+                <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                <a
+                  href={`mailto:${email}`}
+                  title={email}
+                  className="truncate transition-colors hover:text-primary-600 dark:hover:text-primary-400"
+                >
+                  {email}
+                </a>
+              </div>
+            )}
+            {direccion && (
+              <div className="flex min-w-0 items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+                <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                <span className="truncate" title={direccion}>{direccion}</span>
+              </div>
             )}
           </div>
-          <div className="flex min-w-0 items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
-            <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-            {m.direccion?.trim() ? (
-              <span className="truncate" title={m.direccion}>{m.direccion}</span>
-            ) : (
-              <span className="text-gray-500 dark:text-gray-400">Domicilio no informado</span>
-            )}
-          </div>
-        </div>
+        )}
       </div>
     </article>
   );
