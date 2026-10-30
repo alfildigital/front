@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { filterMatriculados } from '@/utils/matriculadosUtils';
+import { filterMatriculados, sortMatriculados } from '@/utils/matriculadosUtils';
 import type { Matriculado } from '@/types';
 
 // ALINEADO CON BACKEND (4.4): fixture con los campos del DTO de
@@ -47,6 +47,27 @@ describe('filterMatriculados', () => {
   it('devuelve todos los ítems cuando el query está vacío', () => {
     expect(filterMatriculados(items, '')).toHaveLength(2);
     expect(filterMatriculados(items, '   ')).toHaveLength(2);
+  });
+
+  describe('sortMatriculados', () => {
+    it('ordena por apellido y luego nombre ignorando mayúsculas y tildes', () => {
+      const result = sortMatriculados([
+        { ...items[0], id: 3, apellido: 'álvarez', nombre: 'Zoe' },
+        { ...items[0], id: 2, apellido: 'González', nombre: 'María' },
+        { ...items[0], id: 4, apellido: 'Alvarez', nombre: 'Ana' },
+        { ...items[0], id: 1, apellido: 'González', nombre: 'Carlos' },
+      ]);
+
+      expect(result.map(({ id }) => id)).toEqual([4, 3, 1, 2]);
+    });
+
+    it('no modifica el array original', () => {
+      const unordered = [items[0], items[1]];
+
+      sortMatriculados(unordered);
+
+      expect(unordered.map(({ id }) => id)).toEqual([1, 2]);
+    });
   });
 
   it('filtra por nombre (case-insensitive)', () => {

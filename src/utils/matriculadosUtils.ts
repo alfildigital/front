@@ -1,6 +1,18 @@
 import type { Matriculado } from '@/types';
 
 /**
+ * Ordena los matriculados por apellido y luego por nombre, ambos ascendente.
+ * Usa reglas de español ignorando mayúsculas y tildes, y no modifica el array original.
+ */
+export function sortMatriculados(items: Matriculado[]): Matriculado[] {
+  const collator = new Intl.Collator('es', { sensitivity: 'base' });
+  return [...items].sort((a, b) => {
+    const porApellido = collator.compare(a.apellido, b.apellido);
+    return porApellido || collator.compare(a.nombre, b.nombre);
+  });
+}
+
+/**
  * Filtra la lista de matriculados por nombre o número de matrícula.
  *
  * Separado de la presentación para:

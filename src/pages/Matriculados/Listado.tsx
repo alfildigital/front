@@ -18,7 +18,7 @@ import { Pagination } from '@/components/common/Pagination';
 import { useMatriculados } from '@/hooks/queries/useMatriculados';
 import { useDebounce } from '@/hooks/useDebounce';
 import { usePagination } from '@/hooks/usePagination';
-import { filterMatriculados } from '@/utils/matriculadosUtils';
+import { filterMatriculados, sortMatriculados } from '@/utils/matriculadosUtils';
 import { paginateItems } from '@/utils/paginationUtils';
 import type { Matriculado } from '@/types';
 import { Reveal } from '@/components/common/Reveal';
@@ -98,10 +98,11 @@ export default function ListadoPage() {
     resetPage();
   }, [debouncedQuery, resetPage]);
 
-  // ── Filtrado + paginación ─────────────────────────────────────────────────
-  // 1. filterMatriculados filtra por nombre o matrícula
-  // 2. paginateItems recorta el array según página y tamaño
-  const filtered = data ? filterMatriculados(data, debouncedQuery) : [];
+  // ── Ordenamiento + filtrado + paginación ──────────────────────────────────
+  // Primero ordena por apellido y luego nombre (ascendente, reglas de español);
+  // después filtra y pagina para que el orden sea consistente entre páginas.
+  const ordered = sortMatriculados(data ?? []);
+  const filtered = filterMatriculados(ordered, debouncedQuery);
   const { data: paginatedItems, totalItems, totalPages, from, to } =
     paginateItems(filtered, page, pageSize);
 
