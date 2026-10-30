@@ -225,9 +225,9 @@ interface Member {
 const boardGroups: Member[][] = [
   [
     { name: 'Fabiana Silva', role: 'Presidenta', image: '/comision_directiva/1_presidenta_consejo_dirctivo.webp' },
-    { name: 'Liz Zamudio', role: 'Vicepresidenta' },
+    { name: 'Liz Zamudio', role: 'Vicepresidenta', image: '/comision_directiva/2_vice_presidenta_consejo_directivo.webp' },
     { name: 'Amanda Alsina', role: 'Secretaria', image: '/comision_directiva/3_secretaria_general_consejo_directivo.webp' },
-    { name: 'Eskinazi Florencia Natalia', role: 'Tesorera' },
+    { name: 'Eskinazi Florencia Natalia', role: 'Tesorera', image: '/comision_directiva/4_tesorera_consejo_directivo.webp' },
   ],
   [
     { name: 'Bettiana Herrera', role: 'Primera consejera', image: '/comision_directiva/5_1_consejera_titular_consejo_directivo.webp' },
