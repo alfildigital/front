@@ -157,11 +157,11 @@ export default function HomePage() {
                 </div>
                 <Reveal>
                   <h2 id="institution-title" className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                    Colegio de Profesionales en Educación Especial de Posadas, Misiones
+                    Colegio de Profesionales en Educación Especial de la Provincia de Misiones
                   </h2>
                 </Reveal>
                 <p className="mt-4 text-justify text-sm leading-8 text-gray-600 dark:text-gray-300">
-                  El Colegio de Profesionales en Educación Especial es la institución rectora que agrupa, representa y orienta a los profesionales dedicados a la atención, enseñanza y acompañamiento de personas con discapacidad en Posadas, Misiones. Nuestra función institucional es fortalecer el ejercicio profesional, promover la ética y la actualización continua, y acompañar a los profesionales en su práctica con un enfoque de inclusión, calidad y responsabilidad social.
+                 El Colegio de Profesionales en Educación Especial es la institución rectora que agrupa, representa y orienta a los profesionales en Educación Especial de la provincia de Misiones. Sus profesionales matriculados desarrollan intervenciones pedagógicas y pedagógico-terapéuticas, diseñan y ofrecen apoyos para el fortalecimiento de las trayectorias educativas, asesoran a instituciones, docentes y familias, y promueven condiciones de accesibilidad, participación e inclusión en todos los niveles y modalidades del sistema educativo. Su función institucional es fortalecer el ejercicio profesional, promover la ética y la actualización continua, y acompañar a los profesionales en su práctica con un enfoque de inclusión, calidad y responsabilidad social.
                   <br /><br />
                   A través de la información institucional, los trámites, la documentación oficial y las novedades del colegio, brindamos acceso a herramientas útiles para quienes desean formarse, matricularse y consultar los procedimientos vigentes. La institución desarrolla su actividad en el marco de la educación especial y la atención a la diversidad, con una mirada comprometida con los derechos de las personas y la mejora continua de la práctica profesional.
                 </p>

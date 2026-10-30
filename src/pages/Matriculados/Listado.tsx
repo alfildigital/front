@@ -51,8 +51,16 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
         : 'border-gray-200 bg-gray-50 text-gray-600 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300';
 
   return (
-    <article className="group flex items-start gap-4 rounded-2xl border border-secondary-200 bg-white p-4 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary-400 hover:shadow-xl dark:border-primary-700 dark:bg-gray-900 dark:hover:border-primary-500 dark:hover:bg-gray-800">
-      <div className="min-w-0 flex-1">
+    <article className="group relative isolate flex items-start gap-4 overflow-hidden rounded-2xl border border-secondary-300 bg-gradient-to-br from-white via-white to-primary-50/80 p-4 shadow-md shadow-gray-900/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary-400 hover:shadow-xl dark:border-primary-700 dark:bg-gray-900 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900 dark:shadow-black/10 dark:hover:border-primary-500 dark:hover:bg-gray-800">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 -top-12 z-0 h-36 w-36 rounded-full bg-primary-300/25 blur-2xl transition-colors duration-300 group-hover:bg-primary-400/35 dark:bg-primary-500/10 dark:group-hover:bg-primary-400/20"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-14 right-1/3 z-0 h-28 w-28 rounded-full bg-secondary-300/20 blur-2xl dark:bg-secondary-400/5"
+      />
+      <div className="relative z-10 min-w-0 flex-1">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="truncate text-base font-semibold text-gray-900 transition-colors duration-200 group-hover:text-primary-700 dark:text-gray-100 dark:group-hover:text-primary-400">
@@ -64,7 +72,7 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
               </span>
             )}
           </div>
-          <span className="rounded-full border border-primary-200 bg-primary-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-700 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-300">
+          <span className="rounded-full border border-primary-300 bg-primary-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-800 dark:border-primary-800 dark:bg-primary-900/20 dark:text-primary-300">
             {m.nro_matricula}
           </span>
         </div>
@@ -74,14 +82,14 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
             {mostrarTelefono && (
               <a
                 href={`tel:${telefono}`}
-                className="flex items-center gap-2 text-xs text-gray-600 transition-colors hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+                className="flex items-center gap-2 text-xs text-gray-700 transition-colors hover:text-primary-700 dark:text-gray-300 dark:hover:text-primary-400"
               >
                 <Phone className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span className="truncate">{telefono}</span>
               </a>
             )}
             {email && (
-              <div className="flex min-w-0 items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+              <div className="flex min-w-0 items-center gap-2 text-xs text-gray-700 dark:text-gray-300">
                 <Mail className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <a
                   href={`mailto:${email}`}
@@ -93,7 +101,7 @@ function MatriculadoCard({ m }: { m: Matriculado }) {
               </div>
             )}
             {direccion && (
-              <div className="flex min-w-0 items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+              <div className="flex min-w-0 items-center gap-2 text-xs text-gray-700 dark:text-gray-300">
                 <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                 <span className="truncate" title={direccion}>{direccion}</span>
               </div>
@@ -199,7 +207,7 @@ export default function ListadoPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Buscar profesional"
-              className="w-full rounded-2xl border border-secondary-200 bg-white py-3.5 pl-10 pr-4 text-sm text-gray-900 shadow-sm transition-all duration-200 placeholder:text-gray-400 focus:border-primary-400 focus:outline-none focus:ring-4 focus:ring-primary-100 dark:border-primary-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-primary-500 dark:focus:ring-primary-900/30"
+              className="w-full rounded-2xl border border-secondary-300 bg-white py-3.5 pl-10 pr-4 text-sm text-gray-900 shadow-sm transition-all duration-200 placeholder:text-gray-500 focus:border-primary-500 focus:outline-none focus:ring-4 focus:ring-primary-100 dark:border-primary-700 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500 dark:focus:border-primary-500 dark:focus:ring-primary-900/30"
             />
           </div>
           <div
