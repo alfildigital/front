@@ -250,7 +250,7 @@ const ethicsGroups: Member[][] = [
   [
     { name: 'Sergio Villalba', role: 'Presidente', image: '/comision_directiva/14_presidente_tribunal_de_Ética_y_disciplina.webp' },
     { name: 'Mariana Novinsky', role: 'Vicepresidente', image: '/comision_directiva/15_vice_presidenta__tribunal_de_Ética_y_disciplina.webp' },
-    { name: 'Haydee Pintos', role: 'Secretaria' },
+    { name: 'Haydeé Pintos Garro', role: 'Secretaria', image: '/comision_directiva/16_secretaria_tribunal_de_Ética_y_disciplina.webp' },
   ],
   [
     { name: 'Luisa Fonseca', role: 'Primer Titular', image: '/comision_directiva/17_1_titular__tribunal_de_Ética_y_disciplina.webp' },

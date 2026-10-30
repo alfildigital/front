@@ -50,15 +50,35 @@ describe('filterMatriculados', () => {
   });
 
   describe('sortMatriculados', () => {
-    it('ordena por apellido y luego nombre ignorando mayúsculas y tildes', () => {
+    it('ordena por fecha de matriculación descendente por defecto', () => {
       const result = sortMatriculados([
-        { ...items[0], id: 3, apellido: 'álvarez', nombre: 'Zoe' },
-        { ...items[0], id: 2, apellido: 'González', nombre: 'María' },
-        { ...items[0], id: 4, apellido: 'Alvarez', nombre: 'Ana' },
-        { ...items[0], id: 1, apellido: 'González', nombre: 'Carlos' },
+        { ...items[0], id: 3, fecha_matriculacion: '2021-01-01' },
+        { ...items[0], id: 1, fecha_matriculacion: '2020-01-01' },
+        { ...items[0], id: 2, fecha_matriculacion: '2021-01-01' },
       ]);
 
-      expect(result.map(({ id }) => id)).toEqual([4, 3, 1, 2]);
+      expect(result.map(({ id }) => id)).toEqual([3, 2, 1]);
+    });
+
+    it('ordena por matrícula ascendente comparando correctamente la parte numérica', () => {
+      const result = sortMatriculados([
+        { ...items[0], id: 3, nro_matricula: 'MP-10' },
+        { ...items[0], id: 1, nro_matricula: 'MP-2' },
+        { ...items[0], id: 2, nro_matricula: 'MP-1' },
+      ], 'matricula_asc');
+
+      expect(result.map(({ id }) => id)).toEqual([2, 1, 3]);
+    });
+
+    it('ordena alfabéticamente por nombre y luego apellido ignorando tildes', () => {
+      const result = sortMatriculados([
+        { ...items[0], id: 3, apellido: 'García', nombre: 'Zoe' },
+        { ...items[0], id: 2, apellido: 'Álvarez', nombre: 'María' },
+        { ...items[0], id: 4, apellido: 'Zárate', nombre: 'Ana' },
+        { ...items[0], id: 1, apellido: 'González', nombre: 'Carlos' },
+      ], 'nombre_asc');
+
+      expect(result.map(({ id }) => id)).toEqual([4, 1, 2, 3]);
     });
 
     it('no modifica el array original', () => {
