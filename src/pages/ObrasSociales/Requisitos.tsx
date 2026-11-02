@@ -1,7 +1,6 @@
 import { useState, useCallback, useId } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Info, CheckCircle, Send, ClipboardList } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { LegalModal } from '@/components/legal/LegalModal';
@@ -146,10 +145,10 @@ export default function RequisitosOsPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Requisitos para Incorporación — {SITE_NAME}</title>
+        <title>Incorporación a obras sociales | Colegio Profesional</title>
         <meta
           name="description"
-          content="Requisitos para que una obra social se incorpore al convenio. Enviá tu solicitud en línea."
+          content="Iniciá la solicitud para incorporar tu obra social al convenio. Completá el formulario con tus datos, especialidad y consulta para comenzar la gestión."
         />
       </Helmet>
 

@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Home, ArrowLeft } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
 
@@ -9,7 +8,12 @@ export default function NotFoundPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Página no encontrada — {SITE_NAME}</title>
+        <title>Página no encontrada | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="La página que buscás no está disponible o cambió de dirección. Volvé al inicio para consultar trámites, noticias y servicios del Colegio en Posadas hoy."
+        />
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">

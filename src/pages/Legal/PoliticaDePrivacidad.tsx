@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { politicaDePrivacidad } from '@/legal/privacidad';
 import { Reveal } from '@/components/common/Reveal';
@@ -21,10 +20,10 @@ export default function PoliticaDePrivacidadPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Política de Privacidad — {SITE_NAME}</title>
+        <title>Privacidad y datos personales | Colegio Profesional</title>
         <meta
           name="description"
-          content="Política de Privacidad del sitio web institucional. Conforme a la Ley 25.326 de Protección de Datos Personales."
+          content="Conocé qué datos personales recopila el sitio, para qué se usan y cómo se resguardan. Revisá tus derechos y vías de contacto según la Ley 25.326 en Argentina."
         />
       </Helmet>
 

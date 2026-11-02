@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { Info } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { EmptyState } from '@/components/common/EmptyState';
 import { Reveal } from '@/components/common/Reveal';
@@ -9,8 +8,11 @@ export default function ArancelesPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Aranceles Obras Sociales — {SITE_NAME}</title>
-        <meta name="description" content="Tabla de aranceles por obra social." />
+        <title>Aranceles de obras sociales | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Esta sección informa sobre aranceles de obras sociales. Consultá aquí las actualizaciones y valores oficiales cuando estén publicados por la institución."
+        />
       </Helmet>
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
         <Reveal as="header" className="mb-8">

@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import { FileText, ImageIcon, Download, Calendar, CreditCard } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { EmptyState } from '@/components/common/EmptyState';
 import { CardSkeletonGrid } from '@/components/common/Skeleton';
@@ -65,8 +64,11 @@ export default function HonorariosPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Honorarios — {SITE_NAME}</title>
-        <meta name="description" content="Tabla de honorarios mínimos vigentes para los profesionales matriculados." />
+        <title>Honorarios profesionales vigentes | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Consultá los honorarios mínimos y valores vigentes para prestaciones profesionales, junto con resoluciones y documentos de referencia para matriculados."
+        />
       </Helmet>
 
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">

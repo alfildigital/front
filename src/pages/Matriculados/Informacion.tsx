@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useState, type FormEvent, useEffect, useRef } from 'react';
 import { AlertCircle, CheckCircle, FileText, LoaderCircle, Send, X } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
 import { apiClient } from '@/api/client';
@@ -97,10 +96,10 @@ export default function InformacionPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Información institucional del Colegio de Educación Especial en Posadas | Pagos y matrícula</title>
+        <title>Consulta de pagos de matrícula | Colegio Profesional</title>
         <meta
           name="description"
-          content="Información institucional del Colegio de Profesionales en Educación Especial de Posadas, Misiones: matrícula, pagos, trámites y documentación."
+          content="Solicitá información sobre tus pagos de matrícula indicando tu número profesional. El Colegio revisará tu consulta y responderá por sus canales institucionales."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/informacion" />
       </Helmet>

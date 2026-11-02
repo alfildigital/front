@@ -20,8 +20,6 @@ import { Phone, Mail, Globe, ExternalLink, Building2 } from 'lucide-react';
 // ORIGEN: Archivo interno de configuración centralizada ('src/config/constants.ts')
 // CÓMO FUNCIONA: Exporta constantes globales de la aplicación (ej: "Colegio de Profesionales en Educación Especial").
 // POR QUÉ SE HACE: Evita escribir cadenas de texto a mano ("hardcodear") y permite cambiar el nombre de la institución en un solo lugar.
-import { SITE_NAME } from '@/config/constants';
-
 // ORIGEN: Componente contenedor global ('src/components/layout/Layout.tsx')
 // CÓMO FUNCIONA: Envuelve el contenido de la página renderizando el Navbar, Sidebar, Footer y el contenedor principal.
 // POR QUÉ SE HACE: Mantiene la estructura visual y consistencia de diseño uniforme en todas las páginas de la aplicación.
@@ -316,10 +314,10 @@ export default function ObrasSocialesPage() {
           en el <head> del HTML sin recargar la página completa (SPA behavior).
           POR QUÉ: Los motores de búsqueda indexan el título y la descripción. */}
       <Helmet>
-        <title>Obras Sociales Adheridas — {SITE_NAME}</title>
+        <title>Obras sociales adheridas en Misiones | Colegio Profesional</title>
         <meta
           name="description"
-          content="Listado de obras sociales adheridas al colegio con información de contacto y sitio web oficial."
+          content="Consultá obras sociales adheridas, sus datos de contacto y enlaces oficiales. Verificá con cada entidad las coberturas y condiciones vigentes para tu atención."
         />
       </Helmet>
 

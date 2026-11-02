@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { Check, Copy, ExternalLink, MessageCircle, CreditCard, AlertCircle } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { config } from '@/config';
 import { Layout } from '@/components/layout/Layout';
 import { buildWhatsAppUrl } from '@/utils/formatters';
@@ -28,10 +27,10 @@ export default function PagoPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Pago de matrícula del Colegio de Educación Especial en Posadas | Mercado Pago</title>
+        <title>Pago online de matrícula profesional | Colegio Profesional</title>
         <meta
           name="description"
-          content="Información para pagar la matrícula del Colegio de Profesionales en Educación Especial en Posadas, Misiones a través de Mercado Pago, alias y CVU."
+          content="Pagá tu matrícula profesional en línea mediante Mercado Pago y consultá los datos de alias y CVU. Si necesitás ayuda, escribinos por WhatsApp en Posadas."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/pago" />
       </Helmet>

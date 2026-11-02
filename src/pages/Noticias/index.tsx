@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Calendar, Tag } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -86,10 +85,10 @@ export default function NoticiasPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Noticias del Colegio de Educación Especial en Posadas | Novedades institucionales</title>
+        <title>Noticias de Educación Especial | Colegio Profesional</title>
         <meta
           name="description"
-          content="Novedades, comunicados y noticias del Colegio de Profesionales en Educación Especial de Posadas, Misiones. Información institucional, publicaciones y actualizaciones para profesionales."
+          content="Leé noticias, comunicados y novedades del Colegio de Profesionales en Educación Especial de Posadas. Consultá actualizaciones institucionales y documentos."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/noticias" />
       </Helmet>

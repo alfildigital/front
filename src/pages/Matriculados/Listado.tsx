@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Search, Phone, Mail, MapPin, ArrowDownWideNarrow, ChevronDown, Check } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -173,8 +172,11 @@ export default function ListadoPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Profesionales Matriculados — {SITE_NAME}</title>
-        <meta name="description" content="Listado de profesionales habilitados por la institución." />
+        <title>Lista de profesionales matriculados | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Buscá profesionales matriculados por nombre o número y consultá su estado y datos de contacto para encontrar la atención que necesitás en Misiones actualmente."
+        />
       </Helmet>
 
       <div className="bg-primary-100/10 mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
