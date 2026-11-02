@@ -208,7 +208,6 @@ export default function NosotrosPage() {
 
 
 import { Helmet } from 'react-helmet-async';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
 import { Building2} from 'lucide-react';
@@ -225,13 +224,13 @@ interface Member {
 const boardGroups: Member[][] = [
   [
     { name: 'Fabiana Silva', role: 'Presidenta', image: '/comision_directiva/1_presidenta_consejo_dirctivo.webp' },
-    { name: 'Liz Zamudio', role: 'Vicepresidenta', image: '/comision_directiva/2_vice_presidenta_consejo_directivo.webp' },
+    { name: 'Liz Zamudio', role: 'Vicepresidenta', image: '/comision_directiva/2_vice_presidenta_consejo_dirctivo.webp' },
     { name: 'Amanda Alsina', role: 'Secretaria', image: '/comision_directiva/3_secretaria_general_consejo_directivo.webp' },
     { name: 'Eskinazi Florencia Natalia', role: 'Tesorera', image: '/comision_directiva/4_tesorera_consejo_directivo.webp' },
   ],
   [
     { name: 'Bettiana Herrera', role: 'Primera consejera', image: '/comision_directiva/5_1_consejera_titular_consejo_directivo.webp' },
-    { name: 'Raimon Evelin', role: 'Segunda consejera', image:'/comision_directiva/5_2_consejera_titular_consejo_directivo.webp' },
+    { name: 'Raimon Evelin', role: 'Segunda consejera', image:'/comision_directiva/6_2_consejera_titular_consejo_directivo.webp' },
     { name: 'Romina Martinez', role: 'Integrante suplente', image: '/comision_directiva/7_consejera_suplente_consejo_directivo.webp' },
     { name: 'Marina Redes', role: 'Integrante suplente', image: '/comision_directiva/8_2_consejera_suplente_consejo_directivo.webp' },
   ],
@@ -363,8 +362,11 @@ export default function NosotrosPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Nosotros | {SITE_NAME}</title>
-        <meta name="description" content="Conocé la institución, su misión, visión y órganos directivos." />
+        <title>Institución y consejo directivo | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Conocé la misión y los valores del Colegio de Profesionales en Educación Especial, junto a las autoridades que representan a quienes ejercen en Posadas."
+        />
       </Helmet>
       <InstitutionSections />
       <CommitteeSection groups={boardGroups} title="Consejo Directivo" sectionIndex={0} />

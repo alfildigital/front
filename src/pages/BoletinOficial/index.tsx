@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Calendar, Download, FileText } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -105,8 +104,11 @@ export default function BoletinOficialPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Boletín Oficial — {SITE_NAME}</title>
-        <meta name="description" content="Publicaciones oficiales, resoluciones y comunicados institucionales." />
+        <title>Boletín oficial y resoluciones | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Consultá publicaciones, resoluciones y comunicados oficiales del Colegio. Revisá las fechas y descargá los documentos disponibles para mantenerte al día."
+        />
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">

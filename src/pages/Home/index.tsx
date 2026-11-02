@@ -114,15 +114,15 @@ export default function HomePage() {
   return (
     <Layout>
       <Helmet>
-        <title>Colegio de Educación Especial en Posadas, Misiones | Matriculación</title>
+        <title>Educación Especial en Posadas | Colegio Profesional</title>
         <meta
           name="description"
-          content="Colegio de Profesionales en Educación Especial de Posadas, Misiones. Información sobre matrícula profesional, requisitos, trámites, estatuto, código de ética y documentación institucional."
+          content="Conocé al Colegio de Profesionales en Educación Especial de Posadas: iniciá tu matrícula, consultá trámites y accedé a información institucional y novedades."
         />
-        <meta property="og:title" content="Colegio de Educación Especial en Posadas, Misiones | Matriculación" />
+        <meta property="og:title" content="Educación Especial en Posadas | Colegio Profesional" />
         <meta
           property="og:description"
-          content="Colegio de Profesionales en Educación Especial de Posadas, Misiones. Información sobre matrícula profesional, requisitos, trámites, estatuto, código de ética y documentación institucional."
+          content="Conocé al Colegio de Profesionales en Educación Especial de Posadas: iniciá tu matrícula, consultá trámites y accedé a información institucional y novedades."
         />
         <meta property="og:url" content="https://colegioedespecial.org.ar/" />
         <link rel="canonical" href="https://colegioedespecial.org.ar/" />

@@ -10,7 +10,6 @@ import {
   Send,
   MessageSquare,
 } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -484,8 +483,11 @@ export default function AlquileresPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Alquileres — {SITE_NAME}</title>
-        <meta name="description" content="Inmuebles y espacios disponibles para alquiler en la institución. Realizá tu consulta en línea." />
+        <title>Alquiler de espacios en Posadas | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Encontrá espacios institucionales disponibles para alquilar, consultá ubicación y precio y enviá una consulta para conocer condiciones y disponibilidad."
+        />
       </Helmet>
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

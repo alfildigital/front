@@ -1,14 +1,28 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
-import { Check, Copy, ExternalLink, MessageCircle, CreditCard, AlertCircle } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
+import { useState, type FormEvent } from 'react';
+import {
+  AlertCircle,
+  Check,
+  Copy,
+  CreditCard,
+  ExternalLink,
+  FileText,
+  LoaderCircle,
+  MessageCircle,
+  Printer,
+} from 'lucide-react';
 import { config } from '@/config';
 import { Layout } from '@/components/layout/Layout';
 import { buildWhatsAppUrl } from '@/utils/formatters';
 import { Reveal } from '@/components/common/Reveal';
-
+/* import { matriculadosService } from '@/api/services/matriculadosService';
+import type { Matriculado } from '@/types';
+ */
 export default function PagoPage() {
   const [copiado, setCopiado] = useState<'alias' | 'cvu' | null>(null);
+ /*  const [nroMatricula, setNroMatricula] = useState('');
+  const [matriculado, setMatriculado] = useState<Matriculado | null>(null);
+  const [busqueda, setBusqueda] = useState<'idle' | 'loading' | 'not-found' | 'error'>('idle'); */
 
   const whatsappUrl = buildWhatsAppUrl(
     config.whatsapp.number,
@@ -25,20 +39,48 @@ export default function PagoPage() {
     }
   };
 
+  // La consulta usa GET /profesionales?q=... mediante matriculadosService, que mapea
+  // el DTO del backend a Matriculado; el servicio valida que el número coincida exactamente.
+ /*  const buscarMatricula = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!nroMatricula.trim()) return;
+
+    setBusqueda('loading');
+    setMatriculado(null);
+    try {
+      const resultado = await matriculadosService.getByMatricula(nroMatricula);
+      setMatriculado(resultado);
+      setBusqueda(resultado ? 'idle' : 'not-found');
+    } catch {
+      setBusqueda('error');
+    }
+  };
+
+  const fechaMatriculacion = (() => {
+    if (!matriculado?.fecha_matriculacion) return null;
+    const fecha = new Date(`${matriculado.fecha_matriculacion}T00:00:00`);
+    if (Number.isNaN(fecha.getTime())) return null;
+    return fecha.toLocaleDateString('es-AR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  })(); */
+
   return (
     <Layout>
       <Helmet>
-        <title>Pago de matrícula del Colegio de Educación Especial en Posadas | Mercado Pago</title>
+        <title>Pago online de matrícula profesional | Colegio Profesional</title>
         <meta
           name="description"
-          content="Información para pagar la matrícula del Colegio de Profesionales en Educación Especial en Posadas, Misiones a través de Mercado Pago, alias y CVU."
+          content="Pagá tu matrícula profesional en línea mediante Mercado Pago y consultá los datos de alias y CVU. Si necesitás ayuda, escribinos por WhatsApp en Posadas."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/pago" />
       </Helmet>
       
       {/*hero*/}
-      <div className="mx-auto max-w-lg px-4 py-16 sm:px-6">
-        <Reveal as="header" className="mb-8 text-center">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+        <Reveal as="header" className="no-print mb-8 text-center">
           <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-100 dark:bg-primary-900/30">
             <CreditCard className="h-7 w-7 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
           </div>
@@ -48,7 +90,128 @@ export default function PagoPage() {
           </p>
         </Reveal>
 
-        <div className="rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
+        {/* <section className="no-print mx-auto mb-8 max-w-2xl rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
+          <div className="mb-4 flex items-center gap-3">
+            <FileText className="h-6 w-6 text-secondary-600 dark:text-secondary-400" aria-hidden="true" />
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Constancia de matrícula</h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Consultá el estado registrado con tu número de matrícula.
+              </p>
+            </div>
+          </div>
+          <form onSubmit={buscarMatricula} className="flex flex-col gap-3 sm:flex-row">
+            <label className="sr-only" htmlFor="nro-matricula">Número de matrícula</label>
+            <input
+              id="nro-matricula"
+              name="nro-matricula"
+              autoComplete="off"
+              required
+              value={nroMatricula}
+              onChange={(event) => setNroMatricula(event.target.value)}
+              placeholder="Número de matrícula"
+              className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-gray-900 placeholder:text-gray-500 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
+            />
+            <button
+              type="submit"
+              disabled={busqueda === 'loading'}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-700 disabled:cursor-wait disabled:opacity-70"
+            >
+              {busqueda === 'loading' ? (
+                <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden="true" />
+              ) : (
+                <FileText className="h-4 w-4" aria-hidden="true" />
+              )}
+              Ver matrícula
+            </button>
+          </form>
+          {busqueda === 'not-found' && (
+            <p role="status" className="mt-3 text-sm text-amber-700 dark:text-amber-300">
+              No encontramos una matrícula con ese número. Revisá el dato e intentá nuevamente.
+            </p>
+          )}
+          {busqueda === 'error' && (
+            <p role="alert" className="mt-3 text-sm text-red-700 dark:text-red-300">
+              No se pudo consultar la matrícula. Intentá nuevamente más tarde.
+            </p>
+          )}
+        </section>
+
+        {matriculado && (
+          <div className="mb-10">
+            <div className="no-print mb-3 flex justify-end">
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex items-center gap-2 rounded-lg border border-secondary-300 bg-white px-4 py-2.5 text-sm font-semibold text-secondary-800 transition-colors hover:bg-secondary-50 dark:border-secondary-700 dark:bg-gray-800 dark:text-secondary-300 dark:hover:bg-gray-700"
+              >
+                <Printer className="h-4 w-4" aria-hidden="true" />
+                Imprimir / Guardar PDF
+              </button>
+            </div>
+            <article
+              id="certificado-matricula"
+              className="certificate-print relative isolate mx-auto flex min-h-[600px] max-w-4xl flex-col items-center justify-between overflow-hidden border-[8px] border-double border-secondary-700 bg-white px-8 py-10 text-center text-gray-900 shadow-xl sm:px-14 sm:py-12"
+            >
+              <img
+                src="/imagenes/logo__.webp"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute left-1/2 top-1/2 z-[-1] h-64 w-64 -translate-x-1/2 -translate-y-1/2 object-contain opacity-[0.08]"
+              />
+              <header className="relative z-10 flex w-full flex-col items-center">
+                <img
+                  src="/imagenes/logo__.webp"
+                  alt="Logo del Colegio de Profesionales en Educación Especial"
+                  className="mb-5 h-20 w-auto object-contain"
+                />
+                <p className="text-xs font-semibold uppercase text-secondary-700">
+                  Colegio de Profesionales en Educación Especial
+                </p>
+                <h2 className="mt-5 text-2xl font-bold uppercase text-gray-900 sm:text-3xl">
+                  Certificado de estado de matrícula
+                </h2>
+              </header>
+
+              <div className="relative z-10 my-8 max-w-2xl space-y-5 text-base leading-relaxed sm:text-lg">
+                <p>
+                  Se deja constancia de que el/la profesional
+                  <strong className="mx-1 font-bold">{[matriculado.nombre, matriculado.apellido].filter(Boolean).join(' ')}</strong>
+                  se encuentra registrado/a bajo la matrícula profesional
+                </p>
+                <p className="text-2xl font-bold text-secondary-800 sm:text-3xl">
+                  N.º {matriculado.nro_matricula}
+                </p>
+                <p>
+                  Estado registrado:{' '}
+                  <strong className="font-bold">{matriculado.estado_matricula || 'Sin estado informado'}</strong>
+                </p>
+                {fechaMatriculacion && (
+                  <p className="text-sm text-gray-700">
+                    Fecha de matriculación: {fechaMatriculacion}
+                  </p>
+                )}
+              </div>
+
+              <footer className="relative z-10 flex w-full flex-col items-center">
+                <p className="mb-6 text-sm text-gray-700">
+                  Emitido el {new Date().toLocaleDateString('es-AR', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+                <div className="h-12 w-56" aria-hidden="true" />
+                <div className="w-56 border-t border-gray-700 pt-2">
+                  <p className="font-semibold">Fabiana Silva</p>
+                  <p className="text-sm">Presidenta</p>
+                </div>
+              </footer>
+            </article>
+          </div>
+        )} */}
+
+        <div className="no-print mx-auto max-w-lg rounded-xl border border-gray-300 bg-gray-50 p-6 shadow-md dark:border-gray-700 dark:bg-gray-800/50">
           <div className="mb-6 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/10">
             <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-500" aria-hidden="true" />
             <div className="text-sm text-blue-800 dark:text-blue-300">

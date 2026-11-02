@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Calendar, Tag, Download } from 'lucide-react';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { ErrorBanner } from '@/components/common/ErrorBanner';
 import { Skeleton } from '@/components/common/Skeleton';
 import { useNoticia } from '@/hooks/queries/useNoticias';
-import { formatDate, formatFileSize } from '@/utils/formatters';
+import { formatDate, formatFileSize, truncateText } from '@/utils/formatters';
 import { Reveal } from '@/components/common/Reveal';
 import { noticiaImagen, base64ToBlobUrl } from '@/utils/fileUtils';
 import type { Noticia } from '@/types';
@@ -42,17 +41,24 @@ export default function NoticiaDetallePage() {
   const { data, isPending, isError, refetch } = useNoticia(numericId);
   const imagen = data ? noticiaImagen(data) : null;
   const adjuntoUrl = useAdjuntoUrl(data);
+  const tituloSeo = data?.titulo
+    ? truncateText(data.titulo, 35)
+    : `Noticia ${numericId}`;
+  const descripcionSeo = data
+    ? truncateText(
+      `${data.titulo}. ${data.contenido.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()} Leé la nota completa en el sitio del Colegio.`,
+      157,
+    )
+    : truncateText(
+      `Leé la noticia institucional número ${numericId} del Colegio de Profesionales en Educación Especial: consultá su contenido, novedades y documentos para profesionales en Posadas.`,
+      157,
+    );
 
   return (
     <Layout>
       <Helmet>
-        <title>{data?.titulo ?? 'Noticia'} — {SITE_NAME}</title>
-        {data?.contenido && (
-          <meta
-            name="description"
-            content={data.contenido.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()}
-          />
-        )}
+        <title>{tituloSeo} | Colegio Profesional</title>
+        <meta name="description" content={descripcionSeo} />
       </Helmet>
 
       <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">

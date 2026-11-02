@@ -37,6 +37,26 @@ interface ProfesionalesPageResponse extends ApiResponse<ProfesionalDto[]> {
 
 const PAGE_SIZE = 100;
 
+const mapProfesional = (profesional: ProfesionalDto): Matriculado => ({
+  id: profesional.id,
+  nro_matricula: profesional.nro_matricula,
+  dni: profesional.dni,
+  nombre: profesional.nombre,
+  apellido: profesional.apellido,
+  email: profesional.email,
+  telefono: profesional.telefono,
+  localidad: profesional.localidad,
+  direccion: profesional.direccion,
+  estado_matricula: profesional.estado_matricula,
+  fecha_matriculacion: profesional.fecha_matriculacion,
+  observaciones: profesional.observaciones,
+  usuario_abm: profesional.usuario_abm,
+  created_at: profesional.created_at,
+  updated_at: profesional.updated_at,
+});
+
+const normalizarMatricula = (matricula: string) => matricula.trim().toUpperCase();
+
 /**
  * ALINEACIÓN (4.1 + 4.4):
  * El endpoint real es /api/v1/profesionales (recurso "profesionales" del backend).
@@ -81,23 +101,29 @@ export const matriculadosService = {
     ];
 
     // El backend ordena por apellido y nombre; concatenar las páginas conserva ese orden.
-    return profesionales.map((p) => ({
-      id: p.id,
-      nro_matricula: p.nro_matricula,
-      dni: p.dni,
-      nombre: p.nombre,
-      apellido: p.apellido,
-      email: p.email,
-      telefono: p.telefono,
-      localidad: p.localidad,
-      direccion: p.direccion,
-      estado_matricula: p.estado_matricula,
-      fecha_matriculacion: p.fecha_matriculacion,
-      observaciones: p.observaciones,
-      usuario_abm: p.usuario_abm,
-      created_at: p.created_at,
-      updated_at: p.updated_at,
-    }));
+    return profesionales.map(mapProfesional);
+  },
+
+  getByMatricula: async (nroMatricula: string): Promise<Matriculado | null> => {
+    const matriculaBuscada = normalizarMatricula(nroMatricula);
+    if (!matriculaBuscada) return null;
+
+    const { data } = await apiClient.get<ProfesionalesPageResponse>(
+      ENDPOINTS.matriculados.list,
+      { params: { page: 1, limit: PAGE_SIZE, q: nroMatricula.trim() } },
+    );
+
+    if (!data.success) {
+      throw new Error(data.message ?? 'No se pudo buscar la matrícula.');
+    }
+    if (!Array.isArray(data.data)) {
+      throw new Error('La API devolvió un listado de matriculados inválido.');
+    }
+
+    const profesional = data.data.find(
+      (item) => normalizarMatricula(item.nro_matricula) === matriculaBuscada,
+    );
+    return profesional ? mapProfesional(profesional) : null;
   },
 
   getPagoData: async (): Promise<PagoMatriculaData> => {

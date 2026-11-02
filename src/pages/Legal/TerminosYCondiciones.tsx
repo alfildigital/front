@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SITE_NAME } from '@/config/constants';
 import { Layout } from '@/components/layout/Layout';
 import { terminosYCondiciones } from '@/legal/terminos';
 import { Reveal } from '@/components/common/Reveal';
@@ -21,10 +20,10 @@ export default function TerminosYCondicionesPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Términos y Condiciones — {SITE_NAME}</title>
+        <title>Términos de uso del sitio | Colegio Profesional</title>
         <meta
           name="description"
-          content="Términos y Condiciones de uso del sitio web institucional."
+          content="Leé las condiciones de uso del sitio, el alcance de sus servicios y responsabilidades de quienes lo visitan. Consultá las reglas antes de enviar formularios."
         />
       </Helmet>
 

@@ -104,3 +104,39 @@
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+.certificate-print {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #certificado-matricula,
+  #certificado-matricula * {
+    visibility: visible !important;
+  }
+
+  #certificado-matricula {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

@@ -5,10 +5,6 @@
 // con renderizado en servidor (SSR) y evita fugas de memoria en streaming.
 import { Helmet } from 'react-helmet-async';
 
-// Importa la constante SITE_NAME desde el archivo de constantes globales.
-// Centralizar el nombre del sitio evita repetir strings y facilita cambiarlo.
-import { SITE_NAME } from '@/config/constants';
-
 // Importa el componente Layout, que envuelve la página con la estructura
 // común (header, footer, navegación, etc.). Así esta página solo se preocupa
 // por su contenido específico.
@@ -103,12 +99,13 @@ export default function FormulariosPage() {
   return (
     // Layout: provee la estructura visual común (header, footer, sidebar).
     <Layout>
-      {/* Helmet: mete en el <head> el título de la pestaña y una meta
-          descripción. El título interpola SITE_NAME para que quede
-          "Formularios — MiSitio". La meta description ayuda al SEO. */}
+      {/* Helmet provides page-specific title and description metadata. */}
       <Helmet>
-        <title>Formularios — {SITE_NAME}</title>
-        <meta name="description" content="Formularios institucionales disponibles para descargar en PDF." />
+        <title>Formularios oficiales de matrícula | Colegio Profesional</title>
+        <meta
+          name="description"
+          content="Descargá formularios oficiales de matrícula, habilitación de consultorio y certificados. Revisá la documentación disponible antes de iniciar trámites."
+        />
       </Helmet>
 
       {/* Contenedor principal con utilidades Tailwind:

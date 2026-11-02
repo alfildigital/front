@@ -15,8 +15,6 @@ import { BadgeCheck, RefreshCw, FileCheck, Stamp, HelpCircle, ExternalLink, Buil
 // ORIGEN: Archivo interno de configuración centralizada ('src/config/constants.ts')
 // CÓMO FUNCIONA: Exporta constantes globales de la aplicación (ej: "Gobierno Ciudad").
 // POR QUÉ SE HACE: Evita escribir cadenas de texto a mano ("hardcodear") y permite cambiar el nombre de la institución en un solo lugar.
-import { SITE_NAME } from '@/config/constants';
-
 // ORIGEN: Componente contenedor global ('src/components/layout/Layout.tsx')
 // CÓMO FUNCIONA: Envuelve el contenido de la página renderizando el Navbar, Sidebar, Footer y el contenedor principal.
 // POR QUÉ SE HACE: Mantiene la estructura visual y consistencia de diseño uniforme en todas las páginas de la aplicación.
@@ -227,10 +225,10 @@ export default function TramitesPage() {
     <Layout>
       {/* INYECCIÓN SEO: Cambia dinámicamente la etiqueta <title> en el navegador */}
       <Helmet>
-        <title>Trámites del Colegio de Educación Especial en Posadas | Requisitos y procedimientos</title>
+        <title>Trámites de matrícula profesional | Colegio Profesional</title>
         <meta
           name="description"
-          content="Trámites institucionales del Colegio de Profesionales en Educación Especial en Posadas, Misiones. Requisitos, procedimientos, documentación y gestión para profesionales."
+          content="Consultá requisitos para inscribirte, renovar tu matrícula y pedir certificados profesionales. Encontrá qué documentación necesitás para iniciar cada trámite."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/tramites" />
       </Helmet>

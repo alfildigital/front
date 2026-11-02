@@ -163,14 +163,11 @@ export default function ContactoPage() {
   return (
     <Layout>
       <Helmet>
-        <title>
-          Contacto del Colegio de Educación Especial en Posadas | Teléfono y
-          dirección
-        </title>
+        <title>Contacto y ubicación en Posadas | Colegio Profesional</title>
 
         <meta
           name="description"
-          content="Contacto institucional del Colegio de Profesionales en Educación Especial en Posadas, Misiones. Teléfono, dirección, email y consultas por WhatsApp."
+          content="Contactá al Colegio de Profesionales en Educación Especial de Posadas por teléfono, WhatsApp o email. Consultá la dirección y coordiná tu atención hoy."
         />
 
         <link

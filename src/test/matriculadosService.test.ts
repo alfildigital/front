@@ -65,3 +65,30 @@ describe('matriculadosService.getAll', () => {
     );
   });
 });
+
+describe('matriculadosService.getByMatricula', () => {
+  beforeEach(() => {
+    vi.mocked(apiClient.get).mockReset();
+  });
+
+  it('busca por número y devuelve solo la coincidencia exacta', async () => {
+    vi.mocked(apiClient.get).mockResolvedValueOnce({
+      data: response(1, [profesional(123), profesional(1234)], 1),
+    } as never);
+
+    const result = await matriculadosService.getByMatricula(' mp-1234 ');
+
+    expect(apiClient.get).toHaveBeenCalledWith(ENDPOINTS.matriculados.list, {
+      params: { page: 1, limit: 100, q: 'mp-1234' },
+    });
+    expect(result?.nro_matricula).toBe('MP-1234');
+  });
+
+  it('devuelve null si el filtro parcial no coincide exactamente', async () => {
+    vi.mocked(apiClient.get).mockResolvedValueOnce({
+      data: response(1, [profesional(123)], 1),
+    } as never);
+
+    await expect(matriculadosService.getByMatricula('MP-1234')).resolves.toBeNull();
+  });
+});
