@@ -13,6 +13,8 @@
 5. [Navbar: estructura y comportamiento](#5-navbar-estructura-y-comportamiento)
 6. [Lazy loading y estado de carga entre páginas](#6-lazy-loading-y-estado-de-carga-entre-páginas)
 7. [Diagrama completo de navegación](#7-diagrama-completo-de-navegación)
+8. [Envío del certificado de matrícula por email](#8-envío-del-certificado-de-matrícula-por-email)
+9. [Solicitud de información de pago](#9-solicitud-de-información-de-pago)
 
 ---
 
@@ -500,3 +502,198 @@ Componente montado
     └── paginateItems(data, page, pageSize)
             └── Recorta el array: muestra items 1-10 de N
 ```
+
+  ## 8. Envío del certificado de matrícula por email
+
+  > **Estado:** el flujo de búsqueda de matrícula existe. El envío del certificado por email,
+  > el endpoint indicado abajo y la configuración SMTP del backend están pendientes de implementar.
+  > El flujo describe el comportamiento esperado cuando se complete esa implementación.
+
+  ### Flujo detallado
+
+  1. El usuario escribe su número de matrícula en el formulario de `/matriculados/pago`.
+    React guarda el valor en el estado `nroMatricula`, definido en `Pago.tsx`.
+
+  2. El usuario presiona **Ver matrícula**. El formulario ejecuta `buscarMatricula(event)`.
+    Esta función evita el envío tradicional del formulario, cambia `busqueda` a `loading`
+    y limpia el resultado anterior en `matriculado`.
+
+  3. `buscarMatricula()` llama a `matriculadosService.getByMatricula(nroMatricula)`.
+    El servicio hace un `GET /api/v1/profesionales?page=1&limit=100&q={nroMatricula}`.
+    El backend valida el token Bearer, ejecuta `ProfesionalesController::index()` y consulta
+    `ProfesionalModel::getPaginated()`. El servicio del frontend busca una coincidencia exacta
+    por `nro_matricula` y transforma el DTO recibido al tipo `Matriculado`.
+
+  4. Si encuentra la matrícula, el front guarda el resultado en `matriculado` y muestra los
+    datos del profesional y el botón **Enviar certificado**. Si no la encuentra, limpia el
+    resultado y muestra que no hay una matrícula coincidente. Si la API falla, muestra un
+    mensaje de error y permite volver a intentar.
+
+  5. El usuario presiona **Enviar certificado**. El handler `enviarCertificado()` cambia el
+    estado `envioCertificado` a `loading` y llama a
+    `matriculadosService.enviarCertificado(matriculado.nro_matricula)`.
+    El front envía únicamente el número de matrícula; no envía el correo, el estado ni el
+    contenido del certificado.
+
+  6. El servicio hace una petición `POST` al endpoint nuevo
+    `POST /api/v1/profesionales/enviar-certificado`, centralizado como
+    `ENDPOINTS.matriculados.enviarCertificado`. El cuerpo JSON es:
+
+    ```json
+    {
+      "nro_matricula": "MP-1234"
+    }
+    ```
+
+  7. El backend debe registrar explícitamente esta ruta en el router de `/public/index.php`,
+    del mismo modo que la acción existente `solicitar-detalle-pagos`, y derivarla a
+    `ProfesionalesController::enviarCertificado()`. El controlador valida la autenticación
+    y el formato del número, y consulta de nuevo la base de datos por coincidencia exacta
+    usando un método específico del modelo, por ejemplo
+    `ProfesionalModel::getByNumeroMatricula()`. No confía en los datos que ya están en el
+    navegador: usa el nombre, estado, fecha y email recuperados de la base de datos.
+
+  8. Si el registro tiene un email válido, el backend genera el certificado PDF con los datos
+    actuales de la base de datos: nombre, número y estado de la matrícula, fecha de emisión,
+    logo institucional en cabecera y marca de agua, y el espacio previsto para la firma con la
+    aclaración “Fabiana Silva, Presidenta”. Luego envía el PDF adjunto al email guardado en el
+    registro. La conexión SMTP y las credenciales se leen exclusivamente de variables privadas
+    del entorno del backend; nunca se incluyen en el bundle del frontend.
+
+  9. Si el envío se completa, el backend responde HTTP `200` con el formato estándar de la API:
+
+    ```json
+    {
+      "success": true,
+      "data": {
+       "email_destino_mascara": "fa***@dominio.com"
+      },
+      "message": "Certificado enviado correctamente."
+    }
+    ```
+
+    El backend devuelve el email enmascarado para confirmar el destino sin volver a exponerlo
+    completo. El front cambia `envioCertificado` a `success` y muestra un mensaje indicando
+    que el certificado fue enviado a esa dirección.
+
+  10. Si ocurre un error, el backend responde con `success: false` y un código HTTP adecuado.
+     El front cambia `envioCertificado` a `error` y muestra el mensaje correspondiente:
+
+     | Código HTTP | Situación | Mensaje esperado en el front |
+     |---|---|---|
+     | `400` o `422` | Número de matrícula inválido o email ausente/inválido | Informar que no se pudo enviar y sugerir actualizar el email con el Colegio |
+     | `401` o `403` | Token faltante, inválido o API deshabilitada | Informar que el servicio no está disponible |
+     | `404` | La matrícula no existe al momento de procesar el envío | Informar que no se encontró la matrícula y permitir una nueva búsqueda |
+     | `429` | Se alcanzó el límite de solicitudes | Pedir que espere antes de volver a intentar |
+     | `500` | Falló la generación del PDF o el envío SMTP | Informar que hubo un problema y permitir reintentar más tarde |
+
+     La respuesta de error conserva el formato común del backend, por ejemplo:
+
+     ```json
+     {
+      "success": false,
+      "message": "No se pudo enviar el certificado. Intentá nuevamente más tarde.",
+      "errors": []
+     }
+     ```
+
+  ### Estados del front
+
+  `envioCertificado` representa el estado de la operación:
+
+  | Valor | Comportamiento |
+  |---|---|
+  | `idle` | Habilita **Enviar certificado** si hay una matrícula encontrada |
+  | `loading` | Deshabilita el botón y muestra un indicador de envío |
+  | `success` | Confirma el envío e informa el email enmascarado |
+  | `error` | Muestra el problema y habilita un nuevo intento si corresponde |
+
+  ### Reglas de seguridad y datos
+
+  - El backend obtiene el email y los datos del certificado de la base de datos; nunca acepta
+    un destinatario arbitrario enviado por el navegador.
+  - El estado certificado es el estado registrado de la matrícula. No representa ni confirma
+    que el pago esté al día.
+  - El endpoint de envío debe limitar solicitudes repetidas por IP y matrícula para reducir
+    abuso y spam. El token Bearer incluido en una SPA no debe considerarse un secreto.
+  - Las credenciales SMTP y la dirección remitente se configuran en el entorno privado del
+    backend. No se guardan en variables `VITE_*` ni se envían al navegador.
+
+  ## 9. Solicitud de información de pago
+
+  > **Ruta:** `/matriculados/informacion`
+  > **Estado del flujo:** el formulario y la respuesta de confirmación están implementados.
+  > Actualmente el backend no consulta pagos, no guarda la solicitud ni envía una respuesta
+  > con el detalle de deuda: solo autentica la petición y confirma que la recibió.
+
+  ### Flujo detallado actual
+
+  1. El usuario abre `/matriculados/informacion` y presiona **Solicitar información de pagos**.
+    El `onClick` ejecuta `setModalAbierto(true)` y abre el formulario modal.
+
+  2. El usuario escribe su número de matrícula. El `<input>` está controlado por el estado React
+    `matricula`, creado con `useState('')`; cada cambio actualiza ese estado mediante
+    `setMatricula(event.target.value)`.
+
+  3. El usuario presiona **Enviar solicitud**. El formulario ejecuta
+    `enviarSolicitud(event)`, que evita el submit tradicional del navegador y copia el valor
+    normalizado a la variable local `nroMatricula` con `matricula.trim()`. Si queda vacío,
+    la función termina sin hacer una petición.
+
+  4. Antes de llamar al backend, `enviarSolicitud()` ejecuta `setEstado('enviando')`. La interfaz
+    deshabilita el botón y muestra **Enviando...** para evitar envíos simultáneos.
+
+  5. El front llama directamente a `apiClient.post<ApiResponse<null>>()` con la ruta definida
+    en `ENDPOINTS.matriculados.solicitarDetallePagos`, cuyo valor es
+    `/profesionales/solicitar-detalle-pagos`. El cliente agrega la base URL de la API y el
+    encabezado `Authorization: Bearer ...` configurado globalmente. El cuerpo enviado es:
+
+    ```json
+    {
+      "nro_matricula": "MP-1234"
+    }
+    ```
+
+  6. El router de `/public/index.php` reconoce el segmento
+    `/api/v1/profesionales/solicitar-detalle-pagos`, permite únicamente el método `POST` y
+    despacha la petición a `ProfesionalesController::solicitarDetallePagos()`.
+
+  7. El método `solicitarDetallePagos()` ejecuta `requireAuth()`. Si la autenticación es válida,
+    hoy no lee el cuerpo JSON ni usa `nro_matricula`: no valida que la matrícula exista, no
+    busca pagos, no guarda la solicitud y no envía un email. Solo llama a
+    `success(null, 200, 'Solicitud recibida.')`.
+
+  8. Si la operación anterior termina correctamente, el backend devuelve HTTP `200` y este JSON:
+
+    ```json
+    {
+      "success": true,
+      "data": null,
+      "message": "Solicitud recibida."
+    }
+    ```
+
+  9. El front revisa `data.success`. Si es `true`, ejecuta `setEstado('exito')` y el modal muestra
+    **Recibimos tu solicitud.** También aparece el botón **Cerrar**. Este mensaje confirma que
+    el backend aceptó la petición; no significa que se hayan consultado o enviado los pagos.
+
+  ### Errores que puede mostrar hoy
+
+  | Respuesta / situación | Comportamiento del front |
+  |---|---|
+  | HTTP `200` con `success: true` | Cambia `estado` a `exito` y muestra “Recibimos tu solicitud.” |
+  | HTTP `200` con `success: false` | Cambia `estado` a `error` y muestra “No pudimos enviar la solicitud. Intentá nuevamente más tarde.” |
+  | HTTP `401` o `403` por autenticación | `apiClient` rechaza la petición; el `catch` cambia `estado` a `error` y muestra el mismo mensaje genérico |
+  | HTTP `405` por método no permitido | El router rechaza el método; el front muestra el mismo mensaje genérico |
+  | Error HTTP `5xx` o falla de conexión | El `catch` cambia `estado` a `error` y muestra el mismo mensaje genérico |
+
+  Cuando el usuario cierra el modal, `cerrarModal()` ejecuta `setModalAbierto(false)`, vuelve
+  `estado` a `idle` y limpia el campo con `setMatricula('')`.
+
+  ### Qué falta para entregar la información de pago
+
+  Para que la solicitud obtenga y entregue información real, el backend debe leer y validar
+  `nro_matricula`, localizar el registro correspondiente, consultar los pagos en la fuente de
+  datos definida por el sistema y decidir el canal de respuesta (por ejemplo, email). Luego debe
+  devolver un resultado acorde a esa operación. El mensaje actual solo confirma recepción y no
+  realiza ninguno de esos pasos.
