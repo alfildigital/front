@@ -261,16 +261,15 @@ const ethicsGroups: Member[][] = [
 
 // Modificamos MemberGroup para usar ComisionCard
 function MemberGroup({ members, group }: { members: Member[]; group: string }) {
-  const colsMobile = members.length >= 2 ? 'grid-cols-2' : 'grid-cols-1';
-  const colsDesktop = {
-    1: 'md:grid-cols-1',
-    2: 'md:grid-cols-2',
-    3: 'md:grid-cols-3',
-    4: 'md:grid-cols-4',
-  }[members.length] ?? 'md:grid-cols-4';
+  const colsResponsive = {
+    1: '',
+    2: 'sm:grid-cols-2',
+    3: 'lg:grid-cols-3',
+    4: 'lg:grid-cols-3 xl:grid-cols-4',
+  }[members.length] ?? 'lg:grid-cols-3 xl:grid-cols-4';
 
   return (
-    <div className={`grid ${colsMobile} ${colsDesktop} items-start gap-4`}>
+    <div className={`grid grid-cols-1 ${colsResponsive} items-start gap-4`}>
       {members.map((member) => (
         <ComisionCard
           key={`${member.role}-${member.image}`}
