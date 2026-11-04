@@ -9,7 +9,7 @@ import type { ApiResponse } from '@/types/api';
 
 export default function InformacionPage() {
   const [modalAbierto, setModalAbierto] = useState(false);
-  const [matricula, setMatricula] = useState('');
+  const [dni, setDni] = useState('');
   const [estado, setEstado] = useState<'idle' | 'enviando' | 'exito' | 'error'>('idle');
   const inputRef = useRef<HTMLInputElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
@@ -34,7 +34,7 @@ export default function InformacionPage() {
       if (event.key === 'Escape' && estadoRef.current !== 'enviando') {
         setModalAbierto(false);
         setEstado('idle');
-        setMatricula('');
+        setDni('');
       }
 
       if (event.key === 'Tab') {
@@ -66,14 +66,14 @@ export default function InformacionPage() {
 
   const enviarSolicitud = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const nroMatricula = matricula.trim();
-    if (!nroMatricula) return;
+    const dniSolicitante = dni.trim();
+    if (!dniSolicitante) return;
 
     setEstado('enviando');
     try {
       const { data } = await apiClient.post<ApiResponse<null>>(
         ENDPOINTS.matriculados.solicitarDetallePagos,
-        { nro_matricula: nroMatricula },
+        { dni: dniSolicitante },
       );
 
       if (!data.success) {
@@ -90,16 +90,16 @@ export default function InformacionPage() {
   const cerrarModal = () => {
     setModalAbierto(false);
     setEstado('idle');
-    setMatricula('');
+    setDni('');
   };
 
   return (
     <Layout>
       <Helmet>
-        <title>Consulta de pagos de matrícula | Colegio Profesional</title>
+        <title>Consulta de pagos de matrícula por DNI | Colegio Profesional</title>
         <meta
           name="description"
-          content="Solicitá información sobre tus pagos de matrícula indicando tu número profesional. El Colegio revisará tu consulta y responderá por sus canales institucionales."
+          content="Solicitá información sobre tus pagos de matrícula indicando tu DNI. El Colegio revisará tu consulta y responderá por sus canales institucionales."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/informacion" />
       </Helmet>
@@ -119,7 +119,7 @@ export default function InformacionPage() {
             Información de pagos
           </h2>
           <p className="mb-5 text-sm text-gray-600 dark:text-gray-400">
-            Solicitá información sobre tus pagos de matrícula indicando tu número de matrícula.
+            Solicitá información sobre tus pagos de matrícula indicando tu DNI.
           </p>
           <button
             type="button"
@@ -151,7 +151,7 @@ export default function InformacionPage() {
                   Solicitar información de pagos
                 </h2>
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  Ingresá tu número de matrícula.
+                  Ingresá tu DNI para identificar tu matrícula.
                 </p>
               </div>
               <button
@@ -172,17 +172,19 @@ export default function InformacionPage() {
               </div>
             ) : (
               <form onSubmit={enviarSolicitud}>
-                <label htmlFor="numero-matricula" className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                  Número de matrícula
+                <label htmlFor="dni-matriculado" className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  DNI
                 </label>
                 <input
                   ref={inputRef}
-                  id="numero-matricula"
-                  name="nro_matricula"
+                  id="dni-matriculado"
+                  name="dni"
                   type="text"
-                  value={matricula}
-                  onChange={(event) => setMatricula(event.target.value)}
-                  maxLength={20}
+                  value={dni}
+                  onChange={(event) => setDni(event.target.value)}
+                  inputMode="numeric"
+                  pattern="\d{7,8}"
+                  maxLength={8}
                   required
                   disabled={estado === 'enviando'}
                   autoComplete="off"
@@ -198,7 +200,7 @@ export default function InformacionPage() {
 
                 <button
                   type="submit"
-                  disabled={estado === 'enviando' || !matricula.trim()}
+                  disabled={estado === 'enviando' || !/^\d{7,8}$/.test(dni.trim())}
                   className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {estado === 'enviando' ? (
