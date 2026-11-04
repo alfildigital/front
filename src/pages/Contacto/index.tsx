@@ -163,11 +163,11 @@ export default function ContactoPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Contacto y ubicación en Posadas | Colegio Profesional</title>
+        <title>Contacto y ubicación en Misiones | Colegio Profesional</title>
 
         <meta
           name="description"
-          content="Contactá al Colegio de Profesionales en Educación Especial de Posadas por teléfono, WhatsApp o email. Consultá la dirección y coordiná tu atención hoy."
+          content="Contactá al Colegio de Profesionales en Educación Especial de Misiones por teléfono, WhatsApp o email. Consultá la dirección y coordiná tu atención hoy."
         />
 
         <link

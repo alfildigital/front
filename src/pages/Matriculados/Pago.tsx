@@ -73,7 +73,7 @@ export default function PagoPage() {
         <title>Pago online de matrícula profesional | Colegio Profesional</title>
         <meta
           name="description"
-          content="Pagá tu matrícula profesional en línea mediante Mercado Pago y consultá los datos de alias y CVU. Si necesitás ayuda, escribinos por WhatsApp en Posadas."
+          content="Pagá tu matrícula profesional en línea mediante Mercado Pago y consultá los datos de alias y CVU. Si necesitás ayuda, escribinos por WhatsApp en Misiones."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/matriculados/pago" />
       </Helmet>

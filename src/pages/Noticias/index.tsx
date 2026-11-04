@@ -88,7 +88,7 @@ export default function NoticiasPage() {
         <title>Noticias de Educación Especial | Colegio Profesional</title>
         <meta
           name="description"
-          content="Leé noticias, comunicados y novedades del Colegio de Profesionales en Educación Especial de Posadas. Consultá actualizaciones institucionales y documentos."
+          content="Leé noticias, comunicados y novedades del Colegio de Profesionales en Educación Especial de Misiones. Consultá actualizaciones institucionales y documentos."
         />
         <link rel="canonical" href="https://colegioedespecial.org.ar/noticias" />
       </Helmet>

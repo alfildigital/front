@@ -483,7 +483,7 @@ export default function AlquileresPage() {
   return (
     <Layout>
       <Helmet>
-        <title>Alquiler de espacios en Posadas | Colegio Profesional</title>
+        <title>Alquiler de espacios en Misiones | Colegio Profesional</title>
         <meta
           name="description"
           content="Encontrá espacios institucionales disponibles para alquilar, consultá ubicación y precio y enviá una consulta para conocer condiciones y disponibilidad."

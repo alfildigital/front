@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         <title>Página no encontrada | Colegio Profesional</title>
         <meta
           name="description"
-          content="La página que buscás no está disponible o cambió de dirección. Volvé al inicio para consultar trámites, noticias y servicios del Colegio en Posadas hoy."
+          content="La página que buscás no está disponible o cambió de dirección. Volvé al inicio para consultar trámites, noticias y servicios del Colegio en Misiones."
         />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>

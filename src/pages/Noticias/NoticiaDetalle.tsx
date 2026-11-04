@@ -50,7 +50,7 @@ export default function NoticiaDetallePage() {
       157,
     )
     : truncateText(
-      `Leé la noticia institucional número ${numericId} del Colegio de Profesionales en Educación Especial: consultá su contenido, novedades y documentos para profesionales en Posadas.`,
+      `Leé la noticia institucional número ${numericId} del Colegio de Profesionales en Educación Especial: consultá su contenido, novedades y documentos para profesionales en Misiones.`,
       157,
     );
 
