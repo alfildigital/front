@@ -367,7 +367,7 @@ export default function NosotrosPage() {
         <title>Institución y consejo directivo | Colegio Profesional</title>
         <meta
           name="description"
-          content="Conocé la misión y los valores del Colegio de Profesionales en Educación Especial, junto a las autoridades que representan a quienes ejercen en Posadas."
+          content="Conocé la misión y los valores del Colegio de Profesionales en Educación Especial, junto a las autoridades que representan a quienes ejercen en Misiones."
         />
       </Helmet>
       <InstitutionSections />
