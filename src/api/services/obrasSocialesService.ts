@@ -25,7 +25,7 @@
 //
 // FLUJO HTTP COMPLETO:
 //   obrasSocialesService.getAll()
-//     → apiClient.get('/obras-sociales')        [Axios con baseURL configurada]
+//     → apiClient.get('/obras_sociales')        [Axios con baseURL configurada]
 //     → Axios agrega headers Content-Type y Accept automáticamente
 //     → El interceptor de `client.ts` normaliza errores si el status es 4xx/5xx
 //     → Se desestructura `{ data }` de la respuesta de Axios (response.data)
@@ -38,7 +38,7 @@
 import { apiClient } from '@/api/client';
 
 // ORIGEN: Mapa centralizado de URLs ('src/api/endpoints.ts')
-// CÓMO FUNCIONA: ENDPOINTS.obrasSociales.list === '/obras-sociales'
+// CÓMO FUNCIONA: ENDPOINTS.obrasSociales.list === '/obras_sociales'
 // POR QUÉ SE HACE: Evita strings duplicados en el código. Si el endpoint cambia,
 //   se actualiza en un solo lugar.
 import { ENDPOINTS } from '@/api/endpoints';
@@ -68,8 +68,8 @@ export const obrasSocialesService = {
    * Obtiene todas las obras sociales adheridas desde el backend.
    *
    * FLUJO DETALLADO:
-   *   1. apiClient.get<ApiResponse<ObraSocial[]>>('/obras-sociales')
-   *      → Axios construye el request con baseURL + '/obras-sociales'
+   *   1. apiClient.get<ApiResponse<ObraSocial[]>>('/obras_sociales')
+   *      → Axios construye el request con baseURL + '/obras_sociales'
    *      → Agrega headers: Content-Type: application/json, Accept: application/json
    *   2. El backend responde con { data: ObraSocial[], status: 200, ... }
    *   3. Axios desestructura la respuesta como `{ data }` (response.data = el body completo)

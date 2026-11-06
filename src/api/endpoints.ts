@@ -30,14 +30,14 @@ export const ENDPOINTS = {
   // El endpoint listado es la fuente de datos real para la página de Obras Sociales.
   // El nombre del recurso queda centralizado aquí para evitar strings duplicados en la app.
   obrasSociales: {
-    list: '/obras-sociales',
+    list: '/obras_sociales',
   },
   alquileres: {
     list: '/alquileres',
   },
-  // Boletín oficial → GET /api/v1/boletines-oficiales
+  // Boletín oficial → GET /api/v1/boletines_oficiales
   boletin: {
-    list: '/boletines-oficiales',
+    list: '/boletines_oficiales',
   },
   // instagram: {
   //   list: '/instagram',
