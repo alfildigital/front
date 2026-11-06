@@ -5,7 +5,7 @@
  */
 export const config = {
   api: {
-    url: import.meta.env.API_URL as string,
+    url: import.meta.env.VITE_API_URL || 'https://gestion.colegioedespecial.org.ar/cpee/api/v1',
     // API Key del backend (header "Authorization: Bearer <clave>").
     // El backend (cpee) exige este token en TODAS  las peticiones a /api/v1.
     // Se inyecta como header global en 'src/api/client.ts'.
