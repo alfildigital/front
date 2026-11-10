@@ -5,10 +5,10 @@
  * ALINEACIÓN CON EL BACKEND (4.1):
  * El backend (cpee) es la fuente de verdad y SOLO consume estos recursos
  * bajo /api/v1:
- *   - novedades            (noticias del frontend)
- *   - profesionales        (matriculados del frontend)
- *   - boletines-oficiales  (boletín oficial del frontend)
- *   - obras-sociales
+ *   - /novedades
+ *   - /profesionales
+ *   - /boletines_oficiales
+ *   - /obras_sociales
  *
  * Los nombres de recurso aquí DEBEN coincidir exactamente con los
  * controladores de /var/www/html/cpee/app/Controllers/Api/.
@@ -24,20 +24,20 @@ export const ENDPOINTS = {
     list: '/profesionales',
     pago: '/posts',
     honorarios: '/posts',
-    solicitarDetallePagos: '/profesionales/solicitar-detalle-pagos',
+    solicitarDetallePagos: '/profesionales/reportes_pagos',
   },
   // Obras sociales:
   // El endpoint listado es la fuente de datos real para la página de Obras Sociales.
   // El nombre del recurso queda centralizado aquí para evitar strings duplicados en la app.
   obrasSociales: {
-    list: '/obras-sociales',
+    list: '/obras_sociales',
   },
   alquileres: {
     list: '/alquileres',
   },
-  // Boletín oficial → GET /api/v1/boletines-oficiales
+  // Boletín oficial → GET /api/v1/boletines_oficiales
   boletin: {
-    list: '/boletines-oficiales',
+    list: '/boletines_oficiales',
   },
   // instagram: {
   //   list: '/instagram',
