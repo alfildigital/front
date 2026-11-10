@@ -5,10 +5,10 @@
  * ALINEACIÓN CON EL BACKEND (4.1):
  * El backend (cpee) es la fuente de verdad y SOLO consume estos recursos
  * bajo /api/v1:
- *   - novedades            (noticias del frontend)
- *   - profesionales        (matriculados del frontend)
- *   - boletines-oficiales  (boletín oficial del frontend)
- *   - obras-sociales
+ *   - /novedades
+ *   - /profesionales
+ *   - /boletines_oficiales
+ *   - /obras_sociales
  *
  * Los nombres de recurso aquí DEBEN coincidir exactamente con los
  * controladores de /var/www/html/cpee/app/Controllers/Api/.
