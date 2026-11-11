@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly VITE_API_URL: string;
   readonly VITE_API_TIMEOUT: string;
   readonly VITE_WHATSAPP_NUMBER: string;
+  readonly VITE_RECAPTCHA_SITE_KEY: string;
   readonly VITE_ENABLE_LOGS: string;
   readonly VITE_USE_MOCKS: string;
 }

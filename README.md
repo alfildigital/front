@@ -40,8 +40,11 @@ Variables disponibles:
 | `VITE_API_URL` | URL base de la API PHP | `http://localhost:8000/api` |
 | `VITE_API_TIMEOUT` | Timeout de peticiones (ms) | `30000` |
 | `VITE_WHATSAPP_NUMBER` | Número de WhatsApp (sin `+`) | `5491123456789` |
+| `VITE_RECAPTCHA_SITE_KEY` | Clave pública del sitio para reCAPTCHA v2 | *(requerida para consultas por DNI)* |
 | `VITE_ENABLE_LOGS` | Habilitar logs de errores en consola | `true` |
 | `VITE_USE_MOCKS` | Usar datos mock (sin API real) | `true` |
+
+La clave secreta de reCAPTCHA debe configurarse únicamente en el backend.
 
 ---
 
@@ -150,4 +153,3 @@ src/
 2. Configurar `VITE_API_URL` con la URL del backend
 3. Revisar `src/docs/DECISIONES.md` para validar los contratos JSON con el backend
 4. Ajustar las interfaces en `src/types/index.ts` si es necesario
-
