@@ -44,7 +44,9 @@ Variables disponibles:
 | `VITE_ENABLE_LOGS` | Habilitar logs de errores en consola | `true` |
 | `VITE_USE_MOCKS` | Usar datos mock (sin API real) | `true` |
 
-La clave secreta de reCAPTCHA debe configurarse únicamente en el backend.
+La clave secreta de reCAPTCHA debe configurarse únicamente en el backend con el
+nombre `RECAPTCHA_SECRET_KEY`. Ver [recaptcha.md](./recaptcha.md) para los pasos
+de configuración, validación y diagnóstico.
 
 ---
 
