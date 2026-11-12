@@ -30,7 +30,7 @@ const viteConfig = {
 
 export default defineConfig(({ mode }) => {
   // Cargamos las variables (incluye las de process.env de Vercel)
-  const env = loadEnv(mode, process.cwd(), 'VITE_');
+  const env = loadEnv(mode, process.cwd(), '');
   
   // 👇 ESTA ES LA LÍNEA MÁGICA QUE FALTABA 👇
   // Si falla, esto imprimirá en los logs de Vercel qué variables con "RECAPTCHA" llegaron.
