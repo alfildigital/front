@@ -32,6 +32,30 @@ const apiClient = axios.create({
   },
 });
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null;
+
+const extractErrorMessage = (value: unknown): string | undefined => {
+  if (typeof value === 'string') return value.trim() || undefined;
+  if (!isRecord(value)) return undefined;
+
+  for (const key of ['message', 'error']) {
+    const candidate = value[key];
+    if (typeof candidate === 'string' && candidate.trim()) return candidate.trim();
+    if (isRecord(candidate)) {
+      const nestedMessage = extractErrorMessage(candidate);
+      if (nestedMessage) return nestedMessage;
+    }
+  }
+
+  for (const key of ['data', 'errors']) {
+    const nestedMessage = extractErrorMessage(value[key]);
+    if (nestedMessage) return nestedMessage;
+  }
+
+  return undefined;
+};
+
 // ---------------------------------------------------------------------------
 // Interceptor de respuesta — normalización de errores
 // ---------------------------------------------------------------------------
@@ -48,11 +72,9 @@ apiClient.interceptors.response.use(
       // El servidor respondió con un código de error
       apiError.status = error.response.status;
 
-      const responseData = error.response.data as Record<string, unknown>;
       apiError.message =
-        typeof responseData?.message === 'string'
-          ? responseData.message
-          : `Error del servidor (${error.response.status})`;
+        extractErrorMessage(error.response.data) ??
+        `Error del servidor (${error.response.status})`;
     } else if (error.request) {
       // La petición se realizó pero no hubo respuesta
       apiError.message = 'No se pudo conectar con el servidor. Verificá tu conexión.';

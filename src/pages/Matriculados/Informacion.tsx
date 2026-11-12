@@ -5,12 +5,155 @@ import { Layout } from '@/components/layout/Layout';
 import { Reveal } from '@/components/common/Reveal';
 import { apiClient } from '@/api/client';
 import { ENDPOINTS } from '@/api/endpoints';
+import { config } from '@/config';
 import type { ApiResponse } from '@/types/api';
+
+interface GoogleRecaptcha {
+  render: (
+    container: HTMLElement,
+    options: {
+      sitekey: string;
+      callback: (token: string) => void;
+      'expired-callback': () => void;
+      'error-callback': () => void;
+    },
+  ) => number;
+  reset: (widgetId?: number) => void;
+}
+
+const getResponseMessage = (value: unknown): string | undefined => {
+  if (typeof value !== 'object' || value === null) return undefined;
+
+  const response = value as Record<string, unknown>;
+  if (typeof response.message === 'string' && response.message.trim()) {
+    return response.message.trim();
+  }
+
+  if (typeof response.error === 'string' && response.error.trim()) {
+    return response.error.trim();
+  }
+
+  if (typeof response.error === 'object' && response.error !== null) {
+    return getResponseMessage(response.error);
+  }
+
+  if (typeof response.data === 'object' && response.data !== null) {
+    return getResponseMessage(response.data);
+  }
+
+  return undefined;
+};
+
+declare global {
+  interface Window {
+    grecaptcha?: GoogleRecaptcha;
+  }
+}
+
+let recaptchaScriptPromise: Promise<GoogleRecaptcha> | null = null;
+
+const loadRecaptcha = (): Promise<GoogleRecaptcha> => {
+  if (window.grecaptcha) return Promise.resolve(window.grecaptcha);
+  if (recaptchaScriptPromise) return recaptchaScriptPromise;
+
+  recaptchaScriptPromise = new Promise((resolve, reject) => {
+    let script = document.querySelector<HTMLScriptElement>('#google-recaptcha-script');
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'google-recaptcha-script';
+      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+    }
+
+    script.addEventListener('load', () => {
+      if (window.grecaptcha) {
+        resolve(window.grecaptcha);
+      } else {
+        recaptchaScriptPromise = null;
+        reject(new Error('No se pudo inicializar reCAPTCHA.'));
+      }
+    }, { once: true });
+    script.addEventListener('error', () => {
+      script.remove();
+      recaptchaScriptPromise = null;
+      reject(new Error('No se pudo cargar reCAPTCHA.'));
+    }, { once: true });
+
+    if (!script.isConnected) document.head.appendChild(script);
+  });
+
+  return recaptchaScriptPromise;
+};
+
+function RecaptchaV2({
+  siteKey,
+  onTokenChange,
+}: {
+  siteKey: string;
+  onTokenChange: (token: string | null) => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const onTokenChangeRef = useRef(onTokenChange);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    onTokenChangeRef.current = onTokenChange;
+  }, [onTokenChange]);
+
+  useEffect(() => {
+    if (!siteKey) return;
+
+    let mounted = true;
+    let widgetId: number | null = null;
+
+    void loadRecaptcha()
+      .then((recaptcha) => {
+        if (!mounted || !containerRef.current) return;
+
+        widgetId = recaptcha.render(containerRef.current, {
+          sitekey: siteKey,
+          callback: (token) => {
+            setLoadError(false);
+            onTokenChangeRef.current(token);
+          },
+          'expired-callback': () => onTokenChangeRef.current(null),
+          'error-callback': () => {
+            onTokenChangeRef.current(null);
+            setLoadError(true);
+          },
+        });
+      })
+      .catch(() => {
+        if (mounted) setLoadError(true);
+      });
+
+    return () => {
+      mounted = false;
+      if (widgetId !== null) window.grecaptcha?.reset(widgetId);
+    };
+  }, [siteKey]);
+
+  return (
+    <div>
+      <div ref={containerRef} />
+      {loadError && (
+        <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400">
+          No pudimos cargar el CAPTCHA. Verificá la conexión y la configuración de
+          VITE_RECAPTCHA_SITE_KEY, y volvé a intentarlo.
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function InformacionPage() {
   const [modalAbierto, setModalAbierto] = useState(false);
   const [dni, setDni] = useState('');
   const [estado, setEstado] = useState<'idle' | 'enviando' | 'exito' | 'error'>('idle');
+  const [mensajeError, setMensajeError] = useState('');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaWidgetKey, setCaptchaWidgetKey] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const estadoRef = useRef(estado);
@@ -35,6 +178,8 @@ export default function InformacionPage() {
         setModalAbierto(false);
         setEstado('idle');
         setDni('');
+        setMensajeError('');
+        setCaptchaToken(null);
       }
 
       if (event.key === 'Tab') {
@@ -67,23 +212,41 @@ export default function InformacionPage() {
   const enviarSolicitud = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const dniSolicitante = dni.trim();
-    if (!dniSolicitante) return;
+    if (!dniSolicitante || !captchaToken) return;
 
     setEstado('enviando');
+    setMensajeError('');
     try {
       const { data } = await apiClient.post<ApiResponse<null>>(
         ENDPOINTS.matriculados.solicitarDetallePagos,
-        { dni: dniSolicitante },
+        { dni: dniSolicitante, captcha_token: captchaToken },
       );
 
       if (!data.success) {
         setEstado('error');
+        setMensajeError(
+          getResponseMessage(data) ||
+            'No pudimos enviar la solicitud. Intentá nuevamente más tarde.',
+        );
+        setCaptchaToken(null);
+        setCaptchaWidgetKey((key) => key + 1);
         return;
       }
 
       setEstado('exito');
-    } catch {
+    } catch (error: unknown) {
       setEstado('error');
+      setMensajeError(
+        typeof error === 'object' &&
+          error !== null &&
+          'message' in error &&
+          typeof error.message === 'string' &&
+          error.message.trim()
+          ? error.message
+          : 'No pudimos enviar la solicitud. Intentá nuevamente más tarde.',
+      );
+      setCaptchaToken(null);
+      setCaptchaWidgetKey((key) => key + 1);
     }
   };
 
@@ -91,6 +254,8 @@ export default function InformacionPage() {
     setModalAbierto(false);
     setEstado('idle');
     setDni('');
+    setMensajeError('');
+    setCaptchaToken(null);
   };
 
   return (
@@ -181,7 +346,13 @@ export default function InformacionPage() {
                   name="dni"
                   type="text"
                   value={dni}
-                  onChange={(event) => setDni(event.target.value)}
+                  onChange={(event) => {
+                    setDni(event.target.value);
+                    if (estado === 'error') {
+                      setEstado('idle');
+                      setMensajeError('');
+                    }
+                  }}
                   inputMode="numeric"
                   pattern="\d{7,8}"
                   maxLength={8}
@@ -194,13 +365,32 @@ export default function InformacionPage() {
                 {estado === 'error' && (
                   <p role="alert" className="mt-3 flex items-start gap-2 text-sm text-red-600 dark:text-red-400">
                     <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                    No pudimos enviar la solicitud. Intentá nuevamente más tarde.
+                    {mensajeError}
+                  </p>
+                )}
+
+                {config.recaptcha.siteKey ? (
+                  <div className="mt-4">
+                    <RecaptchaV2
+                      key={captchaWidgetKey}
+                      siteKey={config.recaptcha.siteKey}
+                      onTokenChange={setCaptchaToken}
+                    />
+                  </div>
+                ) : (
+                  <p role="alert" className="mt-4 text-sm text-red-600 dark:text-red-400">
+                    El CAPTCHA no está configurado. No se puede enviar la solicitud.
                   </p>
                 )}
 
                 <button
                   type="submit"
-                  disabled={estado === 'enviando' || !/^\d{7,8}$/.test(dni.trim())}
+                  disabled={
+                    estado === 'enviando' ||
+                    !/^\d{7,8}$/.test(dni.trim()) ||
+                    !captchaToken ||
+                    !config.recaptcha.siteKey
+                  }
                   className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {estado === 'enviando' ? (

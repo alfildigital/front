@@ -15,6 +15,9 @@ export const config = {
   whatsapp: {
     number: import.meta.env.WHATSAPP_NUMBER as string,
   },
+  recaptcha: {
+    siteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY?.trim() || '',
+  },
   logs: {
     enabled: import.meta.env.ENABLE_LOGS === 'true',
   },
