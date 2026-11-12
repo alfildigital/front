@@ -34,14 +34,14 @@ export default defineConfig(({ mode }) => {
   
   // 👇 ESTA ES LA LÍNEA MÁGICA QUE FALTABA 👇
   // Si falla, esto imprimirá en los logs de Vercel qué variables con "RECAPTCHA" llegaron.
-  if (mode === 'production' && !env.VITE_RECAPTCHA_SITE_KEY?.trim()) {
+  if (mode === 'production' && !env.RECAPTCHA_SITE_KEY?.trim()) {
     console.error(
       'Variables de entorno disponibles en Vercel:',
       Object.keys(process.env).filter((key) => key.includes('RECAPTCHA'))
     );
     
     throw new Error(
-      'Falta VITE_RECAPTCHA_SITE_KEY. Configurala en el entorno de build de producción y volvé a compilar.',
+      'Falta RECAPTCHA_SITE_KEY. Configurala en el entorno de build de producción y volvé a compilar.',
     );
   }
 
