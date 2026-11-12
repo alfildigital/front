@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+// <reference types="vitest" />
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -29,16 +29,12 @@ const viteConfig = {
 };
 
 export default defineConfig(({ mode }) => {
-  // Cargamos las variables (incluye las de process.env de Vercel)
-  const env = loadEnv(mode, process.cwd(), '');
+  // 👇 EL CAMBIO ESTÁ AQUÍ: Cadena vacía en lugar de 'VITE_'
+  const env = loadEnv(mode, process.cwd(), 'VITE_');
   
-  // 👇 ESTA ES LA LÍNEA MÁGICA QUE FALTABA 👇
-  // Si falla, esto imprimirá en los logs de Vercel qué variables con "RECAPTCHA" llegaron.
   if (mode === 'production' && !env.VITE_RECAPTCHA_SITE_KEY?.trim()) {
-    console.error(
-      'Variables de entorno disponibles en Vercel:',
-      Object.keys(process.env).filter((key) => key.includes('RECAPTCHA'))
-    );
+    // Esto te ayudará a depurar en los logs de Vercel si vuelve a fallar
+    console.error('Variables de entorno cargadas:', Object.keys(env).filter(k => k.includes('RECAPTCHA') || k.includes('VITE')));
     
     throw new Error(
       'Falta VITE_RECAPTCHA_SITE_KEY. Configurala en el entorno de build de producción y volvé a compilar.',
