@@ -30,7 +30,7 @@ const viteConfig = {
 
 export default defineConfig(({ mode }) => {
   // 👇 EL CAMBIO ESTÁ AQUÍ: Cadena vacía en lugar de 'VITE_'
-  const env = loadEnv(mode, process.cwd(), 'VITE_');
+  const env = loadEnv(mode, process.cwd(), '');
   
   if (mode === 'production' && !env.VITE_RECAPTCHA_SITE_KEY?.trim()) {
     // Esto te ayudará a depurar en los logs de Vercel si vuelve a fallar
