@@ -28,6 +28,8 @@ VITE_APP_API_KEY=clave_de_acceso_a_la_api
 
 Después de cambiar variables, reiniciá Vite en desarrollo o volvé a construir y desplegar el frontend en producción. La página de consulta está en `src/pages/Matriculados/Informacion.tsx`.
 
+La clave debe estar disponible en el entorno que ejecuta `pnpm build`; el `.env` de una máquina local no se copia automáticamente al servidor ni al pipeline. Si la página muestra **“El CAPTCHA no está configurado”**, el bundle publicado se construyó sin `VITE_RECAPTCHA_SITE_KEY`: definí la variable en el entorno de build y volvé a compilar y desplegar. El build de producción ahora falla explícitamente si falta esta variable.
+
 Para desarrollo local con este backend alojado como `/cpee_back`, usá como `VITE_API_URL`:
 
 ```dotenv
