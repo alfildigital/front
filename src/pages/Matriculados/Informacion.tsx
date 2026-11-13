@@ -9,6 +9,7 @@ import { config } from '@/config';
 import type { ApiResponse } from '@/types/api';
 
 interface GoogleRecaptcha {
+  ready: (callback: () => void) => void;
   render: (
     container: HTMLElement,
     options: {
@@ -96,6 +97,7 @@ function RecaptchaV2({
   const containerRef = useRef<HTMLDivElement>(null);
   const onTokenChangeRef = useRef(onTokenChange);
   const [loadError, setLoadError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     onTokenChangeRef.current = onTokenChange;
@@ -109,23 +111,34 @@ function RecaptchaV2({
 
     void loadRecaptcha()
       .then((recaptcha) => {
-        if (!mounted || !containerRef.current) return;
+        recaptcha.ready(() => {
+          if (!mounted || !containerRef.current) return;
 
-        widgetId = recaptcha.render(containerRef.current, {
-          sitekey: siteKey,
-          callback: (token) => {
-            setLoadError(false);
-            onTokenChangeRef.current(token);
-          },
-          'expired-callback': () => onTokenChangeRef.current(null),
-          'error-callback': () => {
-            onTokenChangeRef.current(null);
+          try {
+            widgetId = recaptcha.render(containerRef.current, {
+              sitekey: siteKey,
+              callback: (token) => {
+                setLoadError(false);
+                onTokenChangeRef.current(token);
+              },
+              'expired-callback': () => onTokenChangeRef.current(null),
+              'error-callback': () => {
+                onTokenChangeRef.current(null);
+                setLoadError(true);
+              },
+            });
+            setIsLoading(false);
+          } catch {
+            setIsLoading(false);
             setLoadError(true);
-          },
+          }
         });
       })
       .catch(() => {
-        if (mounted) setLoadError(true);
+        if (mounted) {
+          setIsLoading(false);
+          setLoadError(true);
+        }
       });
 
     return () => {
@@ -137,6 +150,11 @@ function RecaptchaV2({
   return (
     <div>
       <div ref={containerRef} />
+      {isLoading && (
+        <p role="status" className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          Cargando CAPTCHA...
+        </p>
+      )}
       {loadError && (
         <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400">
           No pudimos cargar el CAPTCHA. Verificá la conexión y la configuración de
